@@ -1,0 +1,17 @@
+<div className="hero-top-nav">
+        {SLIDES.map((_, index) => (
+          <div
+            key={index}
+            className="top-progress-track"
+            onClick={() => setCurrent(index)}
+          >
+            <div
+              className="top-progress-fill"
+              style={{
+                width: index === current ? "100%" : "0%",
+                transition: index === current ? "10s linear" : "none",
+              }}
+            />
+          </div>
+        ))}
+      </div>

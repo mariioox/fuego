@@ -1,4 +1,12 @@
-import { Flame, Instagram, MessageCircle } from "lucide-react";
+import {
+  Flame,
+  Instagram,
+  MessageCircle,
+  Sun,
+  Moon,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Navbar({
   theme,
@@ -8,44 +16,35 @@ export default function Navbar({
   toggleTheme: () => void;
 }) {
   return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 100,
-        background: "var(--bg)",
-        borderBottom: "var(--border)",
-        height: "65px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <span
-            style={{ fontWeight: 900, fontSize: "1.4rem", fontStyle: "italic" }}
-          >
-            FUEG
-          </span>
-          <Flame size={24} fill="var(--orange)" color="var(--orange)" />
-        </div>
+    <nav className="nav-wrapper">
+      <div className="container nav-container">
+        {/* Logo Section */}
+        <Link to="/" className="nav-logo-group">
+          <span className="nav-logo-text">FUEG</span>
+          <Flame size={23} fill="var(--orange)" color="var(--orange)" />
+        </Link>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
-          <button onClick={toggleTheme} className="theme-toggle">
-            {theme === "light" ? "Dark Mode" : "Light Mode"}
+        {/* Action Section */}
+        <div className="nav-right-group">
+          <Link to="/catalogue" className="nav-link-archive">
+            Full_Archive <ArrowRight size={14} />
+          </Link>
+
+          {/* Theme Toggle Icon */}
+          <button
+            onClick={toggleTheme}
+            className="theme-icon-btn"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
-          <a href="#" style={{ color: "inherit" }}>
+          <div className="nav-divider"></div>
+
+          <a href="#" className="nav-social-link">
             <Instagram size={20} />
           </a>
-          <a href="#" style={{ color: "inherit" }}>
+
+          <a href="#" className="nav-social-link">
             <MessageCircle size={20} />
           </a>
         </div>
