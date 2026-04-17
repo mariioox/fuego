@@ -1,7 +1,7 @@
 /* --- SYSTEM DESIGN TOKENS --- */
 :root {
   --orange: #fd6200;
-  --bg: #f2f0ea; /* Nike-style Bone */
+  --bg: #fcfcfcf1;
   --text: #0a0a0a;
   --card: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
@@ -50,6 +50,7 @@ body {
 .btn-main:hover { transform: translateY(-2px); opacity: 0.9; color: var(--orange);}
 
 
+
 /* --- NAVBAR SECTION --- */
 .nav-wrapper { position: sticky; top: 0; z-index: 100; background-color: var(--bg);
   border-bottom: 1px solid var(--border); height: 60px; display: flex; align-items: center; }
@@ -92,8 +93,9 @@ body {
 .nav-social-link:hover { opacity: 1; color: var(--orange); }
 
 
+
 /* --- HERO SECTION (COMPLETE UPDATED) --- */
-.hero-section { position: relative; height: 90vh; width: 100%; overflow: hidden; 
+.hero-section { position: relative; height: 90.3vh; width: 100%; overflow: hidden; 
   background-color: #000; }
 
 /* 1. Top Progress Navigation */
@@ -169,29 +171,39 @@ body {
  color: rgba(255, 255, 255, 0.7); max-width: 440px; margin-bottom: 2rem; display: block; }
 
 /* Add the animation to the description too so it fades in with the meta */
-.hero-desc-animate { animation: metaSlide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.hero-desc-animate { animation: metaSlide 5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
 
 
 /* --- SHOP SECTION --- */
 .shop-section { padding: 4rem 0; }
-.shop-header-title { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; font-style: italic;
-  line-height: 0.9; text-transform: uppercase; letter-spacing: -0.04em; margin-top: 2rem; margin-bottom: 1rem; }
-/* Header & Sublink */
-.shop-header-group { display: flex; flex-direction: column; }
 
-.shop-sublink { font-family: 'Geist Mono', monospace; font-size: 13px; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; text-decoration: none;
-  border-bottom: 1px solid currentColor; width: fit-content; transition: all 0.5s ease;}
+.shop-header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+.shop-header-title { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; font-style: italic; 
+  line-height: 0.9; text-transform: uppercase; letter-spacing: -0.04em; 
+  margin-top: 2rem; margin-bottom: 1rem; }
+
+.shop-nav-group { display: flex; gap: 12px; }
+
+.nav-btn-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--text); 
+  color: var(--text); display: flex; align-items: center; justify-content: center; 
+  background: transparent; cursor: pointer; transition: all 0.3s ease; flex-shrink: 0; }
+
+.nav-btn-circle:hover { border-color: var(--orange); color: var(--orange); }
+
+.shop-sublink { font-family: 'Geist Mono', monospace; opacity: 0.4; transition: all 0.5s ease;
+  letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; font-size: 13px;
+  border-bottom: 1px solid currentColor; font-weight: 800; width: fit-content; }
 
 .shop-sublink:hover { opacity: 1; color: var(--orange); }
 
-/* The Row */
+/* The Carousel */
 .shop-carousel-container { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 2rem;
   scroll-snap-type: x mandatory; margin-top: 20px; }
 
-/* Card & Image Alignment */
 .icon-item-card { min-width: 300px; flex-shrink: 0; scroll-snap-align: start;
- transition: transform 0.5s ease; }
+  transition: transform 0.5s ease; }
 
 .icon-image-container { width: 300px; height: 300px; aspect-ratio: 1/1; margin-top: 10px;
   margin-bottom: 10px; border-radius: 15px; overflow: hidden; background: var(--card); }
@@ -199,33 +211,21 @@ body {
 .icon-image-container img { width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 
-/* Hover Animations */
 .icon-item-card:hover { transform: translateY(-10px); }
-
 .icon-item-card:hover img { transform: scale(1.1); }
 
 /* View All Ghost Card */
-.view-all-card { min-width: 300px; height: 300px; flex-shrink: 0; border: 2px dashed var(--border);
-  border-radius: 12px; display: flex; flex-direction: column; align-items: center; color: inherit;
+.view-all-card { min-width: 300px; height: 300px; flex-shrink: 0; border-radius: 15px;
+  border: 2px dashed var(--border); display: flex; flex-direction: column; align-items: center; 
   justify-content: center; gap: 12px; text-decoration: none; transition: all 0.3s ease;
-  background: transparent; }
+  background: transparent; color: inherit; }
 
-.view-all-card:hover { border-color: var(--orange); background: rgba(253, 98, 0, 0.05); }
+.view-all-card:hover {  border-color: var(--orange);  background: rgba(253, 98, 0, 0.05); }
 
-/* --- SHOP SECTION --- */
-.shop-header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-
-.shop-nav-group { display: flex; gap: 12px; }
-
-.nav-btn-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center; background: transparent;
-  cursor: pointer; transition: all 0.3s ease; flex-shrink: 0; }
-
-.nav-btn-circle:hover { border-color: var(--orange); color: var(--orange); }
 
 
 /* --- ABOUT SECTION --- */
-.about-section { padding: 7rem 0; background-color: var(--card); }
+.about-section { padding: 7rem 0; background-color: var(--bg); }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
 @media (min-width: 1024px) { .about-grid { grid-template-columns: 1.2fr 1fr; } }
 
@@ -250,6 +250,7 @@ body {
 .manifesto-body { font-size: 1rem; line-height: 1.6;
   opacity: 0.7; margin-bottom: 2rem; max-width: 480px; }
 
+ 
 
 /* --- COMMUNITY SECTION --- */
 .community-section { padding: 6rem 0; }
@@ -322,7 +323,7 @@ body {
 
 .footer-bottom-row {
   display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem;
-  border-top: 1px solid var(--border); font-size: 0.7rem; opacity: 0.6;
+  border-top: 1px solid var(--border); font-size: 0.55rem; opacity: 0.6;
 }
 .footer-legal {display: flex; gap: 1rem;}
 
@@ -330,39 +331,95 @@ body {
   display: inline-block; margin-right: 8px; box-shadow: 0 0 10px rgba(40, 223, 107, 0.76);}
 
 
-/* --- CATALOGUE PAGE --- */
-.catalogue-page { padding-top: 20px; background: var(--bg); }
 
-.archive-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; font-style: italic; 
-  line-height: 0.9; text-transform: uppercase; letter-spacing: -0.05em; margin-top: 1.5rem; }
+/* --- FEATURE: ARCHIVE & CATALOGUE --- */
+.catalogue-page { padding-top: 20px;  background: var(--bg); }
 
-.filter-btn { background: var(--card); border: 1px solid var(--border); color: inherit; 
-  padding: 10px 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; display: flex;
-  align-items: center; gap: 10px; cursor: pointer; }
+.catalogue-header { display: flex; flex-direction: column; gap: 2rem; margin: 2rem 0.5rem;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
 
-/* --- THE GRID --- */
-.archive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (min-width: 1024px) {
+  .catalogue-header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+}
+
+.archive-title { font-size: clamp(3rem, 5vw, 4rem); font-weight: 950; font-style: italic;
+  line-height: 0.85; text-transform: uppercase; letter-spacing: -0.05em; margin-top: 2rem; }
+
+/* Filter System & Search */
+.filter-system { display: flex; justify-content: flex-end;
+  align-items: flex-end; width: 100%; flex-direction: column;}
+
+.search-wrapper { position: relative; display: flex; align-items: center; min-width: 200px;
+  background: var(--card); border: 1px solid var(--border); transition: all 0.5s ease; 
+  height: 30px; width: 100%; max-width: 571px; margin-bottom: 20px;}
+
+.search-wrapper:focus-within { border-color: var(--orange); }
+
+.search-icon { position: absolute; left: 14px; opacity: 0.4; }
+
+.search-input { background: transparent; border: none; color: inherit; font-size: 11px;
+  padding: 14px 14px 14px 42px; width: 100%; outline: none; text-transform: uppercase; }
+
+.filter-select { background: var(--card); border: 1px solid var(--border); color: inherit;
+  padding: 0 10px; height: 30px; font-size: 10px; font-weight: 600; cursor: pointer;
+  outline: none; text-transform: uppercase; transition: border-color 0.5s ease; }
+
+.filter-select:hover { border-color: var(--orange); }
+
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px;   align-items: flex-end; }
+
+.filter-group { display: flex; flex-direction: column; align-items: flex-start; }
+
+.filter-group-label { display: block; font-size: 10px; font-weight: 700; opacity: 0.4; 
+  margin-bottom: 5px; text-transform: uppercase;}
+
+.swatch-grid { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+
+.swatch-btn { position: relative; width: 30px; height: 30px; background: var(--card);
+  border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swatch-btn:hover { border-color: var(--text); transform: translateY(-1px);
+}
+
+.swatch-btn.active { border-color: var(--orange); }
+
+.swatch-inner { width: 15px; height: 15px; border: 1px solid rgba(0,0,0,0.05); }
+
+/* Specific inner colors */
+.inner-red { background: #f32536; }
+.inner-blue { background: #239ce7; }
+.inner-black { background: #1A1A1A; }
+.inner-white { background: #FFFFFF; border: 1px solid var(--border); }
+.inner-green { background: #2fdf4c; }
+.inner-grey { background: #9c9c9c; }
+.inner-multi { background: conic-gradient(red, yellow, green, blue, red); }
+
+.swatch-all { font-size: 9px; font-weight: 900; padding: 0 10px; height: 30px; color: var(--text); }
+
+/* The Grid & Cards */
+.archive-grid { display: grid; grid-template-columns: repeat(2, 1fr);  gap: 30px 30px; }
 
 @media (min-width: 768px) {
   .archive-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1200px) {
-  .archive-grid { grid-template-columns: repeat(4, 1fr); } /* 4 cols on desktop */
+  .archive-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* --- CARD STYLING --- */
-.archive-card { text-decoration: none; color: inherit; display: block; 
-  transition: transform 0.4s ease; }
+.archive-card {  text-decoration: none; color: inherit; display: block; margin-bottom: 1rem;}
 
 .card-img-wrapper { position: relative; aspect-ratio: 1/1; background: var(--card);
-  overflow: hidden; border-radius: 4px; }
+  overflow: hidden; border-radius: 15px; }
 
-.card-img-wrapper img { width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.card-img { width: 100%;  height: 100%; object-fit: cover;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 
 .card-tag { position: absolute; top: 12px; left: 12px; background: var(--orange);
-  color: white; font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 900;
+  color: white; font-family: 'Geist Mono', monospace;  font-size: 9px; font-weight: 900;
   padding: 4px 8px; z-index: 5; }
 
 .card-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex;
@@ -370,49 +427,23 @@ body {
   color: white; }
 
 .archive-card:hover .card-overlay { opacity: 1; }
-.archive-card:hover img { transform: scale(1.05); }
+.archive-card:hover .card-img { transform: scale(1.05); }
 
-.card-info { padding: 1rem 0.2rem; margin-bottom: 2rem;}
+.card-info { padding: 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
 
-.card-name { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.5rem; }
+.card-name { font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
+  color: var(--text); }
 
-.catalogue-header {
-  display: flex;
-  flex-direction: column; /* Stack on mobile */
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
+.card-meta-row { display: flex; justify-content: space-between; align-items: flex-end;
+  padding-top: 0.5rem; border-top: 1px solid var(--border); }
+
+.card-brand { font-weight: 800; color: #727272ec;}
+
+.card-price { font-size: 13px; background: var(--text); color: var(--bg);
+  padding: 4px 10px; font-weight: 800;
 }
 
-@media (min-width: 1024px) {
-  .catalogue-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+[data-theme='dark'] .card-price {
+  background: var(--orange);
+  color: #000;
 }
-
-.filter-system {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Search Bar Styling */
-.search-wrapper { position: relative; display: flex; align-items: center; background: var(--card);
-  border: 1px solid var(--border); min-width: 150px; }
-
-.search-icon { position: absolute; left: 12px; opacity: 0.4; }
-
-.search-input { background: transparent; border: none; color: inherit; padding: 12px 12px 12px 30px;
-  font-size: 11px; width: 100%; outline: none; border-radius: 3px;}
-
-.clear-search { position: absolute; right: 12px; cursor: pointer; opacity: 0.4; }
-
-/* Dropdown Styling */
-.filter-select { background: var(--card); border: 1px solid var(--border); color: inherit;
-  padding: 10px 15px; font-size: 11px; font-weight: 550; cursor: pointer; outline: none;
-  appearance: none; min-width: 110px; border-radius: 3px; }
-
-.filter-select:hover { border-color: var(--orange); }

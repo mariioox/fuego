@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 // Import your assets here
-import heroThree from "../assets/Hero3.jpeg";
-import heroSix from "../assets/Hero6.jpeg";
-import heroOne from "../assets/Hero1.jpeg";
+import heroThree from "../../../assets/Hero3.jpeg";
+import heroSix from "../../../assets/Hero6.jpeg";
+import heroOne from "../../../assets/Hero1.jpeg";
 
 const SLIDES = [
   {
