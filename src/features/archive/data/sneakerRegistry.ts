@@ -163,15 +163,6 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
     priceFormatted: "₦450,000",
     image: getSneakerImage("U2000EA"),
   },{
-    id: 18,
-    sku: "U2000EA",
-    name: "New Balance Abzorb 2000 Black Grey",
-    brand: "NEW BALANCE",
-    color: ["BLACK", "GREY"],
-    price: 450000,
-    priceFormatted: "₦450,000",
-    image: getSneakerImage("U2000EA"),
-  },{
     id: 17,
     sku: "315122-001",
     name: "Nike Air Force 1 Low '07 Black",
