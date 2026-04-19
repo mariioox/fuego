@@ -9,7 +9,17 @@ interface Props {
   setSortOrder: (val: string) => void;
 }
 
-const COLORS = ["RED", "BLUE", "BLACK", "WHITE", "GREEN", "GREY", "MULTI"];
+const COLORS = [
+  "RED",
+  "BLUE",
+  "BLACK",
+  "WHITE",
+  "GREEN",
+  "GREY",
+  "PURPLE",
+  "BROWN",
+  "MULTI",
+];
 
 export default function ArchiveHeader({
   searchTerm,
@@ -55,6 +65,11 @@ export default function ArchiveHeader({
             <option value="NIKE">NIKE</option>
             <option value="JORDAN">JORDAN</option>
             <option value="ADIDAS">ADIDAS</option>
+            <option value="ASICS">ASICS</option>
+            <option value="PUMA">PUMA</option>
+            <option value="VANS">VANS</option>
+            <option value="NEW BALANCE">NEW BALANCE</option>
+            <option value="TIMBERLAND">TIMBERLAND</option>
           </select>
 
           {/* <select
