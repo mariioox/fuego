@@ -17,7 +17,7 @@ const SLIDES = [
     id: "002",
     meta: "STOCK_UPDATE // Q1_26",
     title: "CURATED <br/> ARCHIVE.",
-    sub: "The rarest finds in the city, authenticated and ready to ship.",
+    sub: "Send a picture of a shoe in our collection to buy and be qualified to join the giveaway.",
     img: heroThree,
     btnText: "View Collection",
   },
@@ -27,7 +27,7 @@ const SLIDES = [
     title: "JOIN THE <br/> CIRCLE.",
     sub: "Follow us for early access drops and private community events.",
     img: heroOne,
-    btnText: "Join Instagram",
+    btnText: "Follow Instagram",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 10000); // 10 seconds gives people time to read the giveaway text
+    }, 8000); // 8 seconds gives people time to read the giveaway text
     return () => clearInterval(timer);
   }, []);
 
@@ -88,9 +88,16 @@ export default function Hero() {
               {SLIDES[current].sub}
             </span>
 
-            <button className="btn-main w-fit">
-              {SLIDES[current].btnText}
-            </button>
+            <a
+              href="https://wa.me/message/MNPXIERXZVHPK1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-main w-fit"
+            >
+              <button className="btn-main w-fit">
+                {SLIDES[current].btnText}
+              </button>
+            </a>
 
             <div className="corner-br"></div>
           </div>

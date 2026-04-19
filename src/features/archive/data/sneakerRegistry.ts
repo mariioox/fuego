@@ -1,20 +1,12 @@
 import type { Sneaker } from "../types";
 
-/**
- * STEP 1: DYNAMIC ASSET IMPORT
- * Vite scans the assets folder. 'eager: true' ensures the images 
- * are bundled immediately for the grid.
- */
+/* STEP 1: DYNAMIC ASSET IMPORT */
 const imageModules = import.meta.glob('./assets/*.webp', { 
   eager: true, 
   import: 'default' 
 });
 
-/**
- * STEP 2: SKU MAPPING LOGIC
- * We process the file paths to extract the SKU from your naming convention:
- * "Nike SB Dunk Low University Red Gum - FJ1674-600.webp" -> "FJ1674-600"
- */
+/* STEP 2: SKU MAPPING LOGIC */
 const imageMap: Record<string, string> = {};
 
 Object.entries(imageModules).forEach(([path, url]) => {
@@ -27,14 +19,10 @@ Object.entries(imageModules).forEach(([path, url]) => {
   }
 });
 
-/**
- * STEP 3: IMAGE LOOKUP HELPER
- */
+/* STEP 3: IMAGE LOOKUP HELPER */
 const getSneakerImage = (sku: string) => imageMap[sku] || "/placeholder-shoe.webp";
 
-/**
- * STEP 4: DATA REGISTRY
- */
+/* STEP 4: DATA REGISTRY */
 export const SNEAKER_REGISTRY: Sneaker[] = [
   {
     id: 1,

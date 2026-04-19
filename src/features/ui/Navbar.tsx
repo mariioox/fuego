@@ -40,11 +40,21 @@ export default function Navbar({
           </button>
           <div className="nav-divider"></div>
 
-          <a href="#" className="nav-social-link">
+          <a
+            href="https://www.instagram.com/fuego.heat?igsh=MXRxZzh3OTM5MHNyMA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-social-link"
+          >
             <Instagram size={20} />
           </a>
 
-          <a href="#" className="nav-social-link">
+          <a
+            href="https://wa.me/message/MNPXIERXZVHPK1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-social-link"
+          >
             <MessageCircle size={20} />
           </a>
         </div>

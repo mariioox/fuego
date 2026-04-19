@@ -1,37 +1,49 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import University_red from "../../archive/data/assets/Nike SB Dunk Low University Red Gum - FJ1674-600.webp";
+import Brick from "../../archive/data/assets/Air Jordan 4 Retro OG SP Nigel Sylvester Brick by Brick - HF4340-800.webp";
+import Forest_green from "../../archive/data/assets/New Balance 9060 Team Forest Green - U9060VRA.webp";
+import Riot from "../../archive/data/assets/Nike SB Dunk Low Riot Skateshop - FZ1289-200.webp";
+import Timberland_grey from "../../archive/data/assets/Timberland 6 Waterproof Boot Ice Studios - TB0A44VY-EJR.webp";
+import Speedcat_blue from "../../archive/data/assets/Puma Speedcat Archive Team Light Blue Club Navy - 398847-01.webp";
 
 const ICONS = [
   {
     id: 1,
-    name: "Air Max",
-    tag: "Lagos Classic",
-    img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+    name: "University Red Gum",
+    tag: "Nike SB Dunk Low",
+    img: University_red,
   },
   {
     id: 2,
-    name: "Jordan 1",
-    tag: "The Grail",
-    img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400",
+    name: "Brick by Brick",
+    tag: "Air Jordan 4 Retro OG",
+    img: Brick,
   },
   {
     id: 3,
-    name: "Dunk Low",
-    tag: "Street King",
-    img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400",
+    name: "Team Forest Green",
+    tag: "New Balance 9060 ",
+    img: Forest_green,
   },
   {
     id: 4,
-    name: "NB 9060",
-    tag: "New Wave",
-    img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400",
+    name: "Riot Skateshop",
+    tag: "Nike SB Dunk Low ",
+    img: Riot,
   },
   {
     id: 5,
-    name: "Vans Old",
-    tag: "Daily 234",
-    img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400",
+    name: "Timberland",
+    tag: "Timberland",
+    img: Timberland_grey,
+  },
+  {
+    id: 6,
+    name: "Speedcat Blue",
+    tag: "Puma",
+    img: Speedcat_blue,
   },
 ];
 
