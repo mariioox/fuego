@@ -37,10 +37,18 @@ export default function Footer() {
             <div>
               <p className="footer-group-title mono">Connect</p>
               <div className="footer-social-icons">
-                <a href="#" className="footer-link" aria-label="WhatsApp">
+                <a
+                  href="https://wa.me/message/MNPXIERXZVHPK1"
+                  className="footer-link"
+                  aria-label="WhatsApp"
+                >
                   <MessageCircle size={22} />
                 </a>
-                <a href="#" className="footer-link" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/fuego.heat"
+                  className="footer-link"
+                  aria-label="Instagram"
+                >
                   <Instagram size={22} />
                 </a>
               </div>

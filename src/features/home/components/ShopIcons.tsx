@@ -35,7 +35,7 @@ const ICONS = [
   },
   {
     id: 5,
-    name: "Timberland",
+    name: "Timberland Grey",
     tag: "Timberland",
     img: Timberland_grey,
   },

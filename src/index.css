@@ -1,7 +1,7 @@
 /* --- SYSTEM DESIGN TOKENS --- */
 :root {
   --orange: #fd6200;
-  --bg: #fcfcfcf1;
+  --bg: #f8f8f8ec;
   --text: #0a0a0a;
   --card: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
@@ -196,7 +196,7 @@ body {
 /* --- HERO SECTION (COMPLETE UPDATED) --- */
 .hero-section {
   position: relative;
-  height: 90.31vh;
+  height: 90.3vh;
   width: 100%;
   overflow: hidden;
   background-color: #000;
@@ -262,8 +262,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.5);
-  transform: scale(1.1);
+  filter: brightness(0.4);
+  transform: scale(1.2);
 }
 
 .hero-slide-bg.active .hero-img {
@@ -368,7 +368,7 @@ body {
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 950;
   font-style: italic;
-  color: rgba(238, 223, 209, 0.685);
+  color: rgba(238, 223, 209, 0.651);
   line-height: 0.8;
   text-transform: uppercase;
   letter-spacing: -0.04em;
@@ -378,12 +378,12 @@ body {
 /* --- HERO DESCRIPTION STYLE --- */
 .hero-description {
   font-family: "Geist Mono", monospace;
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.4;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgb(240, 230, 221);
+  color: rgb(236, 226, 217);
   max-width: 440px;
   margin-bottom: 2rem;
   display: block;
@@ -471,15 +471,15 @@ body {
 }
 
 .icon-item-card {
-  min-width: 300px;
+  min-width: 250px;
   flex-shrink: 0;
   scroll-snap-align: start;
   transition: transform 0.5s ease;
 }
 
 .icon-image-container {
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   aspect-ratio: 1/1;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -505,8 +505,8 @@ body {
 
 /* View All Ghost Card */
 .view-all-card {
-  min-width: 300px;
-  height: 300px;
+  min-width: 280px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 15px;
   border: 2px dashed var(--border);
@@ -516,7 +516,7 @@ body {
   justify-content: center;
   gap: 12px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   background: transparent;
   color: inherit;
 }
@@ -880,7 +880,7 @@ body {
   transition: all 0.5s ease;
   height: 30px;
   width: 100%;
-  max-width: 644px;
+  max-width: 679px;
   margin-bottom: 20px;
 }
 
@@ -891,7 +891,13 @@ body {
 .search-icon {
   position: absolute;
   left: 14px;
-  opacity: 0.4;
+  opacity: 0.3;
+}
+
+.clear-search {
+  position: absolute;
+  right: 14px;
+  opacity: 0.3;
 }
 
 .search-input {
@@ -1006,6 +1012,15 @@ body {
 .inner-brown {
   background: #a0522d;
 }
+.inner-yellow {
+  background: #e2f10f;
+}
+.inner-pink {
+  background: palevioletred;
+}
+.inner-orange {
+  background: var(--orange);
+}
 .inner-multi {
   background: conic-gradient(red, yellow, green, blue, red);
 }
@@ -1041,7 +1056,7 @@ body {
   text-decoration: none;
   color: inherit;
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
   padding: 0.5rem;
   border-radius: 15px;
   border: 1px solid var(--border);
@@ -1098,7 +1113,7 @@ body {
 }
 
 .card-info {
-  padding: 1rem 0;
+  padding: 0.6rem 0.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -1109,6 +1124,7 @@ body {
   font-size: 0.9rem;
   text-transform: uppercase;
   color: var(--text);
+  height: 2.8rem;
 }
 
 .card-meta-row {

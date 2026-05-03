@@ -10,14 +10,17 @@ interface Props {
 }
 
 const COLORS = [
+  "BLACK",
+  "GREY",
+  "WHITE",
   "RED",
   "BLUE",
-  "BLACK",
-  "WHITE",
+  "YELLOW",
   "GREEN",
-  "GREY",
-  "PURPLE",
   "BROWN",
+  "PURPLE",
+  "PINK",
+  "ORANGE",
   "MULTI",
 ];
 
@@ -68,6 +71,7 @@ export default function ArchiveHeader({
             <option value="ASICS">ASICS</option>
             <option value="PUMA">PUMA</option>
             <option value="VANS">VANS</option>
+            <option value="CONVERSE">CONVERSE</option>
             <option value="NEW BALANCE">NEW BALANCE</option>
             <option value="TIMBERLAND">TIMBERLAND</option>
           </select>
@@ -90,7 +94,6 @@ export default function ArchiveHeader({
             <option value="PRICE_ASC">SORT: PRICE(LOW TO HIGH)</option>
             <option value="PRICE_DESC">SORT: PRICE(HIGH TO LOW)</option>
           </select>
-
           <div className="filter-group">
             <span className="filter-group-label mono">SPEC_COLOR_INDEX</span>
 

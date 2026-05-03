@@ -92,7 +92,6 @@ export default function Hero() {
               href="https://wa.me/message/MNPXIERXZVHPK1"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-main w-fit"
             >
               <button className="btn-main w-fit">
                 {SLIDES[current].btnText}

@@ -3,7 +3,7 @@ export interface Sneaker {
   sku: string;
   name: string;
   brand: string;
-  color: Array<'RED' | 'BLUE' | 'BLACK' | 'WHITE' | 'GREEN' | 'GREY' | 'BROWN' | 'MULTI' | 'PURPLE' | 'YELLOW'>;
+  color: Array<'BLACK' | 'WHITE' | 'RED' | 'BLUE' | 'GREEN' | 'GREY' | 'BROWN' | 'MULTI' | 'PURPLE' | 'ORANGE' |'PINK' | 'YELLOW'>;
   price: number;
   priceFormatted: string;
   tag?: string;

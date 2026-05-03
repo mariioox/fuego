@@ -41,7 +41,7 @@ export default function Navbar({
           <div className="nav-divider"></div>
 
           <a
-            href="https://www.instagram.com/fuego.heat?igsh=MXRxZzh3OTM5MHNyMA=="
+            href="https://www.instagram.com/fuego.heat"
             target="_blank"
             rel="noopener noreferrer"
             className="nav-social-link"
