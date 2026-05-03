@@ -1,4 +1,4 @@
-import type { Sneaker } from "../types";
+import type { Sneaker } from "../types/sneaker";
 
 /* STEP 1: DYNAMIC ASSET IMPORT */
 const imageModules = import.meta.glob('./assets/*.webp', { 
@@ -38,7 +38,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
     sku: "IF8768",
     name: "adidas Campus 00s Core Black White",
     brand: "ADIDAS",
-    color: ["BLACK", "WHITE"],
+    color: ["BLACK"],
     price: 185000,
     priceFormatted: "₦185,000",
     image: getSneakerImage("IF8768"),
@@ -578,7 +578,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
     sku: "HF7743-001",
     name: "Nike SB Dunk Low There Skateboards",
     brand: "NIKE",
-    color: ["GREEN", "GREY", "BLACK", "WHITE"],
+    color: ["GREEN", "GREY", "BLACK"],
     price: 185000,
     priceFormatted: "₦185,000",
     image: getSneakerImage("HF7743-001"), 

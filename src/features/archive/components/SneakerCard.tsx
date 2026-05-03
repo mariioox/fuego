@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import type { Sneaker } from "../types";
+import type { Sneaker } from "../types/sneaker";
 
 export default function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,6 +1,5 @@
-// src/layouts/MainLayout.tsx
 import type { ReactNode } from "react";
-import Navbar from "../features/ui/Navbar"; // Will move to features/ui later
+import Navbar from "../features/ui/Navbar";
 import Footer from "../features/ui/Footer";
 
 interface Props {
