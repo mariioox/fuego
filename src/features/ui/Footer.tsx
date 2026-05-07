@@ -1,4 +1,5 @@
 import { Flame, Instagram, MessageCircle } from "lucide-react";
+import "./styles/Footer.css";
 
 export default function Footer() {
   return (

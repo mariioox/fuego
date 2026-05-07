@@ -1,0 +1,35 @@
+/* --- ARCHIVE PAGE CONTAINER --- */
+.archive-page-wrapper {
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  background-color: var(--bg);
+  /* Smooth entry animation for the whole page */
+  animation: archiveFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes archiveFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.archive-content-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Spacing between Header and Grid */
+}
+
+/* Optional: Top "Counter" label found in many specimen archives */
+.archive-results-count {
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}

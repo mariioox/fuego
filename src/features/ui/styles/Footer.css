@@ -1,0 +1,91 @@
+/* --- FOOTER --- */
+.footer-main {
+  padding: 2rem 0;
+  background: var(--bg);
+}
+
+.footer-top-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-logo-text {
+  font-weight: 900;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.footer-mission {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  max-width: 350px;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.footer-nav-groups {
+  display: flex;
+  gap: 4rem;
+}
+
+.footer-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--orange);
+}
+
+/* System Status Dot */
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #1ff56d;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  box-shadow: 0 0 10px rgba(40, 223, 107, 0.76);
+}
+
+.footer-social-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.footer-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.55rem;
+  opacity: 0.6;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1rem;
+}

@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import "../styles/Community.css";
 
 export default function Community() {
   return (

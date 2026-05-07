@@ -1,0 +1,176 @@
+/* --- OVERLAY --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(15px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+}
+
+/* --- MAIN CONTAINER --- */
+.modal-content {
+  background: var(--bg);
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh; /* Force modal to stay within browser frame */
+  border: 1px solid var(--border);
+  position: relative;
+  margin: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- GRID SYSTEM --- */
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Stacked by default for mobile/tablet */
+}
+
+@media (min-width: 1024px) {
+  .modal-grid {
+    grid-template-columns: 1fr 1fr; /* Split view only for desktop */
+  }
+}
+
+/* --- IMAGE SECTION --- */
+.modal-image-section {
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px; /* Reduced padding for mobile */
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 1024px) {
+  .modal-image-section {
+    padding: 60px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    min-height: 500px;
+  }
+}
+
+.modal-main-img {
+  max-width: 90%;
+  height: auto;
+  object-fit: contain;
+  /* Removed 110% scale to prevent overflow on small containers */
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* --- DETAILS SECTION --- */
+.modal-details-section {
+  padding: 20px; /* Tighter spacing for mobile readability */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .modal-details-section {
+    padding: 45px;
+  }
+}
+
+.modal-sneaker-name {
+  font-size: clamp(
+    1.8rem,
+    8vw,
+    2.5rem
+  ); /* Fluid sizing based on screen width */
+  line-height: 0.95;
+  font-weight: 950;
+  font-style: italic;
+  text-transform: uppercase;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* --- DATA TABLE & ROWS --- */
+.modal-data-table {
+  border-top: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 10px; /* Prevent label/value collisions */
+}
+
+.data-row .label {
+  font-size: 10px;
+  font-weight: 800;
+  opacity: 0.4;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.data-row .value {
+  font-size: 11px;
+  font-weight: 900;
+  text-align: right;
+  word-break: break-all; /* Prevent long names from pushing out of frame */
+}
+
+/* --- SWATCHES ROW --- */
+.flex .gap-1 {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.swatch-mini {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- DESCRIPTION --- */
+.modal-description {
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--orange);
+  margin-bottom: 1.5rem;
+}
+
+/* --- CLOSE BUTTON --- */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 2px;
+}
+
+.orange-text {
+  color: var(--orange);
+}

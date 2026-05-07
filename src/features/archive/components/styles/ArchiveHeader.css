@@ -1,0 +1,190 @@
+/* --- ARCHIVE HEADER & FILTER SYSTEM --- */
+.catalogue-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 1024px) {
+  .catalogue-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.archive-title {
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 950;
+  font-style: italic;
+  line-height: 0.85;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-top: 2rem;
+}
+
+/* Search Wrapper */
+.filter-system {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  flex-direction: column;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: all 0.5s ease;
+  height: 30px;
+  width: 100%;
+  max-width: 679px;
+  margin-bottom: 20px;
+}
+
+.search-wrapper:focus-within {
+  border-color: var(--orange);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  opacity: 0.3;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 11px;
+  padding: 0 14px 0 42px;
+  width: 100%;
+  outline: none;
+  text-transform: uppercase;
+}
+
+/* Filter Dropdowns */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.4;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.filter-select {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: inherit;
+  padding: 0 10px;
+  height: 30px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+  transition: border-color 0.5s ease;
+}
+
+.filter-select:hover {
+  border-color: var(--orange);
+}
+
+/* Swatch Grid System */
+.swatch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.swatch-btn {
+  width: 30px;
+  height: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.swatch-btn:hover {
+  border-color: var(--text);
+}
+.swatch-btn.active {
+  border-color: var(--orange);
+}
+
+.swatch-inner {
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Color Definitions */
+.inner-red {
+  background: #f32536;
+}
+.inner-blue {
+  background: #239ce7;
+}
+.inner-black {
+  background: #1a1a1a;
+}
+.inner-white {
+  background: #ffffff;
+  border: 1px solid var(--border);
+}
+.inner-green {
+  background: #2fdf4c;
+}
+.inner-grey {
+  background: #9c9c9c;
+}
+.inner-pink {
+  background: pink;
+}
+.inner-brown {
+  background: brown;
+}
+.inner-yellow {
+  background: yellow;
+}
+.inner-purple {
+  background: purple;
+}
+.inner-multi {
+  background: conic-gradient(red, yellow, green, blue, red);
+}
+.inner-orange {
+  background: var(--orange);
+}
+
+.swatch-all {
+  font-size: 9px;
+  font-weight: 900;
+  padding: 0 10px;
+  height: 30px;
+  color: var(--text);
+}

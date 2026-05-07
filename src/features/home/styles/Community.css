@@ -1,0 +1,154 @@
+/* --- COMMUNITY SECTION --- */
+.community-section {
+  padding: 6rem 0;
+}
+
+/* Header Styling */
+.comm-header-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comm-title {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.comm-sub-wrap {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1rem;
+}
+
+.comm-orange-line {
+  width: 50px;
+  height: 3px;
+  background-color: var(--orange);
+}
+
+/* Grid & Items */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 4rem;
+}
+
+@media (min-width: 768px) {
+  .community-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.community-item {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  background: var(--card);
+}
+
+.community-hero {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.community-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.community-label {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: var(--text);
+  color: var(--bg);
+  padding: 5px 12px;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+/* Hover States & Overlay */
+.community-item:hover .community-img {
+  transform: scale(1.1);
+}
+
+.community-item:hover .community-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.community-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  opacity: 0;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.community-item:hover::after {
+  opacity: 0.2;
+}
+
+/* The Animated Underline (Tag Link) */
+.comm-tag-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  padding-bottom: 10px;
+  transition: color 0.5s ease;
+}
+
+.comm-tag-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--orange);
+  transform: scaleX(0.21);
+  transform-origin: left;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.comm-tag-link:hover {
+  color: var(--orange);
+}
+
+.comm-tag-link:hover::after {
+  transform: scaleX(1);
+}
+
+.comm-tag-link svg {
+  transition: transform 0.3s ease;
+}
+
+.comm-tag-link:hover svg {
+  transform: rotate(-90deg) scale(1.3);
+}

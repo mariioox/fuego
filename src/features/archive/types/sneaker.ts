@@ -6,6 +6,7 @@ export interface Sneaker {
   color: Array<'BLACK' | 'WHITE' | 'RED' | 'BLUE' | 'GREEN' | 'GREY' | 'BROWN' | 'MULTI' | 'PURPLE' | 'ORANGE' |'PINK' | 'YELLOW'>;
   price: number;
   priceFormatted: string;
-  tag?: string;
+  status?: 'AVAILABLE' | 'PREMIUM' | 'SOLD_OUT' | 'ARCHIVED';
   image: string;
+  description?: string;
 }

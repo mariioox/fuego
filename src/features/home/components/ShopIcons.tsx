@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import "../styles/ShopIcons.css";
 import University_red from "../../archive/data/assets/Nike SB Dunk Low University Red Gum - FJ1674-600.webp";
 import Brick from "../../archive/data/assets/Air Jordan 4 Retro OG SP Nigel Sylvester Brick by Brick - HF4340-800.webp";
 import Forest_green from "../../archive/data/assets/New Balance 9060 Team Forest Green - U9060VRA.webp";

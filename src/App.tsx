@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTheme } from "./core/hooks/useTheme";
 import MainLayout from "./layouts/MainLayout";
 import ScrollToTop from "./core/components/ScrollToTop";
-
+import "./index.css";
 // Page Imports
 import Home from "./pages/Home";
 import Catalogue from "./pages/Catalogue";
