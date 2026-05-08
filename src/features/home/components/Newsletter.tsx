@@ -50,7 +50,8 @@ export default function Newsletter() {
               <br />A RELEASE
             </h2>
             <p className="news-description">
-              JOIN THE INNER CIRCLE FOR EARLY ACCESS TO NEW ARCHIVE ADDITIONS.
+              JOIN THE INNER CIRCLE FOR EARLY ACCESS TO NEW ARCHIVE ADDITIONS,
+              PROMOS AND GIVEAWAYS.
             </p>
           </div>
 
