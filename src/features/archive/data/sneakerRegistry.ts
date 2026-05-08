@@ -306,7 +306,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
   },{
     id: 34,
     sku: "TB010073-009",
-    name: "Timberland 6 Boot Black Nubuck Premium",
+    name: "Timberland 6' Premium Waterproof Boot Black",
     brand: "TIMBERLAND",
     color: ["BLACK"],
     price: 185000,
@@ -315,7 +315,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
   },{
     id: 35,
     sku: "TB010061-713",
-    name: "Timberland 6 Premium Waterproof Boot Wheat",
+    name: "Timberland 6' Premium Waterproof Boot Wheat",
     brand: "TIMBERLAND",
     color: ["BLACK", "BROWN"],
     price: 185000,
@@ -324,7 +324,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
   },{
     id: 36,
     sku: "TB0A44VY-EJR",
-    name: "Timberland 6 Waterproof Boot Ice Studios",
+    name: "Timberland 6' Waterproof Boot Ice Studios",
     brand: "TIMBERLAND",
     color: ["GREY"],
     price: 185000,
@@ -522,7 +522,7 @@ export const SNEAKER_REGISTRY: Sneaker[] = [
   },{
     id: 58,
     sku: "TB0A1M6Q",
-    name: "Timberland 6 Premium Boot Ghost White",
+    name: "Timberland 6' Premium Boot Ghost White",
     brand: "TIMBERLAND",
     color: ["WHITE"],
     price: 185000,

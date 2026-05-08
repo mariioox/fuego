@@ -3,6 +3,7 @@ import "./styles/ArchiveHeader.css";
 
 interface Props {
   searchTerm: string;
+  brandFilter: string;
   setSearchTerm: (val: string) => void;
   setBrandFilter: (val: string) => void;
   colorFilter: string;
@@ -27,6 +28,7 @@ const COLORS = [
 
 export default function ArchiveHeader({
   searchTerm,
+  brandFilter,
   setSearchTerm,
   setBrandFilter,
   colorFilter,
@@ -63,6 +65,7 @@ export default function ArchiveHeader({
         <div className="filter-row">
           <select
             className="filter-select mono"
+            value={brandFilter}
             onChange={(e) => setBrandFilter(e.target.value)}
           >
             <option value="ALL">BRAND: ALL</option>

@@ -71,51 +71,76 @@ export default function ArchiveContainer() {
     <section className="container py-20">
       <ArchiveHeader
         searchTerm={searchTerm}
+        brandFilter={brandFilter}
+        colorFilter={colorFilter}
         setSearchTerm={(v) => handleFilterChange(setSearchTerm, v)}
         setBrandFilter={(v) => handleFilterChange(setBrandFilter, v)}
-        colorFilter={colorFilter}
         setColorFilter={(v) => handleFilterChange(setColorFilter, v)}
         setSortOrder={(v) => handleFilterChange(setSortOrder, v)}
       />
 
-      <ArchiveGrid data={visibleData} />
+      {/* ... inside ArchiveContainer return ... */}
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="pagination-nav">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="nav-btn mono"
-          >
-            PREV
-          </button>
+      {filteredAndSortedData.length > 0 ? (
+        <>
+          <ArchiveGrid data={visibleData} />
 
-          <div className="page-numbers mono">
-            {Array.from({ length: totalPages }, (_, i) => (
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="pagination-nav">
               <button
-                key={i + 1}
-                onClick={() => handlePageChange(i + 1)}
-                className={`page-num ${currentPage === i + 1 ? "active" : ""}`}
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="nav-btn mono"
               >
-                {String(i + 1).padStart(2, "0")}
+                PREV
               </button>
-            ))}
+
+              <div className="page-numbers mono">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`page-num ${currentPage === i + 1 ? "active" : ""}`}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="nav-btn mono"
+              >
+                NEXT
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        /* NEW HIGH-TECH EMPTY STATE */
+        <div className="no-results-container">
+          <div className="no-results-content">
+            <div className="error-code orange-text mono">
+              SYSTEM_ERROR // NULL_SEARCH
+            </div>
+            <h3 className="no-results-title italic">NO_MATCHING_ITEMS_FOUND</h3>
+            <p className="no-results-text mono">
+              SEARCH PARAMETERS RETURNED ZERO DATA POINTS. PLEASE RECALIBRATE
+              FILTERS.
+            </p>
+            <button
+              className="reset-search-btn mono"
+              onClick={() => {
+                setSearchTerm("");
+                setBrandFilter("ALL");
+                setColorFilter("ALL");
+              }}
+            >
+              RECALIBRATE_SYSTEM
+            </button>
           </div>
-
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="nav-btn mono"
-          >
-            NEXT
-          </button>
-        </div>
-      )}
-
-      {filteredAndSortedData.length === 0 && (
-        <div className="py-20 text-center mono opacity-40 text-sm">
-          NO_MATCHING_SPECIMENS_FOUND
         </div>
       )}
     </section>

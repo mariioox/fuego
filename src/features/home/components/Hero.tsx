@@ -41,9 +41,18 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 10000); // 8 seconds gives people time to read the giveaway text
+    }, 10000); // 10 seconds gives people time to read the giveaway text
     return () => clearInterval(timer);
   }, []);
+
+  const handleHeroClick = () => {
+    const audio = new Audio("/sounds/click.mp3");
+    audio.volume = 0.4;
+    audio.play();
+
+    document.body.classList.add("trigger-flicker");
+    setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
+  };
 
   return (
     <section className="hero-section">
@@ -96,7 +105,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="btn-main w-fit">
+            <button className="btn-main w-fit" onClick={handleHeroClick}>
               {SLIDES[current].btnText}
             </button>
           </a>

@@ -13,6 +13,7 @@ export default function App() {
 
   return (
     <Router>
+      <div className="flicker-overlay"></div>
       <ScrollToTop />
       <MainLayout theme={theme} toggleTheme={toggleTheme}>
         <Routes>

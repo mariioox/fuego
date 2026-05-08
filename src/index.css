@@ -67,3 +67,43 @@ body {
   opacity: 0.9;
   color: var(--orange);
 }
+
+/* Screen Flicker Animation */
+.flicker-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.trigger-flicker {
+  animation: screen-glitch 0.25s cubic-bezier(0.46, 0.29, 0, 1.24) forwards;
+}
+
+@keyframes screen-glitch {
+  0% {
+    opacity: 0.1;
+    transform: scaleY(1);
+  }
+  20% {
+    opacity: 0.3;
+    transform: scaleY(1.02);
+  }
+  40% {
+    opacity: 0.1;
+    background: var(--orange);
+  }
+  60% {
+    opacity: 0.4;
+    transform: scaleY(0.98);
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(1);
+  }
+}

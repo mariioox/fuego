@@ -1,0 +1,128 @@
+.newsletter-section {
+  padding: 5rem 0;
+  background: var(--text); /* Reverse theme: Dark background */
+  color: var(--bg); /* Light text */
+}
+
+.newsletter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .newsletter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.news-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 950;
+  line-height: 0.85;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+}
+
+.news-description {
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.7;
+  max-width: 450px;
+}
+
+/* Form Styling */
+.news-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .input-group {
+    flex-direction: row;
+  }
+}
+
+.news-input {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 18px;
+  color: white;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.news-input:focus {
+  border-color: var(--orange);
+}
+
+.news-submit {
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-weight: 900;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.news-submit:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+.news-disclaimer {
+  font-size: 10px;
+  opacity: 0.4;
+  letter-spacing: 0.1em;
+}
+
+/* Animation for the "Processing" state */
+.news-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success glow for the input */
+.news-input.success-border {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.orange-text {
+  color: var(--orange);
+}
+
+/* Optional: Add a subtle pulse animation to the orange text */
+@keyframes statusPulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.news-disclaimer span {
+  animation: statusPulse 2s infinite;
+}
