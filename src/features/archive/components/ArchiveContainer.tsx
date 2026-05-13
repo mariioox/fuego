@@ -3,8 +3,8 @@ import { SNEAKER_REGISTRY } from "../data/sneakerRegistry";
 import ArchiveHeader from "./ArchiveHeader";
 import ArchiveGrid from "./ArchiveGrid";
 import type { Sneaker } from "../types/sneaker";
-import "./styles/ArchiveContainer.css";
-import "./styles/ArchiveGrid.css";
+import "../styles/ArchiveContainer.css";
+import "../styles/ArchiveGrid.css";
 
 const ITEMS_PER_PAGE = 20;
 

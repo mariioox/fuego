@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
-import "./styles/SpecimenModal.css";
+import "../styles/SpecimenModal.css";
 
 // Helper to map your color strings to hex/css values
 const colorMap: Record<string, string> = {

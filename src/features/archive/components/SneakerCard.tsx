@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
-import SpecimenModal from "./SpecimenModal"; // Import the new modal
-import "./styles/SneakerCard.css";
+import SpecimenModal from "./SpecimenModal";
+import "../styles/SneakerCard.css";
 
 export default function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,5 +1,5 @@
 import { Search, X } from "lucide-react";
-import "./styles/ArchiveHeader.css";
+import "../styles/ArchiveHeader.css";
 
 interface Props {
   searchTerm: string;

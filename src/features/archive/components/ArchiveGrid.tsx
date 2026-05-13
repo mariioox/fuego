@@ -1,7 +1,6 @@
-// src/features/archive/components/ArchiveGrid.tsx
 import type { Sneaker } from "../types/sneaker";
 import SneakerCard from "./SneakerCard";
-import "./styles/ArchiveGrid.css";
+import "../styles/ArchiveGrid.css";
 
 interface Props {
   data: Sneaker[];
