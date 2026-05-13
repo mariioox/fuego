@@ -153,6 +153,31 @@
   margin-bottom: 1.5rem;
 }
 
+.modal-add-cart-btn {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  background: var(--text);
+  color: var(--bg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.modal-add-cart-btn:hover {
+  color: var(--orange);
+  transform: translateY(-1px);
+}
+
 /* --- CLOSE BUTTON --- */
 .modal-close-btn {
   position: absolute;

@@ -5,8 +5,10 @@ import {
   Sun,
   Moon,
   ArrowRight,
+  ShoppingBag,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../cart/context/CartContext";
 import "./styles/Navbar.css";
 
 export default function Navbar({
@@ -16,6 +18,8 @@ export default function Navbar({
   theme: string;
   toggleTheme: () => void;
 }) {
+  const { cartCount, openCart } = useCart();
+
   return (
     <nav className="nav-wrapper">
       <div className="container nav-container">
@@ -30,6 +34,8 @@ export default function Navbar({
           <Link to="/catalogue" className="nav-link-archive">
             Full_Archive <ArrowRight size={14} />
           </Link>
+
+          
 
           {/* Theme Toggle Icon */}
           <button
@@ -58,6 +64,19 @@ export default function Navbar({
           >
             <MessageCircle size={20} />
           </a>
+
+          <button
+            onClick={openCart}
+            className="nav-cart-btn"
+            aria-label={`Open cart with ${cartCount} item${cartCount === 1 ? "" : "s"}`}
+          >
+            <ShoppingBag size={19} />
+            {cartCount > 0 && (
+              <span className="nav-cart-count mono">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
+          </button>
         </div>
       </div>
     </nav>

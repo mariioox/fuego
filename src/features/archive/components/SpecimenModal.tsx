@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import { X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ShoppingBag, X } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
+import { useCart } from "../../cart/context/CartContext";
 import "../styles/SpecimenModal.css";
 
 // Helper to map your color strings to hex/css values
@@ -28,6 +29,9 @@ export default function SpecimenModal({
   sneaker,
   onClose,
 }: SpecimenModalProps) {
+  const { addItem } = useCart();
+  const [addStatus, setAddStatus] = useState<"IDLE" | "ADDED">("IDLE");
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const handleEsc = (e: KeyboardEvent) => {
@@ -39,6 +43,12 @@ export default function SpecimenModal({
       window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
+
+  const handleAddToCart = () => {
+    addItem(sneaker);
+    setAddStatus("ADDED");
+    window.setTimeout(() => setAddStatus("IDLE"), 1400);
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -109,6 +119,11 @@ export default function SpecimenModal({
                 DESIGNED BY ${sneaker.brand}, THIS UNIT REMAINS A HIGH-PRIORITY SPECIMEN WITHIN 
                 THE ${sneaker.color.join("/")} COLOR SEQUENCE.`}
             </p>
+
+            <button className="modal-add-cart-btn" onClick={handleAddToCart}>
+              <ShoppingBag size={18} />
+              {addStatus === "ADDED" ? "ADDED_TO_CART" : "ADD_TO_CART"}
+            </button>
           </div>
         </div>
       </div>
