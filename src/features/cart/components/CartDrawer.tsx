@@ -1,10 +1,12 @@
+// src/features/cart/components/CartDrawer.tsx
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 import type { CartItem } from "../types/cart";
 import "../styles/CartDrawer.css";
 
-const WHATSAPP_ORDER_URL = "https://wa.me/message/MNPXIERXZVHPK1";
+// Formatted with country code, omitting leading plus sign or internal spacing
+const WHATSAPP_PHONE = "2348151729606";
 
 function formatNaira(value: number) {
   return new Intl.NumberFormat("en-NG", {
@@ -48,6 +50,16 @@ export default function CartDrawer() {
     [cartTotal, items],
   );
 
+  // Trigger sensory feedback loops (Click sound + Screen flicker)
+  const triggerSensoryFeedback = () => {
+    const audio = new Audio("/sounds/click.mp3");
+    audio.volume = 0.4;
+    audio.play().catch((err) => console.log("Audio playback blocked", err));
+
+    document.body.classList.add("trigger-flicker");
+    setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
+  };
+
   useEffect(() => {
     if (!isCartOpen) return;
 
@@ -72,12 +84,27 @@ export default function CartDrawer() {
   if (!isCartOpen) return null;
 
   const handleCopyOrder = async () => {
+    triggerSensoryFeedback();
     await navigator.clipboard.writeText(orderMessage);
     setCopyStatus("COPIED");
   };
 
   const handleCheckout = () => {
-    window.open(WHATSAPP_ORDER_URL, "_blank", "noopener,noreferrer");
+    triggerSensoryFeedback();
+    
+    // URL-encode order text to safely pass spaces and linebreaks to WhatsApp UI
+    const encodedText = encodeURIComponent(orderMessage);
+    const directUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedText}`;
+    
+    window.open(directUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const handleQuantityAdjustment = (action: () => void) => {
+    // Light click sound only when tweaking item count numbers
+    const audio = new Audio("/sounds/click.mp3");
+    audio.volume = 0.2;
+    audio.play().catch(() => {});
+    action();
   };
 
   return (
@@ -126,14 +153,14 @@ export default function CartDrawer() {
                     <div className="cart-item-bottom">
                       <div className="cart-qty-control" aria-label="Quantity controls">
                         <button
-                          onClick={() => decreaseQuantity(item.id)}
+                          onClick={() => handleQuantityAdjustment(() => decreaseQuantity(item.id))}
                           aria-label={`Decrease ${item.name} quantity`}
                         >
                           <Minus size={14} />
                         </button>
                         <span>{String(item.quantity).padStart(2, "0")}</span>
                         <button
-                          onClick={() => increaseQuantity(item.id)}
+                          onClick={() => handleQuantityAdjustment(() => increaseQuantity(item.id))}
                           aria-label={`Increase ${item.name} quantity`}
                         >
                           <Plus size={14} />
@@ -163,7 +190,13 @@ export default function CartDrawer() {
                 {copyStatus === "COPIED" ? "ORDER_TEXT_COPIED" : "COPY_ORDER_TEXT"}
               </button>
 
-              <button className="cart-clear-btn mono" onClick={clearCart}>
+              <button 
+                className="cart-clear-btn mono" 
+                onClick={() => {
+                  triggerSensoryFeedback();
+                  clearCart();
+                }}
+              >
                 CLEAR_QUEUE
               </button>
             </div>
