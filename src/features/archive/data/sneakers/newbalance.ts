@@ -8,7 +8,7 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     brand: "NEW BALANCE",
     color: ["GREY"],
     status: 'AVAILABLE',
-    price: 45000,
+    price: 40000,
   },{
     id: 14,
     sku: "U9060VRA",
@@ -24,7 +24,7 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     brand: "NEW BALANCE",
     color: ["BLACK"],
     status: 'AVAILABLE',
-    price: 45000,
+    price: 40000,
   },{
     id: 16,
     sku: "U2000EA",

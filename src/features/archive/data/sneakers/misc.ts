@@ -40,7 +40,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["BLACK"],
     status: 'AVAILABLE',
-    price: 70000,
+    price: 60000,
   },{
     id: 35,
     sku: "TB010061-713",
@@ -48,7 +48,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["BLACK", "BROWN"],
     status: 'AVAILABLE',
-    price: 70000,
+    price: 60000,
   },{
     id: 36,
     sku: "TB0A44VY-EJR",
@@ -56,7 +56,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["GREY"],
     status: 'AVAILABLE',
-    price: 70000,
+    price: 60000,
   },{
     id: 37,
     sku: "VN0009QC6BT",
@@ -96,7 +96,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["BLACK"],
     status: 'PREMIUM',
-    price: 80000,
+    price: 70000,
   },{
     id: 57,
     sku: "1AD72X",
@@ -104,7 +104,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["BROWN", "BLACK"],
     status: 'PREMIUM',
-    price: 80000,
+    price: 70000,
   },{
     id: 58,
     sku: "TB0A1M6Q",
@@ -112,7 +112,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     brand: "TIMBERLAND",
     color: ["WHITE"],
     status: 'PREMIUM',
-    price: 80000
+    price: 70000
   },{
     id: 67,
     sku: "395205-02",

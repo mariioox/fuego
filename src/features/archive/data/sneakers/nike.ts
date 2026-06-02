@@ -145,13 +145,14 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     color: ["WHITE", "ORANGE"],
     status: 'PREMIUM',
     price: 60000,
-  },{
-    id: 1,
-    sku: "FJ1674-600",
-    name: "Nike SB Dunk Low 'University Red Gum'",
-    brand: "NIKE",
-    color: ["RED", "WHITE"],
-    price: 70000,
-    status: 'PREMIUM',
   },
+  //{
+  //   id: 1,
+  //   sku: "FJ1674-600",
+  //   name: "Nike SB Dunk Low 'University Red Gum'",
+  //   brand: "NIKE",
+  //   color: ["RED", "WHITE"],
+  //   price: 70000,
+  //   status: 'PREMIUM',
+  // },
 ];
