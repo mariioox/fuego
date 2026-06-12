@@ -34,6 +34,22 @@ export default async function handler(
       return response.status(500).json({ error: "Failed to subscribe" });
     }
 
+    const emailjsResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_ID,
+        user_id: process.env.EMAILJS_PUBLIC_KEY,
+        template_params: { user_email: email },
+      }),
+    });
+
+    if (!emailjsResponse.ok) {
+      const error = await emailjsResponse.json();
+      console.error("EmailJS error:", error);
+    }
+
     return response.status(200).json({ success: true });
   } catch (error) {
     console.error("Subscription error:", error);

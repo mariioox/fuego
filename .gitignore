@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 .env
-email-templates/
+email-template.html
 
 # Editor directories and files
 .vscode/*
