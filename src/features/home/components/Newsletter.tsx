@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import "../styles/Newsletter.css";
 
 export default function Newsletter() {
@@ -9,19 +8,13 @@ export default function Newsletter() {
   >("IDLE");
 
   const triggerFeedback = () => {
-    // 1. Mechanical Click Sound (Place file in public/sounds/click.mp3)
     const audio = new Audio("/sounds/click.mp3");
     audio.volume = 0.4;
     audio.play();
 
-    // 2. Screen Flicker
     document.body.classList.add("trigger-flicker");
     setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
   };
-
-  useEffect(() => {
-    emailjs.init("QGzZ9cloXxyNwqCfq");
-  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,13 +22,18 @@ export default function Newsletter() {
     setStatus("LOADING");
 
     try {
-      await emailjs.send("service_wscab66", "template_1", {
-        user_email: email,
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
+
+      if (!res.ok) throw new Error("Subscription failed");
+
       setStatus("SUCCESS");
       setEmail("");
     } catch (err) {
-      console.error("EMAIL_FAILURE:", err);
+      console.error("SUBSCRIBE_FAILURE:", err);
       setStatus("ERROR");
     }
   };
