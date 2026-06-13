@@ -29,9 +29,9 @@ export default async function handler(
     });
 
     if (!brevoResponse.ok) {
-      const error = await brevoResponse.json();
+      const error = await brevoResponse.text();
       console.error("Brevo API error:", error);
-      return response.status(500).json({ error: "Failed to subscribe" });
+      return response.status(500).json({ error: "Brevo error", detail: error });
     }
 
     const emailjsResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -46,7 +46,7 @@ export default async function handler(
     });
 
     if (!emailjsResponse.ok) {
-      const error = await emailjsResponse.json();
+      const error = await emailjsResponse.text();
       console.error("EmailJS error:", error);
     }
 
