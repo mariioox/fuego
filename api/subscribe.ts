@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import emailjs from "@emailjs/nodejs";
 
 export default async function handler(
   request: VercelRequest,
@@ -31,24 +32,18 @@ export default async function handler(
     if (!brevoResponse.ok) {
       const error = await brevoResponse.text();
       console.error("Brevo API error:", error);
-      return response.status(500).json({ error: "Brevo error", detail: error });
+      return response.status(500).json({ error: "Failed to subscribe" });
     }
 
-    const emailjsResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        service_id: process.env.EMAILJS_SERVICE_ID,
-        template_id: process.env.EMAILJS_TEMPLATE_ID,
-        user_id: process.env.EMAILJS_PUBLIC_KEY,
-        template_params: { user_email: email },
-      }),
-    });
-
-    if (!emailjsResponse.ok) {
-      const error = await emailjsResponse.text();
-      console.error("EmailJS error:", error);
-    }
+    await emailjs.send(
+      process.env.EMAILJS_SERVICE_ID!,
+      process.env.EMAILJS_TEMPLATE_ID!,
+      { user_email: email },
+      {
+        publicKey: process.env.EMAILJS_PUBLIC_KEY!,
+        privateKey: process.env.EMAILJS_PRIVATE_KEY!,
+      },
+    );
 
     return response.status(200).json({ success: true });
   } catch (error) {
