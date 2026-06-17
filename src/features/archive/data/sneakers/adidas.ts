@@ -84,7 +84,7 @@ export const adidasSneakers: Partial<Sneaker>[] = [
   },
   {
     id: 47,
-    sku: "01aC",
+    sku: "01ASCGPWP",
     name: "adidas Samba x Comme des Garçons Play White_Pink",
     brand: "ADIDAS",
     color: ["BROWN", "WHITE", "PINK"],

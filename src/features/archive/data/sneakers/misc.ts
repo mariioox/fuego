@@ -160,7 +160,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     name: "Puma Speedcat OG White Black",
     brand: "PUMA",
     color: ["WHITE", "BLACK"],
-    price: 4000,
+    price: 40000,
     status: "AVAILABLE",
   },
   {
