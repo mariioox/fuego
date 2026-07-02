@@ -39,7 +39,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="newsletter-section">
+    <section id="newsletter" className="newsletter-section">
       <div className="container">
         <div className="newsletter-grid">
           <div className="news-content">

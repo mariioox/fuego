@@ -2,25 +2,26 @@ import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import "../styles/ShopIcons.css";
-import University_red from "../../archive/data/assets/Nike SB Dunk Low University Red Gum - FJ1674-600.webp";
-import Brick from "../../archive/data/assets/Air Jordan 4 Retro OG SP Nigel Sylvester Brick by Brick - HF4340-800.webp";
+import LV_TIMB_black from "../../archive/data/assets/Louis Vuitton Timberland 6 Ankle Boot Wheat Monogram - 1AD72X.webp";
+import Speedcat_BW from "../../archive/data/assets/Puma Speedcat OG Black White - 398846-01.webp";
 import Forest_green from "../../archive/data/assets/New Balance 9060 Team Forest Green - U9060VRA.webp";
-import Riot from "../../archive/data/assets/Nike SB Dunk Low Riot Skateshop - FZ1289-200.webp";
+import Rammellzee from "../../archive/data/assets/Nike SB Dunk High Supreme Rammellzee - FD8779-100.webp";
 import Timberland_grey from "../../archive/data/assets/Timberland 6 Waterproof Boot Ice Studios - TB0A44VY-EJR.webp";
 import Speedcat_blue from "../../archive/data/assets/Puma Speedcat Archive Team Light Blue Club Navy - 398847-01.webp";
+import comme from "../../archive/data/assets/Adidas Samba x Comme des Garçons Play White_Pink - 01ASCGPWP.webp";
 
 const ICONS = [
   {
     id: 1,
-    name: "University Red Gum",
-    tag: "Nike SB Dunk Low",
-    img: University_red,
+    name: "Louis Vuitton x Timberland",
+    tag: "Timberland",
+    img: LV_TIMB_black,
   },
   {
     id: 2,
-    name: "Brick by Brick",
-    tag: "Air Jordan 4 Retro OG",
-    img: Brick,
+    name: "Speedcat B&W",
+    tag: "PUMA",
+    img: Speedcat_BW,
   },
   {
     id: 3,
@@ -30,9 +31,9 @@ const ICONS = [
   },
   {
     id: 4,
-    name: "Riot Skateshop",
-    tag: "Nike SB Dunk Low ",
-    img: Riot,
+    name: "Supreme Rammellzee",
+    tag: "Nike SB Dunk High",
+    img: Rammellzee,
   },
   {
     id: 5,
@@ -45,6 +46,12 @@ const ICONS = [
     name: "Speedcat Blue",
     tag: "Puma",
     img: Speedcat_blue,
+  },
+  {
+    id: 7,
+    name: "Comme des Garçons",
+    tag: "Adidas",
+    img: comme,
   },
 ];
 
