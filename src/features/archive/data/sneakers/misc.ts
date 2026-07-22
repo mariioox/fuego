@@ -181,7 +181,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
     price: 40000,
   },{
-    id: 84,
+    id: 94,
     sku: "TB010073-009",
     name: "Timberland 6' Waterproof Boot Black",
     brand: "TIMBERLAND",
@@ -190,7 +190,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 85,
+    id: 95,
     sku: "TB010061-713",
     name: "Timberland 6' Waterproof Boot Wheat",
     brand: "TIMBERLAND",
