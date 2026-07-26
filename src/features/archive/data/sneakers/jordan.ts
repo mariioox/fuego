@@ -2,7 +2,6 @@ import type { Sneaker } from "../../types/sneaker";
 
 export const jordanSneakers: Partial<Sneaker>[] = [
   {
-    id: 7,
     sku: "DH6927-111",
     name: "Jordan 4 Retro Military Black",
     brand: "JORDAN",
@@ -11,7 +10,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
   },
   {
-    id: 8,
     sku: "FV5029-100",
     name: "Jordan 4 Retro White Cement",
     brand: "JORDAN",
@@ -20,7 +18,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
   },
   {
-    id: 51,
     sku: "CJ7891-400",
     name: "Jordan 1 Low SB Midnight Navy",
     brand: "JORDAN",
@@ -29,7 +26,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     price: 45000,
   },
   {
-    id: 52,
     sku: "DC7770-160",
     name: "Jordan 4 Retro Fire Red",
     brand: "JORDAN",
@@ -38,7 +34,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 55,
     sku: "CI1184-146",
     name: "Jordan 4 Retro What The",
     brand: "JORDAN",
@@ -47,7 +42,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 74,
     sku: "FQ8155-010",
     name: "Jordan 1 High Zoom Air CMFT 2 Día De Muertos",
     brand: "JORDAN",
@@ -56,7 +50,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 75,
     sku: "FQ2941-200",
     name: "Jordan 1 Retro High OG SP Dusted Clay",
     brand: "JORDAN",
@@ -65,7 +58,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 76,
     sku: "HQ7978-100",
     name: "Jordan 5 Retro Grape",
     brand: "JORDAN",
@@ -74,7 +66,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 77,
     sku: "FQ8138-103",
     name: "Jordan retro 4 Oxidized Green",
     brand: "JORDAN",
@@ -83,7 +74,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   //{
-  //   id: 4,
   //   sku: "HF4340-800",
   //   name: "Air Jordan 4 Retro OG SP Nigel Sylvester Brick by Brick",
   //   brand: "JORDAN",
@@ -91,15 +81,13 @@ export const jordanSneakers: Partial<Sneaker>[] = [
   //   price: 85000,
   //   status: 'PREMIUM',
   // },
-  // //   id: 53,
-  //   sku: "AQ9129-001",
+  // //   sku: "AQ9129-001",
   //   name: "Jordan 4 Retro Frozen Moments",
   //   brand: "JORDAN",
   //   color: ["GREY", "WHITE"],
   //   status: 'PREMIUM',
   //   price: 60000,
   // },{
-  //   id: 54,
   //   sku: "930155-003",
   //   name: "Jordan 4 Retro Kaws",
   //   brand: "JORDAN",
@@ -108,7 +96,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
   //   price: 60000,
   // },
   // {
-  //   id: 9,
   //   sku: "HF3975-001",
   //   name: "Jordan 5 Retro OG Black Metallic Reimagined",
   //   brand: "JORDAN",
@@ -116,7 +103,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
   //   price: 60000,
   //   status: 'PREMIUM',
   // },{
-  //   id: 10,
   //   sku: "136027-035",
   //   name: "Jordan 5 Retro Oreo",
   //   brand: "JORDAN",
@@ -124,7 +110,6 @@ export const jordanSneakers: Partial<Sneaker>[] = [
   //   price: 60000,
   //   status: 'PREMIUM',
   // },{
-  //   id: 11,
   //   sku: "DD0587-002",
   //   name: "Jordan 5 Retro Wolf Grey",
   //   brand: "JORDAN",

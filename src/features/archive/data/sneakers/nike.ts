@@ -2,7 +2,6 @@ import type { Sneaker } from "../../types/sneaker";
 
 export const nikeSneakers: Partial<Sneaker>[] = [
   {
-    id: 17,
     sku: "315122-001",
     name: "Nike Air Force 1 Low '07 Black",
     status: "AVAILABLE",
@@ -11,7 +10,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 30000,
   },
   {
-    id: 18,
     sku: "315122-111",
     name: "Nike Air Force 1 Low '07 White",
     brand: "NIKE",
@@ -20,7 +18,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 30000,
   },
   // {
-  //   id: 19,
   //   sku: "FJ4217-002",
   //   name: "Nike Air Max 95 Black University Blue",
   //   brand: "NIKE",
@@ -29,7 +26,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
   //   price: 50000,
   // },
   // {
-  //   id: 20,
   //   sku: "HV1470-001",
   //   name: "Nike Dunk Low Ducks of a Feather Black University of Oregon PE",
   //   brand: "NIKE",
@@ -38,7 +34,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
   //   price: 50000,
   // },
   {
-    id: 21,
     sku: "HQ3815-001",
     name: "Nike Dunk Low Symbiote",
     brand: "NIKE",
@@ -47,7 +42,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 22,
     sku: "BQ6817-011",
     name: "Nike SB Dunk Low Chlorophyll",
     brand: "NIKE",
@@ -56,7 +50,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 23,
     sku: "895969-006",
     name: "Nike SB Dunk Low Ishod Wair Dark Grey",
     brand: "NIKE",
@@ -65,7 +58,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 24,
     sku: "BQ6817-200",
     name: "Nike SB Dunk Low Light Cream Thunderstorm",
     brand: "NIKE",
@@ -74,7 +66,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 25,
     sku: "FN5880-001",
     name: "Nike SB Dunk Low Premium City of Style",
     brand: "NIKE",
@@ -83,7 +74,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 26,
     sku: "FZ5251-001",
     name: "Nike SB Dunk Low Rayssa Leal",
     brand: "NIKE",
@@ -92,7 +82,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 27,
     sku: "FZ1289-200",
     name: "Nike SB Dunk Low Riot Skateshop",
     brand: "NIKE",
@@ -101,7 +90,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 28,
     sku: "CZ2239-600",
     name: "Nike SB Dunk Low What The P-Rod",
     brand: "NIKE",
@@ -119,7 +107,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 70000,
   },
   {
-    id: 29,
     sku: "FQ1180-001",
     name: "Nike SB Dunk Low Yuto Horigome",
     brand: "NIKE",
@@ -128,7 +115,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 35000,
   },
   {
-    id: 30,
     sku: "HQ1988-001",
     name: "Nike Shox R4 Black Bright Crimson",
     brand: "NIKE",
@@ -137,7 +123,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 31,
     sku: "HQ1988-002",
     name: "Nike Shox R4 Black Metallic Silver",
     brand: "NIKE",
@@ -146,7 +131,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 64,
     sku: "HF7743-001",
     name: "Nike SB Dunk Low There Skateboards",
     brand: "NIKE",
@@ -155,7 +139,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 35000,
   },
   {
-    id: 65,
     sku: "HV6349-200",
     name: "Nike Shox Ride 2 Baroque Brown Diffused Blue",
     brand: "NIKE",
@@ -164,7 +147,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 66,
     sku: "HQ5412-072",
     name: "Nike Shox Ride 2 Light Bone Turf Orange",
     brand: "NIKE",
@@ -173,7 +155,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
-    id: 79,
     sku: "DD1399-105",
     name: "Nike Dunk High Panda Black White",
     brand: "NIKE",
@@ -182,7 +163,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 80,
     sku: "DD1391-100",
     name: "Nike Dunk Low Retro White Black Panda",
     brand: "NIKE",
@@ -191,7 +171,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 81,
     sku: "394053-005",
     name: "Nike Initiator Black Dark Smoke Grey",
     brand: "NIKE",
@@ -200,7 +179,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 82,
     sku: "HQ1179-001",
     name: "Nike Initiator Light Bone Smoke Grey",
     brand: "NIKE",
@@ -209,7 +187,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 83,
     sku: "394055-001",
     name: "Nike Initiator Metallic Silver Red",
     brand: "NIKE",
@@ -218,7 +195,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 84,
     sku: "FD8779-100",
     name: "Nike SB Dunk High Supreme Rammellzee",
     brand: "NIKE",
@@ -227,7 +203,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 85,
     sku: "918321-381",
     name: "Nike SB Dunk High Thomas Campbell What the Dunk",
     brand: "NIKE",
@@ -236,7 +211,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 87,
     sku: "AV3595-002",
     name: "Nike Shox TL Black Metallic Hematite",
     brand: "NIKE",
@@ -245,7 +219,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 88,
     sku: "IF7119-001",
     name: "Nike Shox TL Black Varsity Maize",
     brand: "NIKE",
@@ -254,7 +227,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 89,
     sku: "CN0151-003",
     name: "Nike Shox TL Black University Red",
     brand: "NIKE",
@@ -263,7 +235,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   //{
-  //   id: 1,
   //   sku: "FJ1674-600",
   //   name: "Nike SB Dunk Low 'University Red Gum'",
   //   brand: "NIKE",
@@ -272,7 +243,6 @@ export const nikeSneakers: Partial<Sneaker>[] = [
   //   status: 'PREMIUM',
   // },
   // {
-  //   id: 86,
   //   sku: "01NSDLYDSP",
   //   name: "Nike SB Dunk Low Year of the Dragon Steam Puppet",
   //   brand: "NIKE",

@@ -4,6 +4,7 @@ import { jordanSneakers } from "./sneakers/jordan";
 import { adidasSneakers } from "./sneakers/adidas";
 import { newBalanceSneakers } from "./sneakers/newbalance";
 import { miscSneakers } from "./sneakers/misc";
+import { pumaSneakers } from "./sneakers/puma";
 
 /* STEP 1: DYNAMIC ASSET IMPORT */
 const imageModules = import.meta.glob('./assets/*.webp', { 
@@ -42,11 +43,12 @@ const rawRegistry = [
   ...adidasSneakers,
   ...newBalanceSneakers,
   ...miscSneakers,
+  ...pumaSneakers,
 ];
 
 /* STEP 4: DATA REGISTRY */
-export const SNEAKER_REGISTRY: Sneaker[] = rawRegistry.map((shoe) => ({
-  id: shoe.id!,
+export const SNEAKER_REGISTRY: Sneaker[] = rawRegistry.map((shoe, index) => ({
+  id: index + 1,
   sku: shoe.sku!,
   name: shoe.name!,
   brand: shoe.brand!,

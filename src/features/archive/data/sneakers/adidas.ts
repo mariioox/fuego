@@ -2,7 +2,6 @@ import type { Sneaker } from "../../types/sneaker";
 
 export const adidasSneakers: Partial<Sneaker>[] = [
   {
-    id: 38,
     sku: "HP6395",
     name: "adidas Campus 00s Bliss Lilac",
     brand: "ADIDAS",
@@ -11,7 +10,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 30000,
   },
   {
-    id: 39,
     sku: "ID3171",
     name: "adidas Campus 00s Core Black True Pink",
     brand: "ADIDAS",
@@ -20,7 +18,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 30000,
   },
   {
-    id: 40,
     sku: "HQ4569",
     name: "adidas Campus 00s Dust Cargo Clear Pink",
     brand: "ADIDAS",
@@ -29,7 +26,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 30000,
   },
   {
-    id: 41,
     sku: "IG0792",
     name: "adidas Campus 00s KoRn",
     brand: "ADIDAS",
@@ -38,7 +34,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 42,
     sku: "IF4398",
     name: "adidas Samba Light Purple Floral",
     brand: "ADIDAS",
@@ -47,7 +42,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 43,
     sku: "B75807",
     name: "adidas Samba OG Black White Gum",
     brand: "ADIDAS",
@@ -56,7 +50,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 35000,
   },
   {
-    id: 44,
     sku: "IE5836",
     name: "adidas Samba OG Black Wonder White",
     brand: "ADIDAS",
@@ -65,7 +58,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 45,
     sku: "BZ0057",
     name: "adidas Samba OG Cloud White Core Black",
     brand: "ADIDAS",
@@ -74,7 +66,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 35000,
   },
   {
-    id: 46,
     sku: "ID1482",
     name: "adidas Samba OG Putty Grey Maroon",
     brand: "ADIDAS",
@@ -83,7 +74,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 47,
     sku: "01ASCGPWP",
     name: "adidas Samba x Comme des Garçons Play White_Pink",
     brand: "ADIDAS",
@@ -92,7 +82,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 3,
     sku: "IF8768",
     name: "adidas Campus 00s Core Black",
     brand: "ADIDAS",
@@ -101,7 +90,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 68,
     sku: "HQ8708",
     name: "adidas Campus 00s Core Black White",
     brand: "ADIDAS",
@@ -110,7 +98,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 69,
     sku: "GY6433",
     name: "adidas Campus 00s Bark",
     brand: "ADIDAS",
@@ -119,7 +106,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 70,
     sku: "HQ8707",
     name: "adidas Campus 00s Grey White",
     brand: "ADIDAS",
@@ -128,7 +114,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 71,
     sku: "ID7028",
     name: "adidas Campus 00s Pink Fusion",
     brand: "ADIDAS",
@@ -137,7 +122,6 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
-    id: 72,
     sku: "JH7275",
     name: "adidas Campus 00s Pink Spark Core Black",
     brand: "ADIDAS",

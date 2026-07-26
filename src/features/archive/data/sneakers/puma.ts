@@ -1,0 +1,60 @@
+import type { Sneaker } from "../../types/sneaker";
+
+export const pumaSneakers: Partial<Sneaker>[] = [
+  {
+    sku: "395205-02",
+    name: "Puma Suede XL Black White",
+    brand: "PUMA",
+    color: ["BLACK", "WHITE"],
+    status: "AVAILABLE",
+    price: 35000,
+  },
+  {
+    sku: "398846-83",
+    name: "Puma Speedcat OG New Navy Rosy Outlook",
+    brand: "PUMA",
+    color: ["BLACK", "PINK"],
+    price: 40000,
+    status: "AVAILABLE",
+  },
+  {
+    sku: "398846-02",
+    name: "Puma Speedcat OG Red White",
+    brand: "PUMA",
+    color: ["RED", "WHITE"],
+    price: 40000,
+    status: "AVAILABLE",
+  },
+  {
+    sku: "01PSXOW",
+    name: "Puma Suede XL Olive White",
+    brand: "PUMA",
+    color: ["WHITE", "GREEN"],
+    price: 35000,
+    status: "AVAILABLE",
+  },
+  {
+    sku: "01PSOWB",
+    name: "Puma Speedcat OG White Black",
+    brand: "PUMA",
+    color: ["WHITE", "BLACK"],
+    price: 40000,
+    status: "AVAILABLE",
+  },
+  {
+    sku: "398847-01",
+    name: "Puma Speedcat Archive Team Light Blue Club Navy",
+    brand: "PUMA",
+    color: ["BLUE", "BLACK"],
+    status: "AVAILABLE",
+    price: 40000,
+  },
+  {
+    sku: "398846-01",
+    name: "Puma Speedcat OG Black White",
+    brand: "PUMA",
+    color: ["BLACK", "WHITE"],
+    status: "AVAILABLE",
+    price: 40000,
+  },
+];

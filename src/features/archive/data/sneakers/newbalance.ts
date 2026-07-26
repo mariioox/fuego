@@ -2,7 +2,6 @@ import type { Sneaker } from "../../types/sneaker";
 
 export const newBalanceSneakers: Partial<Sneaker>[] = [
   {
-    id: 13,
     sku: "U9060ZGB",
     name: "New Balance 9060 Shadow Grey Castlerock",
     brand: "NEW BALANCE",
@@ -11,7 +10,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 14,
     sku: "U9060VRA",
     name: "New Balance 9060 Team Forest Green",
     brand: "NEW BALANCE",
@@ -20,7 +18,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 45000,
   },
   {
-    id: 15,
     sku: "U9060BPM",
     name: "New Balance 9060 Triple Black",
     brand: "NEW BALANCE",
@@ -29,7 +26,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 16,
     sku: "U2000EA",
     name: "New Balance Abzorb 2000 Black Grey",
     brand: "NEW BALANCE",
@@ -38,7 +34,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 59,
     sku: "MR530SG",
     name: "New Balance 530 White Silver Navy",
     brand: "NEW BALANCE",
@@ -47,7 +42,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 60,
     sku: "GR740BM",
     name: "New Balance 740 Black Silver Metallic",
     brand: "NEW BALANCE",
@@ -56,7 +50,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
-    id: 61,
     sku: "U9060ERC",
     name: "New Balance 9060 Arid Stone Mushroom",
     brand: "NEW BALANCE",
@@ -65,7 +58,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 45000,
   },
   {
-    id: 62,
     sku: "U9060OUT",
     name: "New Balance 9060 Beef and Broccoli",
     brand: "NEW BALANCE",
@@ -74,7 +66,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 45000,
   },
   {
-    id: 63,
     sku: "U9060ZGD",
     name: "New Balance 9060 Dark Olivine",
     brand: "NEW BALANCE",
@@ -83,7 +74,6 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     price: 45000,
   },
   {
-    id: 78,
     sku: "U1906ANA",
     name: "New Balance 1906A Eggplant",
     brand: "NEW BALANCE",
