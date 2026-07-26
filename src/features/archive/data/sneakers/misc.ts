@@ -21,7 +21,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     sku: "1203A566-100",
     name: "ASICS Gel - Kayano 14 Kith Cream Scarab",
     brand: "ASICS",
-    color: ["WHITE", "BROWN"],
+    color: ["WHITE", "BLACK"],
     price: 35000,
     status: "AVAILABLE",
   },

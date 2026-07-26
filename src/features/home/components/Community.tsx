@@ -46,6 +46,7 @@ export default function Community() {
           <div className="community-item">
             <img
               src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400"
+              alt="Sneaker community verified heat"
               className="community-img"
             />
             <span className="community-label">Verified Heat</span>
@@ -54,6 +55,7 @@ export default function Community() {
           <div className="community-item">
             <img
               src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400"
+              alt="Lagos sneaker archive collection"
               className="community-img"
             />
             <span className="community-label">Lagos Archive</span>
@@ -62,6 +64,7 @@ export default function Community() {
           <div className="community-item">
             <img
               src="https://images.unsplash.com/photo-1512675845772-b962317738aa?w=400"
+              alt="Sneaker culture vibe check"
               className="community-img"
             />
             <span className="community-label">@vibe_check</span>
@@ -70,6 +73,7 @@ export default function Community() {
           <div className="community-item">
             <img
               src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400"
+              alt="Select sneaker series collection"
               className="community-img"
             />
             <span className="community-label">Select Series</span>
