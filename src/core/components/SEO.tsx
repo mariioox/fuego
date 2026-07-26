@@ -11,7 +11,6 @@ interface SEOProps {
 const SITE_NAME = "Fuego Archive";
 const DEFAULT_IMAGE = "/fuego_logo.jpeg";
 const SITE_URL = "https://feugo-heat.vercel.app";
-const IG_HANDLE = "@fuego.heat";
 const TW_HANDLE = "@fuego_heatng";
 
 export default function SEO({
