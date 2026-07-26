@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Sneaker } from "../../archive/types/sneaker";
-import type { CartItem, CartProduct } from "../types/cart";
+import type { CartItem, CartProduct, SneakerSize } from "../types/cart";
 
 const CART_STORAGE_KEY = "fuego-cart";
 
@@ -17,7 +17,7 @@ interface CartContextValue {
   isCartOpen: boolean;
   cartCount: number;
   cartTotal: number;
-  addItem: (product: Sneaker | CartProduct) => void;
+  addItem: (product: Sneaker | CartProduct, size: SneakerSize) => void;
   removeItem: (id: number) => void;
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
@@ -57,21 +57,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = useCallback((product: Sneaker | CartProduct) => {
+  const addItem = useCallback((product: Sneaker | CartProduct, size: SneakerSize) => {
     const cartProduct = toCartProduct(product);
 
     setItems((currentItems) => {
-      const existingItem = currentItems.find((item) => item.id === product.id);
+      const existingItem = currentItems.find(
+        (item) => item.id === product.id && item.size === size,
+      );
 
       if (existingItem) {
         return currentItems.map((item) =>
-          item.id === product.id
+          item.id === product.id && item.size === size
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
 
-      return [...currentItems, { ...cartProduct, quantity: 1 }];
+      return [...currentItems, { ...cartProduct, quantity: 1, size }];
     });
 
     setIsCartOpen(true);
@@ -84,7 +86,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const increaseQuantity = useCallback((id: number) => {
     setItems((currentItems) =>
       currentItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+        item.id === id && item.quantity < 99
+          ? { ...item, quantity: item.quantity + 1 }
+          : item,
       ),
     );
   }, []);

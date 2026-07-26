@@ -53,6 +53,7 @@ export default function ArchiveHeader({
             className="search-input mono"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search by model name or SKU"
           />
           {searchTerm && (
             <X
@@ -80,16 +81,6 @@ export default function ArchiveHeader({
             <option value="TIMBERLAND">TIMBERLAND</option>
           </select>
 
-          {/* <select
-            className="filter-select mono"
-            onChange={(e) => setColorFilter(e.target.value)}
-          >
-            <option value="ALL">COLOR: ALL</option>
-            <option value="RED">RED</option>
-            <option value="BLACK">BLACK</option>
-            <option value="BLUE">BLUE</option>
-          </select> */}
-
           <select
             className="filter-select mono"
             onChange={(e) => setSortOrder(e.target.value)}
@@ -114,7 +105,7 @@ export default function ArchiveHeader({
               {COLORS.map((color) => (
                 <button
                   key={color}
-                  title={color}
+                  aria-label={`Filter by ${color}`}
                   className={`swatch-btn ${colorFilter === color ? "active" : ""}`}
                   onClick={() => setColorFilter(color)}
                 >

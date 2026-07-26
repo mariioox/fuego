@@ -82,6 +82,38 @@ body {
   animation: screen-glitch 0.25s cubic-bezier(0.46, 0.29, 0, 1.24) forwards;
 }
 
+/* --- ACCESSIBILITY --- */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--orange);
+  color: #fff;
+  padding: 12px 24px;
+  z-index: 10001;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "Geist Mono", monospace;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger-flicker,
+  .btn-main,
+  .hero-slide-bg,
+  .hero-meta-animate,
+  .hero-desc-animate,
+  .card-img,
+  .modal-content,
+  .cart-drawer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @keyframes screen-glitch {
   0% {
     opacity: 0.1;

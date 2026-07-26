@@ -23,14 +23,8 @@ export default function Footer() {
             <div>
               <p className="footer-group-title mono">Navigation</p>
               <div className="footer-link-list">
-                <a href="#" className="footer-link">
+                <a href="/catalogue" className="footer-link">
                   Archive
-                </a>
-                <a href="#" className="footer-link">
-                  The Hunt
-                </a>
-                <a href="#" className="footer-link">
-                  Sourcing
                 </a>
               </div>
             </div>

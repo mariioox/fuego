@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSound } from "../../../core/hooks/useSound";
+import { subscribeEmail } from "../../../core/api/subscribe";
 import "../styles/Newsletter.css";
 
 export default function Newsletter() {
@@ -6,14 +8,23 @@ export default function Newsletter() {
   const [status, setStatus] = useState<
     "IDLE" | "LOADING" | "SUCCESS" | "ERROR"
   >("IDLE");
+  const playClick = useSound("/sounds/click.mp3");
+  const flickerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (flickerTimer.current) clearTimeout(flickerTimer.current);
+    };
+  }, []);
 
   const triggerFeedback = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.4;
-    audio.play();
+    playClick(0.4);
 
     document.body.classList.add("trigger-flicker");
-    setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
+    flickerTimer.current = setTimeout(
+      () => document.body.classList.remove("trigger-flicker"),
+      300,
+    );
   };
 
   const handleSubscribe = async (e: React.FormEvent) => {
@@ -21,19 +32,12 @@ export default function Newsletter() {
     triggerFeedback();
     setStatus("LOADING");
 
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+    const result = await subscribeEmail(email);
 
-      if (!res.ok) throw new Error("Subscription failed");
-
+    if (result.success) {
       setStatus("SUCCESS");
       setEmail("");
-    } catch (err) {
-      console.error("SUBSCRIBE_FAILURE:", err);
+    } else {
       setStatus("ERROR");
     }
   };

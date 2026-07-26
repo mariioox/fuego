@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useDebounce } from "../../../core/hooks/useDebounce";
 import { SNEAKER_REGISTRY } from "../data/sneakerRegistry";
 import ArchiveHeader from "./ArchiveHeader";
 import ArchiveGrid from "./ArchiveGrid";
@@ -15,6 +16,8 @@ export default function ArchiveContainer() {
   const [sortOrder, setSortOrder] = useState("NEWEST");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const debouncedSearch = useDebounce(searchTerm, 300);
+
   // Helper to reset page when filters change
   const handleFilterChange = (setter: (val: string) => void, value: string) => {
     setter(value);
@@ -25,8 +28,8 @@ export default function ArchiveContainer() {
     let result = [...SNEAKER_REGISTRY];
 
     // Search Filter
-    if (searchTerm) {
-      const lowSearch = searchTerm.toLowerCase();
+    if (debouncedSearch) {
+      const lowSearch = debouncedSearch.toLowerCase();
       result = result.filter(
         (item) =>
           item.name.toLowerCase().includes(lowSearch) ||
@@ -52,7 +55,7 @@ export default function ArchiveContainer() {
       if (sortOrder === "PRICE_DESC") return b.price - a.price;
       return b.id - a.id;
     });
-  }, [searchTerm, brandFilter, colorFilter, sortOrder]);
+  }, [debouncedSearch, brandFilter, colorFilter, sortOrder]);
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredAndSortedData.length / ITEMS_PER_PAGE);

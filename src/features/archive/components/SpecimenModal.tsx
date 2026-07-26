@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ShoppingBag, X } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
+import type { SneakerSize } from "../../cart/types/cart";
 import { useCart } from "../../cart/context/CartContext";
 import "../styles/SpecimenModal.css";
+
+const SIZES: SneakerSize[] = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
 
 // Helper to map your color strings to hex/css values
 const colorMap: Record<string, string> = {
@@ -31,27 +34,56 @@ export default function SpecimenModal({
 }: SpecimenModalProps) {
   const { addItem } = useCart();
   const [addStatus, setAddStatus] = useState<"IDLE" | "ADDED">("IDLE");
+  const [selectedSize, setSelectedSize] = useState<SneakerSize>(42);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && overlayRef.current) {
+        const focusable = overlayRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    },
+    [onClose],
+  );
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleEsc);
+    const firstFocusable = overlayRef.current?.querySelector<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    firstFocusable?.focus();
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onClose]);
+  }, [handleKeyDown]);
 
   const handleAddToCart = () => {
-    addItem(sneaker);
+    addItem(sneaker, selectedSize);
     setAddStatus("ADDED");
     window.setTimeout(() => setAddStatus("IDLE"), 1400);
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" ref={overlayRef} role="dialog" aria-modal="true" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose}>
           <X size={16} />
@@ -59,10 +91,12 @@ export default function SpecimenModal({
 
         <div className="modal-grid">
           <div className="modal-image-section">
+            {!imgLoaded && <div className="modal-img-skeleton" />}
             <img
               src={sneaker.image}
               alt={sneaker.name}
-              className="modal-main-img"
+              className={`modal-main-img ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+              onLoad={() => setImgLoaded(true)}
             />
           </div>
 
@@ -110,6 +144,23 @@ export default function SpecimenModal({
                 <span className="value text-orange-500">
                   {sneaker.priceFormatted}
                 </span>
+              </div>
+
+              <div className="data-row">
+                <span className="label">SELECT_SIZE</span>
+                <div className="size-grid">
+                  {SIZES.map((size) => (
+                    <button
+                      key={size}
+                      type="button"
+                      className={`size-btn ${selectedSize === size ? "active" : ""}`}
+                      onClick={() => setSelectedSize(size)}
+                      aria-label={`Size ${size}`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 

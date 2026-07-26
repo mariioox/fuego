@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useSound } from "../../../core/hooks/useSound";
 import "../styles/Hero.css";
-// Import your assets here
 import heroThree from "../../../assets/Hero3.jpeg";
 import heroSix from "../../../assets/Hero6.jpeg";
 import heroOne from "../../../assets/Hero1.jpeg";
@@ -9,7 +9,7 @@ const SLIDES = [
   {
     id: "001",
     meta: "RAFFLE_ACTIVE // GIVEAWAY",
-    title: "WIN THE <br/> ICON.",
+    title: ["WIN THE", "ICON."],
     sub: "SUBSCRIBE TO THE NEWSLETTER TO WIN A NEW NIKE AF1.",
     img: heroSix,
     btnText: "SUBSCRIBE",
@@ -18,7 +18,7 @@ const SLIDES = [
   {
     id: "002",
     meta: "STOCK_UPDATE",
-    title: "CURATED <br/> ARCHIVE.",
+    title: ["CURATED", "ARCHIVE."],
     sub: "CHECK OUT OUR UPDATED COLLECTION.",
     img: heroThree,
     btnText: "View Collection",
@@ -27,7 +27,7 @@ const SLIDES = [
   {
     id: "003",
     meta: "COMMUNITY // CONNECT",
-    title: "JOIN THE <br/> CIRCLE.",
+    title: ["JOIN THE", "CIRCLE."],
     sub: "Follow us for early access drops and private community events.",
     img: heroOne,
     btnText: "Follow Instagram",
@@ -37,29 +37,32 @@ const SLIDES = [
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const playClick = useSound("/sounds/click.mp3");
+
+  const goTo = useCallback((index: number) => {
+    setCurrent(index);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 10000); // 10 seconds gives people time to read the giveaway text
+    }, 10000);
     return () => clearInterval(timer);
-  }, []);
+  }, [current]);
 
   const handleHeroClick = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.4;
-    audio.play();
+    playClick(0.4);
 
     document.body.classList.add("trigger-flicker");
     setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
   };
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" aria-label="Hero slideshow">
       {/* 1. TOP PROGRESS NAVIGATION */}
       <div className="hero-top-nav">
         <div className="top-progress-track">
-          <div className="top-progress-fill" />
+          <div className="top-progress-fill" key={current} />
         </div>
       </div>
 
@@ -76,9 +79,8 @@ export default function Hero() {
       </div>
 
       {/* 3. STATIC CONTENT */}
-      <div className="hero-static-content">
+      <div className="hero-static-content" aria-live="polite" aria-atomic="true">
         <div className="hero-content-box">
-          {/* Metadata (System Style) */}
           <span
             key={SLIDES[current].id}
             className="hero-meta hero-meta-animate"
@@ -86,13 +88,15 @@ export default function Hero() {
             {SLIDES[current].meta}
           </span>
 
-          {/* Title (The Message) */}
-          <h1
-            className="hero-title"
-            dangerouslySetInnerHTML={{ __html: SLIDES[current].title }}
-          />
+          <h1 className="hero-title">
+            {SLIDES[current].title.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < SLIDES[current].title.length - 1 && <br />}
+              </span>
+            ))}
+          </h1>
 
-          {/* NEW: Subtext / Description */}
           <span
             key={`sub-${SLIDES[current].id}`}
             className="hero-description hero-desc-animate"
@@ -112,6 +116,38 @@ export default function Hero() {
 
           <div className="corner-br"></div>
         </div>
+      </div>
+
+      {/* 4. SLIDE CONTROLS */}
+      <div className="hero-controls">
+        <button
+          className="hero-nav-btn"
+          aria-label="Previous slide"
+          onClick={() => goTo((current - 1 + SLIDES.length) % SLIDES.length)}
+        >
+          &#8592;
+        </button>
+
+        <div className="hero-dots" role="tablist" aria-label="Slides">
+          {SLIDES.map((slide, index) => (
+            <button
+              key={slide.id}
+              role="tab"
+              aria-selected={index === current}
+              aria-label={`Go to slide ${index + 1}`}
+              className={`hero-dot ${index === current ? "active" : ""}`}
+              onClick={() => goTo(index)}
+            />
+          ))}
+        </div>
+
+        <button
+          className="hero-nav-btn"
+          aria-label="Next slide"
+          onClick={() => goTo((current + 1) % SLIDES.length)}
+        >
+          &#8594;
+        </button>
       </div>
     </section>
   );

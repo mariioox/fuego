@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
 import SpecimenModal from "./SpecimenModal";
 import "../styles/SneakerCard.css";
 
-export default function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
+function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div className="archive-card" onClick={() => setShowModal(true)}>
+      <div
+        className="archive-card"
+        role="button"
+        tabIndex={0}
+        onClick={() => setShowModal(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setShowModal(true);
+          }
+        }}
+      >
         <div className="card-img-wrapper">
           {sneaker.status && <span className="card-tag">{sneaker.status}</span>}
           <img
@@ -44,3 +55,5 @@ export default function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
     </>
   );
 }
+
+export default memo(SneakerCard);

@@ -15,6 +15,11 @@ export default async function handler(
     return response.status(400).json({ error: "Email is required" });
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return response.status(400).json({ error: "Invalid email format" });
+  }
+
   try {
     const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
@@ -30,8 +35,6 @@ export default async function handler(
     });
 
     if (!brevoResponse.ok) {
-      const error = await brevoResponse.text();
-      console.error("Brevo API error:", error);
       return response.status(500).json({ error: "Failed to subscribe" });
     }
 
@@ -46,8 +49,7 @@ export default async function handler(
     );
 
     return response.status(200).json({ success: true });
-  } catch (error) {
-    console.error("Subscription error:", error);
+  } catch {
     return response.status(500).json({ error: "Internal server error" });
   }
 }

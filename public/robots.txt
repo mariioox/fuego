@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://feugo-heat.vercel.app/sitemap.xml

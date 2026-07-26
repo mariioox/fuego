@@ -1,12 +1,13 @@
 // src/features/cart/components/CartDrawer.tsx
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { useSound } from "../../../core/hooks/useSound";
 import { useCart } from "../context/CartContext";
 import type { CartItem } from "../types/cart";
 import "../styles/CartDrawer.css";
 
 // Formatted with country code, omitting leading plus sign or internal spacing
-const WHATSAPP_PHONE = "2348151729606";
+const WHATSAPP_PHONE = import.meta.env.VITE_WHATSAPP_PHONE || "2348151729606";
 
 function formatNaira(value: number) {
   return new Intl.NumberFormat("en-NG", {
@@ -20,7 +21,7 @@ function buildOrderMessage(items: CartItem[], total: number) {
   const itemLines = items
     .map(
       (item, index) =>
-        `${index + 1}. ${item.quantity}x ${item.name} (${item.sku}) - ${formatNaira(
+        `${index + 1}. ${item.quantity}x ${item.name} (${item.sku}) Size ${item.size} - ${formatNaira(
           item.price * item.quantity,
         )}`,
     )
@@ -44,6 +45,7 @@ export default function CartDrawer() {
     decreaseQuantity,
   } = useCart();
   const [copyStatus, setCopyStatus] = useState<"IDLE" | "COPIED">("IDLE");
+  const playClick = useSound("/sounds/click.mp3");
 
   const orderMessage = useMemo(
     () => buildOrderMessage(items, cartTotal),
@@ -52,9 +54,7 @@ export default function CartDrawer() {
 
   // Trigger sensory feedback loops (Click sound + Screen flicker)
   const triggerSensoryFeedback = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.4;
-    audio.play().catch((err) => console.log("Audio playback blocked", err));
+    playClick(0.4);
 
     document.body.classList.add("trigger-flicker");
     setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
@@ -100,10 +100,7 @@ export default function CartDrawer() {
   };
 
   const handleQuantityAdjustment = (action: () => void) => {
-    // Light click sound only when tweaking item count numbers
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.2;
-    audio.play().catch(() => {});
+    playClick(0.2);
     action();
   };
 
@@ -112,6 +109,8 @@ export default function CartDrawer() {
       <aside
         className="cart-drawer"
         onClick={(event) => event.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
         aria-label="Shopping cart"
       >
         <div className="cart-header">
@@ -138,7 +137,7 @@ export default function CartDrawer() {
                       <div>
                         <h3 className="cart-item-name">{item.name}</h3>
                         <p className="cart-item-meta mono">
-                          {item.brand} // {item.sku}
+                          {item.brand} // {item.sku} // EU {item.size}
                         </p>
                       </div>
                       <button

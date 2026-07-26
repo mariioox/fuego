@@ -11,8 +11,9 @@ interface Props {
 export default function MainLayout({ children, theme, toggleTheme }: Props) {
   return (
     <div className="min-h-screen flex flex-col">
+      <a href="#main-content" className="skip-to-content">Skip to content</a>
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <main className="flex-grow">{children}</main>
+      <main id="main-content" className="flex-grow">{children}</main>
       <div className="section-divider">
         <Footer />
       </div>
