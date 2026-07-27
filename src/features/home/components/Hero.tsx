@@ -35,21 +35,11 @@ const SLIDES = [
   },
 ];
 
-const PRELOAD_IMAGES = [heroSix, heroThree, heroOne];
-
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [leaving, setLeaving] = useState<number | null>(null);
   const playClick = useSound("/sounds/click.mp3");
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Preload all hero images on mount
-  useEffect(() => {
-    PRELOAD_IMAGES.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
 
   const goTo = useCallback((index: number) => {
     if (index === current) return;
@@ -57,13 +47,6 @@ export default function Hero() {
     setLeaving(current);
     setCurrent(index);
     leaveTimer.current = setTimeout(() => setLeaving(null), 1200);
-  }, [current]);
-
-  // Preload next slide image when current changes
-  useEffect(() => {
-    const next = (current + 1) % SLIDES.length;
-    const img = new Image();
-    img.src = SLIDES[next].img;
   }, [current]);
 
   // Auto-rotate slides
@@ -113,7 +96,7 @@ export default function Hero() {
             src={SLIDES[current].img}
             alt=""
             className="hero-img"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </div>
       </div>
