@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useSound } from "../../../core/hooks/useSound";
 import "../styles/Hero.css";
 import heroThree from "../../../assets/Hero3.jpeg";
@@ -35,20 +35,57 @@ const SLIDES = [
   },
 ];
 
+const PRELOAD_IMAGES = [heroSix, heroThree, heroOne];
+
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const [leaving, setLeaving] = useState<number | null>(null);
   const playClick = useSound("/sounds/click.mp3");
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const goTo = useCallback((index: number) => {
-    setCurrent(index);
+  // Preload all hero images on mount
+  useEffect(() => {
+    PRELOAD_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
+  const goTo = useCallback((index: number) => {
+    if (index === current) return;
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    setLeaving(current);
+    setCurrent(index);
+    leaveTimer.current = setTimeout(() => setLeaving(null), 1200);
+  }, [current]);
+
+  // Preload next slide image when current changes
+  useEffect(() => {
+    const next = (current + 1) % SLIDES.length;
+    const img = new Image();
+    img.src = SLIDES[next].img;
+  }, [current]);
+
+  // Auto-rotate slides
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % SLIDES.length);
+      const next = (current + 1) % SLIDES.length;
+      if (leaveTimer.current) clearTimeout(leaveTimer.current);
+      setLeaving(current);
+      setCurrent(next);
+      leaveTimer.current = setTimeout(() => setLeaving(null), 1200);
     }, 10000);
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+    };
   }, [current]);
+
+  // Cleanup leave timer on unmount
+  useEffect(() => {
+    return () => {
+      if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    };
+  }, []);
 
   const handleHeroClick = () => {
     playClick(0.4);
@@ -59,26 +96,28 @@ export default function Hero() {
 
   return (
     <section className="hero-section" aria-label="Hero slideshow">
-      {/* 1. TOP PROGRESS NAVIGATION */}
       <div className="hero-top-nav">
         <div className="top-progress-track">
           <div className="top-progress-fill" key={current} />
         </div>
       </div>
 
-      {/* 2. BACKGROUND CROSS-FADE */}
       <div className="hero-bg-wrapper">
-        {SLIDES.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`hero-slide-bg ${index === current ? "active" : ""}`}
-          >
-            <img src={slide.img} alt="" className="hero-img" />
+        {leaving !== null && (
+          <div className="hero-slide-bg leaving" key={`leaving-${leaving}`}>
+            <img src={SLIDES[leaving].img} alt="" className="hero-img" />
           </div>
-        ))}
+        )}
+        <div className="hero-slide-bg active" key={`curr-${current}`}>
+          <img
+            src={SLIDES[current].img}
+            alt=""
+            className="hero-img"
+            fetchpriority="high"
+          />
+        </div>
       </div>
 
-      {/* 3. STATIC CONTENT */}
       <div className="hero-static-content" aria-live="polite" aria-atomic="true">
         <div className="hero-content-box">
           <span
@@ -118,7 +157,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 4. SLIDE CONTROLS */}
       <div className="hero-controls">
         <button
           className="hero-nav-btn"

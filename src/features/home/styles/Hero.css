@@ -56,11 +56,25 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-slide-bg.active {
-  opacity: 1;
+  animation: heroFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-slide-bg.leaving {
+  animation: heroFadeOut 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes heroFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .hero-img {
