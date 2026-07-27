@@ -128,8 +128,8 @@ export default function Hero() {
 
           <a
             href={SLIDES[current].link}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={SLIDES[current].link.startsWith("http") ? "_blank" : undefined}
+            rel={SLIDES[current].link.startsWith("http") ? "noopener noreferrer" : undefined}
           >
             <button className="btn-main w-fit" onClick={handleHeroClick}>
               {SLIDES[current].btnText}
