@@ -9,7 +9,7 @@ export default function MobileCatalogueButton() {
 
   return (
     <Link to="/catalogue" className="mobile-catalogue-cta" aria-label="Browse the catalogue">
-      <LayoutGrid size={18} />
+      <LayoutGrid size={16} className="mobile-cta-icon" />
       <span>Catalogue</span>
     </Link>
   );

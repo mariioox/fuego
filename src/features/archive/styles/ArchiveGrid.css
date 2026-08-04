@@ -71,3 +71,33 @@
   color: var(--bg);
   border-color: var(--text);
 }
+
+@media (max-width: 639px) {
+  .pagination-nav {
+    gap: 0.5rem;
+    margin: 3rem 0;
+    padding-top: 2rem;
+  }
+
+  .page-numbers {
+    gap: 0.25rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .page-numbers::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-num {
+    font-size: 11px;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .nav-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+}

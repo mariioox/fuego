@@ -1,34 +1,62 @@
 /* --- MOBILE STICKY CATALOGUE CTA --- */
 .mobile-catalogue-cta {
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  height: 52px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  height: 44px;
+  padding: 0 22px;
   z-index: 90;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--orange);
+  color: #fff;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   font-family: "Geist Mono", monospace;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 950;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  transition: color 0.2s ease;
+  animation: glow-pulse 2.6s ease-in-out infinite;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-catalogue-cta:hover {
-  color: var(--orange);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .mobile-catalogue-cta:active {
-  transform: scale(0.98);
+  transform: scale(0.93);
+}
+
+.mobile-cta-icon {
+  animation: icon-nudge 2.6s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 18px rgba(255, 94, 0, 0.35);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(255, 94, 0, 0.6);
+  }
+}
+
+@keyframes icon-nudge {
+  0%,
+  86%,
+  100% {
+    transform: translateX(0);
+  }
+  92% {
+    transform: translateX(3px);
+  }
 }
 
 @media (min-width: 769px) {
@@ -39,6 +67,6 @@
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 76px;
+    padding-bottom: 72px;
   }
 }
