@@ -3,6 +3,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0; /* Prevent grid blowout / horizontal overflow */
   background: var(--card);
   border-radius: 16px;
   border: 1px solid var(--border);
@@ -28,7 +29,7 @@
   aspect-ratio: 1/1;
   overflow: hidden;
   background: #ffffff; /* Light neutral for product shots */
-  margin: 12px;
+  margin: 10px;
   border-radius: 12px;
   border: 1px solid var(--border);
 }
@@ -126,7 +127,7 @@
 
 /* Info Section */
 .card-info {
-  padding: 1.1rem 1.25rem 1.25rem;
+  padding: 0.9rem 1rem 1rem;
   border-top: 1px solid var(--border);
 }
 
@@ -149,10 +150,10 @@
   font-weight: 700;
   line-height: 1.25;
   text-transform: uppercase;
-  height: 3.2rem;
-  margin-bottom: 0.6rem;
+  min-height: 3.15rem;
+  margin-bottom: 0.5rem;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Shows exactly 2 lines then adds ... */
+  -webkit-line-clamp: 3; /* Shows up to 3 lines, no cutoff */
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-word;
@@ -164,7 +165,7 @@
   align-items: flex-end;
   gap: 12px;
   border-top: 1px solid var(--border);
-  padding-top: 0.6rem;
+  padding-top: 0.5rem;
 }
 
 .card-price {
@@ -186,7 +187,8 @@
 /* --- QUICK ADD --- */
 .quick-add-btn {
   position: absolute;
-  top: 14px;
+  top: auto;
+  bottom: 14px;
   right: 14px;
   z-index: 10;
   width: 40px;
@@ -282,4 +284,32 @@
 
 .quick-add-submit:hover {
   color: var(--orange);
+}
+
+/* --- PHONE 2-COLUMN FIT --- */
+@media (max-width: 639px) {
+  .card-name {
+    font-size: 0.95rem;
+    line-height: 1.2;
+    min-height: 2.85rem;
+  }
+
+  .card-price {
+    font-size: 0.75rem;
+  }
+
+  .card-brand {
+    font-size: 10px;
+  }
+
+  .card-info {
+    padding: 0.8rem 0.9rem 0.9rem;
+  }
+
+  .quick-add-btn {
+    width: 36px;
+    height: 36px;
+    bottom: 12px;
+    right: 12px;
+  }
 }
