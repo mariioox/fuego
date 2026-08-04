@@ -70,9 +70,9 @@ export default function Navbar({
             className="nav-cart-btn"
             aria-label={`Open cart with ${cartCount} item${cartCount === 1 ? "" : "s"}`}
           >
-            <ShoppingBag size={19} />
+            <ShoppingBag size={22} />
             {cartCount > 0 && (
-              <span className="nav-cart-count mono">
+              <span key={cartCount} className="nav-cart-count mono">
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             )}

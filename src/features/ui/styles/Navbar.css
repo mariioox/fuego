@@ -35,7 +35,7 @@
 .nav-right-group {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
 }
 
 .nav-link-archive {
@@ -70,20 +70,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6px;
+  border-radius: 10px;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s ease,
+    background 0.3s ease;
 }
 
 .theme-icon-btn:hover {
   color: var(--orange);
+  background: var(--card);
   transform: rotate(15deg);
 }
 
 .nav-cart-btn {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--border);
+  border-radius: 12px;
   background: var(--card);
   color: inherit;
   cursor: pointer;
@@ -93,37 +99,53 @@
   transition:
     color 0.3s ease,
     border-color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-cart-btn:hover {
   color: var(--orange);
   border-color: var(--orange);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 94, 0, 0.12);
 }
 
 .nav-cart-count {
   position: absolute;
   top: -7px;
-  right: -8px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
+  right: -9px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
   border-radius: 999px;
   background: var(--orange);
   color: #fff;
-  border: 1px solid var(--bg);
+  border: 2px solid var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 950;
   line-height: 1;
+  box-shadow: 0 4px 12px rgba(255, 94, 0, 0.35);
+  animation: badge-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .nav-divider {
-  width: 2px;
-  height: 20px;
+  width: 1px;
+  height: 26px;
   background: var(--border);
 }
 
@@ -132,19 +154,23 @@
   color: inherit;
   display: flex;
   align-items: center;
+  padding: 6px;
+  border-radius: 10px;
   transition:
     opacity 0.3s ease,
-    color 0.3s ease;
+    color 0.3s ease,
+    background 0.3s ease;
 }
 
 .nav-social-link:hover {
   opacity: 1;
   color: var(--orange);
+  background: var(--card);
 }
 
 @media (max-width: 640px) {
   .nav-right-group {
-    gap: 9px;
+    gap: 8px;
   }
 
   .nav-link-archive {
@@ -155,5 +181,11 @@
   .nav-link-archive svg {
     width: 17px;
     height: 17px;
+  }
+
+  .nav-cart-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
   }
 }
