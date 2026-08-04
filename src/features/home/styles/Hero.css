@@ -33,7 +33,7 @@
   height: 100%;
   background: var(--orange);
   width: 0%;
-  animation: fillProgress 10s linear infinite;
+  animation: fillProgress 5s linear infinite;
 }
 
 @keyframes fillProgress {
@@ -86,7 +86,7 @@
 }
 
 .hero-slide-bg.active .hero-img {
-  animation: heroZoom 10s linear forwards;
+  animation: heroZoom 5s linear forwards;
 }
 
 @keyframes heroZoom {

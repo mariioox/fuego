@@ -1,6 +1,6 @@
 // src/features/cart/components/CartDrawer.tsx
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSound } from "../../../core/hooks/useSound";
 import { useCart } from "../context/CartContext";
 import type { CartItem } from "../types/cart";
@@ -17,7 +17,13 @@ function formatNaira(value: number) {
   }).format(value);
 }
 
-function buildOrderMessage(items: CartItem[], total: number) {
+function buildOrderMessage(
+  items: CartItem[],
+  subtotal: number,
+  discount: number,
+  promoCode: string,
+  influencer: string,
+) {
   const itemLines = items
     .map(
       (item, index) =>
@@ -27,9 +33,14 @@ function buildOrderMessage(items: CartItem[], total: number) {
     )
     .join("\n");
 
-  return `Hello FUEGO, I want to order:\n\n${itemLines}\n\nTotal: ${formatNaira(
-    total,
-  )}`;
+  const promoLine =
+    discount > 0
+      ? `\nPROMO: ${promoCode} (${influencer}) — ${formatNaira(discount)} off`
+      : "";
+
+  return `Hello FUEGO, I want to order:\n\n${itemLines}\n\nSubtotal: ${formatNaira(
+    subtotal,
+  )}${promoLine}\nTotal: ${formatNaira(subtotal - discount)}`;
 }
 
 export default function CartDrawer() {
@@ -37,19 +48,38 @@ export default function CartDrawer() {
     items,
     isCartOpen,
     cartCount,
+    subtotal,
+    discount,
     cartTotal,
+    promoCode,
+    appliedPromo,
     closeCart,
     clearCart,
     removeItem,
     increaseQuantity,
     decreaseQuantity,
+    applyPromo,
+    removePromo,
   } = useCart();
   const [copyStatus, setCopyStatus] = useState<"IDLE" | "COPIED">("IDLE");
+  const [promoInput, setPromoInput] = useState("");
+  const [promoStatus, setPromoStatus] = useState<
+    "IDLE" | "ACCEPTED" | "REJECTED"
+  >("IDLE");
   const playClick = useSound("/sounds/click.mp3");
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   const orderMessage = useMemo(
-    () => buildOrderMessage(items, cartTotal),
-    [cartTotal, items],
+    () =>
+      buildOrderMessage(
+        items,
+        subtotal,
+        discount,
+        promoCode,
+        appliedPromo?.influencer || "",
+      ),
+    [appliedPromo, discount, items, promoCode, subtotal],
   );
 
   // Trigger sensory feedback loops (Click sound + Screen flicker)
@@ -78,7 +108,16 @@ export default function CartDrawer() {
   }, [closeCart, isCartOpen]);
 
   useEffect(() => {
-    if (!isCartOpen) setCopyStatus("IDLE");
+    if (!isCartOpen) {
+      setCopyStatus("IDLE");
+      setPromoStatus("IDLE");
+      previouslyFocused.current?.focus?.();
+      previouslyFocused.current = null;
+      return;
+    }
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
   }, [isCartOpen]);
 
   if (!isCartOpen) return null;
@@ -91,17 +130,26 @@ export default function CartDrawer() {
 
   const handleCheckout = () => {
     triggerSensoryFeedback();
-    
+
     // URL-encode order text to safely pass spaces and linebreaks to WhatsApp UI
     const encodedText = encodeURIComponent(orderMessage);
     const directUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedText}`;
-    
+
     window.open(directUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleQuantityAdjustment = (action: () => void) => {
     playClick(0.2);
     action();
+  };
+
+  const handleApplyPromo = () => {
+    const result = applyPromo(promoInput);
+    setPromoStatus(result.ok ? "ACCEPTED" : "REJECTED");
+    if (result.ok) {
+      setPromoInput("");
+      playClick(0.4);
+    }
   };
 
   return (
@@ -118,7 +166,12 @@ export default function CartDrawer() {
             <span className="cart-kicker mono">ORDER_QUEUE</span>
             <h2 className="cart-title">Cart</h2>
           </div>
-          <button className="cart-icon-btn" onClick={closeCart} aria-label="Close cart">
+          <button
+            className="cart-icon-btn"
+            onClick={closeCart}
+            aria-label="Close cart"
+            ref={closeButtonRef}
+          >
             <X size={18} />
           </button>
         </div>
@@ -127,7 +180,7 @@ export default function CartDrawer() {
           <>
             <div className="cart-items">
               {items.map((item) => (
-                <div className="cart-item" key={item.id}>
+                <div className="cart-item" key={`${item.id}-${item.size}`}>
                   <div className="cart-item-img-wrap">
                     <img src={item.image} alt={item.name} className="cart-item-img" />
                   </div>
@@ -180,24 +233,87 @@ export default function CartDrawer() {
                 <strong>{formatNaira(cartTotal)}</strong>
               </div>
 
+              {discount > 0 && (
+                <div className="cart-discount-row mono">
+                  <span>
+                    PROMO // {promoCode}{" "}
+                    {appliedPromo ? `(${appliedPromo.influencer})` : ""}
+                  </span>
+                  <span>-{formatNaira(discount)}</span>
+                </div>
+              )}
+
+              <div className="promo-form mono">
+                <input
+                  type="text"
+                  value={promoInput}
+                  onChange={(e) => setPromoInput(e.target.value)}
+                  placeholder={
+                    promoCode ? "PROMO_CODE_APPLIED" : "ENTER_PROMO_CODE"
+                  }
+                  aria-label="Promo code"
+                  disabled={!!promoCode}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleApplyPromo();
+                  }}
+                />
+                {promoCode ? (
+                  <button
+                    type="button"
+                    className="promo-clear-btn"
+                    onClick={() => {
+                      removePromo();
+                      setPromoStatus("IDLE");
+                    }}
+                    aria-label="Remove promo code"
+                  >
+                    X
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="promo-apply-btn"
+                    onClick={handleApplyPromo}
+                  >
+                    APPLY
+                  </button>
+                )}
+              </div>
+              {promoStatus !== "IDLE" && (
+                <p
+                  className={`promo-feedback mono ${promoStatus === "ACCEPTED" ? "ok" : "err"}`}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {promoStatus === "ACCEPTED"
+                    ? "CODE_ACCEPTED // ₦1,000 OFF"
+                    : "INVALID_CODE"}
+                </p>
+              )}
+
               <button className="cart-checkout-btn" onClick={handleCheckout}>
                 <ShoppingBag size={18} />
                 ORDER_ON_WHATSAPP
               </button>
 
-              <button className="cart-copy-btn mono" onClick={handleCopyOrder}>
-                {copyStatus === "COPIED" ? "ORDER_TEXT_COPIED" : "COPY_ORDER_TEXT"}
-              </button>
+              <div className="cart-actions-row">
+                <button
+                  className="cart-copy-btn mono"
+                  onClick={handleCopyOrder}
+                >
+                  {copyStatus === "COPIED" ? "ORDER_TEXT_COPIED" : "COPY_ORDER_TEXT"}
+                </button>
 
-              <button 
-                className="cart-clear-btn mono" 
-                onClick={() => {
-                  triggerSensoryFeedback();
-                  clearCart();
-                }}
-              >
-                CLEAR_QUEUE
-              </button>
+                <button
+                  className="cart-clear-btn mono"
+                  onClick={() => {
+                    triggerSensoryFeedback();
+                    clearCart();
+                  }}
+                >
+                  CLEAR_QUEUE
+                </button>
+              </div>
             </div>
           </>
         ) : (

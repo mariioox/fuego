@@ -80,6 +80,7 @@ export default function ArchiveContainer() {
         setBrandFilter={(v) => handleFilterChange(setBrandFilter, v)}
         setColorFilter={(v) => handleFilterChange(setColorFilter, v)}
         setSortOrder={(v) => handleFilterChange(setSortOrder, v)}
+        sortOrder={sortOrder}
       />
 
       {/* ... inside ArchiveContainer return ... */}

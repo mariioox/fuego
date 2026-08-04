@@ -57,7 +57,7 @@ export default function Hero() {
       setLeaving(current);
       setCurrent(next);
       leaveTimer.current = setTimeout(() => setLeaving(null), 1200);
-    }, 10000);
+    }, 5000);
     return () => {
       clearInterval(timer);
     };

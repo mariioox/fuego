@@ -1,6 +1,8 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
+import type { ReactNode } from "react";
 import ArchiveContainer from "../ArchiveContainer";
+import { CartProvider } from "../../../cart/context/CartContext";
 
 vi.mock("../../data/sneakerRegistry", () => ({
   SNEAKER_REGISTRY: [
@@ -40,9 +42,13 @@ vi.mock("../../data/sneakerRegistry", () => ({
   ],
 }));
 
+function renderWithCart(ui: ReactNode) {
+  return render(<CartProvider>{ui}</CartProvider>);
+}
+
 describe("ArchiveContainer", () => {
   it("renders all sneakers initially", () => {
-    render(<ArchiveContainer />);
+    renderWithCart(<ArchiveContainer />);
     expect(screen.getByText("Nike Air Force 1")).toBeInTheDocument();
     expect(screen.getByText("Jordan 4 Military Black")).toBeInTheDocument();
     expect(screen.getByText("Adidas Samba OG")).toBeInTheDocument();
@@ -50,7 +56,7 @@ describe("ArchiveContainer", () => {
 
   it("filters by search term", () => {
     vi.useFakeTimers();
-    render(<ArchiveContainer />);
+    renderWithCart(<ArchiveContainer />);
 
     const searchInput = screen.getByPlaceholderText("SEARCH_BY_MODEL...");
     fireEvent.change(searchInput, { target: { value: "Nike" } });
@@ -67,7 +73,7 @@ describe("ArchiveContainer", () => {
   });
 
   it("filters by brand", () => {
-    render(<ArchiveContainer />);
+    renderWithCart(<ArchiveContainer />);
 
     const brandSelect = screen.getByDisplayValue("BRAND: ALL");
     fireEvent.change(brandSelect, { target: { value: "JORDAN" } });
@@ -78,12 +84,12 @@ describe("ArchiveContainer", () => {
   });
 
   it("shows page title", () => {
-    render(<ArchiveContainer />);
+    renderWithCart(<ArchiveContainer />);
     expect(screen.getByText("FULL ARCHIVE.")).toBeInTheDocument();
   });
 
   it("renders filter controls", () => {
-    render(<ArchiveContainer />);
+    renderWithCart(<ArchiveContainer />);
     expect(screen.getByPlaceholderText("SEARCH_BY_MODEL...")).toBeInTheDocument();
     expect(screen.getByDisplayValue("BRAND: ALL")).toBeInTheDocument();
     expect(screen.getByDisplayValue("SORT: NEWEST")).toBeInTheDocument();

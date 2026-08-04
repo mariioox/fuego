@@ -2,10 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ShoppingBag, X } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
 import type { SneakerSize } from "../../cart/types/cart";
+import { SNEAKER_SIZES } from "../data/sizes";
 import { useCart } from "../../cart/context/CartContext";
 import "../styles/SpecimenModal.css";
-
-const SIZES: SneakerSize[] = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
 
 // Helper to map your color strings to hex/css values
 const colorMap: Record<string, string> = {
@@ -34,9 +33,10 @@ export default function SpecimenModal({
 }: SpecimenModalProps) {
   const { addItem } = useCart();
   const [addStatus, setAddStatus] = useState<"IDLE" | "ADDED">("IDLE");
-  const [selectedSize, setSelectedSize] = useState<SneakerSize>(42);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<SneakerSize>(42);  const [imgLoaded, setImgLoaded] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+  const nameId = `specimen-name-${sneaker.id}`;
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -65,6 +65,7 @@ export default function SpecimenModal({
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
     const firstFocusable = overlayRef.current?.querySelector<HTMLElement>(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
@@ -73,6 +74,7 @@ export default function SpecimenModal({
     return () => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused.current?.focus();
     };
   }, [handleKeyDown]);
 
@@ -83,9 +85,16 @@ export default function SpecimenModal({
   };
 
   return (
-    <div className="modal-overlay" ref={overlayRef} role="dialog" aria-modal="true" onClick={onClose}>
+    <div
+      className="modal-overlay"
+      ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={nameId}
+      onClick={onClose}
+    >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close-btn" onClick={onClose}>
+        <button className="modal-close-btn" onClick={onClose} aria-label="Close specimen details">
           <X size={16} />
         </button>
 
@@ -106,7 +115,9 @@ export default function SpecimenModal({
                 <div className="orange-text text-[10px] font-black tracking-tighter">
                   SPECIMEN_ID // {sneaker.sku}
                 </div>
-                <h2 className="modal-sneaker-name">{sneaker.name}</h2>
+                <h2 className="modal-sneaker-name" id={nameId}>
+                  {sneaker.name}
+                </h2>
               </div>
             </div>
 
@@ -149,7 +160,7 @@ export default function SpecimenModal({
               <div className="data-row">
                 <span className="label">SELECT_SIZE</span>
                 <div className="size-grid">
-                  {SIZES.map((size) => (
+                  {SNEAKER_SIZES.map((size) => (
                     <button
                       key={size}
                       type="button"

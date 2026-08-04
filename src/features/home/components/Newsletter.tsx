@@ -8,6 +8,7 @@ export default function Newsletter() {
   const [status, setStatus] = useState<
     "IDLE" | "LOADING" | "SUCCESS" | "ERROR"
   >("IDLE");
+  const [errorMessage, setErrorMessage] = useState("");
   const playClick = useSound("/sounds/click.mp3");
   const flickerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -39,6 +40,7 @@ export default function Newsletter() {
       setEmail("");
     } else {
       setStatus("ERROR");
+      setErrorMessage(result.error || "SUBSCRIPTION_FAILED // TRY_AGAIN.");
     }
   };
 
@@ -80,10 +82,16 @@ export default function Newsletter() {
                 {status === "LOADING" ? "COMMUNICATING..." : "SUBSCRIBE"}
               </button>
             </div>
-            <div className="news-disclaimer mono">
+            <div
+              className="news-disclaimer mono"
+              role="status"
+              aria-live="polite"
+            >
               {status === "SUCCESS"
                 ? "// ACCESS_GRANTED. CHECK_INBOX."
-                : "// SECURE_CONNECTION_REQUIRED."}
+                : status === "ERROR"
+                  ? `// ${errorMessage}`
+                  : "// SECURE_CONNECTION_REQUIRED."}
             </div>
           </form>
         </div>

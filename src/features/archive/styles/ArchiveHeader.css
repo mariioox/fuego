@@ -58,6 +58,26 @@
   opacity: 0.3;
 }
 
+.clear-search {
+  position: absolute;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.clear-search:hover {
+  opacity: 1;
+}
+
 .search-input {
   background: transparent;
   border: none;
@@ -67,6 +87,31 @@
   width: 100%;
   outline: none;
   text-transform: uppercase;
+}
+
+/* FILTERS toggle — hidden on desktop, shown on mobile */
+.filters-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.filters-toggle .rotated {
+  transform: rotate(180deg);
+}
+
+.filters-toggle svg {
+  transition: transform 0.2s ease;
 }
 
 /* Filter Dropdowns */
@@ -187,4 +232,67 @@
   padding: 0 10px;
   height: 30px;
   color: var(--text);
+}
+
+/* --- MOBILE FILTER UX --- */
+@media (max-width: 768px) {
+  .filters-toggle {
+    display: flex;
+  }
+
+  .filter-row {
+    width: 100%;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .filter-row.collapsed {
+    display: none;
+  }
+
+  .filter-select {
+    flex: 1 1 45%;
+    height: 40px;
+    font-size: 11px;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .swatch-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .swatch-inner {
+    width: 18px;
+    height: 18px;
+  }
+
+  .swatch-all {
+    height: 36px;
+  }
+
+  .search-wrapper {
+    height: 40px;
+    margin-bottom: 12px;
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .filter-system {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--bg);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .catalogue-header {
+    margin-top: 0;
+  }
 }

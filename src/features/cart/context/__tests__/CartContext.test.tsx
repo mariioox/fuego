@@ -142,4 +142,84 @@ describe("CartContext", () => {
     expect(result.current.cartTotal).toBe(60000);
     expect(result.current.cartCount).toBe(2);
   });
+
+  it("applies a valid promo code", () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(mockSneaker, TEST_SIZE));
+
+    let outcome: { ok: boolean; error?: string } | undefined;
+    act(() => {
+      outcome = result.current.applyPromo("TAYLA10");
+    });
+
+    expect(outcome?.ok).toBe(true);
+    expect(result.current.promoCode).toBe("TAYLA10");
+    expect(result.current.appliedPromo?.influencer).toBe("@tayla.online");
+    expect(result.current.discount).toBe(1000);
+    expect(result.current.cartTotal).toBe(29000);
+  });
+
+  it("matches promo codes case-insensitively", () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(mockSneaker, TEST_SIZE));
+
+    let outcome: { ok: boolean; error?: string } | undefined;
+    act(() => {
+      outcome = result.current.applyPromo("  tayla10  ");
+    });
+
+    expect(outcome?.ok).toBe(true);
+    expect(result.current.discount).toBe(1000);
+    expect(result.current.cartTotal).toBe(29000);
+  });
+
+  it("rejects an invalid promo code", () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(mockSneaker, TEST_SIZE));
+
+    let outcome: { ok: boolean; error?: string } | undefined;
+    act(() => {
+      outcome = result.current.applyPromo("FAKECODE");
+    });
+
+    expect(outcome?.ok).toBe(false);
+    expect(outcome?.error).toBe("Invalid promo code");
+    expect(result.current.discount).toBe(0);
+    expect(result.current.cartTotal).toBe(30000);
+  });
+
+  it("caps discount at the subtotal", () => {
+    const cheapSneaker: Sneaker = { ...mockSneaker, price: 500 };
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(cheapSneaker, TEST_SIZE));
+    act(() => result.current.applyPromo("TAYLA10"));
+
+    expect(result.current.discount).toBe(500);
+    expect(result.current.cartTotal).toBe(0);
+  });
+
+  it("removes a promo code", () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(mockSneaker, TEST_SIZE));
+    act(() => result.current.applyPromo("TAYLA10"));
+    act(() => result.current.removePromo());
+
+    expect(result.current.promoCode).toBe("");
+    expect(result.current.appliedPromo).toBeNull();
+    expect(result.current.discount).toBe(0);
+    expect(result.current.cartTotal).toBe(30000);
+  });
+
+  it("persists promo code to localStorage", () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.applyPromo("TAYLA10"));
+
+    expect(localStorage.getItem("fuego-promo")).toBe("TAYLA10");
+  });
 });

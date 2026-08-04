@@ -104,6 +104,7 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   color: white;
+  pointer-events: none;
 }
 
 .overlay-text {
@@ -135,6 +136,10 @@
   text-transform: uppercase;
   margin-bottom: 4px;
   display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-name {
@@ -155,6 +160,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 12px;
   border-top: 1px solid var(--border);
   padding-top: 0.5rem;
 }
@@ -163,6 +169,9 @@
   font-size: 0.7rem;
   font-weight: 700;
   font-style: italic;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .card-year {
@@ -170,4 +179,104 @@
   font-size: 10px;
   opacity: 0.4;
   font-weight: 700;
+}
+
+/* --- QUICK ADD --- */
+.quick-add-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.quick-add-btn:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+  transform: scale(1.06);
+}
+
+.quick-add-popover {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 10px;
+}
+
+.quick-add-head {
+  font-size: 9px;
+  font-weight: 900;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+.quick-add-sizes {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+
+.quick-size-btn {
+  height: 30px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-size-btn:hover {
+  border-color: var(--orange);
+}
+
+.quick-size-btn.active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.quick-add-submit {
+  width: 100%;
+  height: 36px;
+  margin-top: auto;
+  border: none;
+  background: var(--text);
+  color: var(--bg);
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.quick-add-submit:hover {
+  color: var(--orange);
 }

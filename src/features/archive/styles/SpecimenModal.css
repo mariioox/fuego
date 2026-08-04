@@ -218,6 +218,14 @@
   transition:
     color 0.25s ease,
     transform 0.25s ease;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  margin-top: auto;
+}
+
+.modal-details-section {
+  position: relative;
 }
 
 .modal-add-cart-btn:hover {

@@ -87,15 +87,6 @@ export default function Footer() {
           <p className="footer-copyright uppercase">
             © {new Date().getFullYear()} FUEGO NIGERIA. BUILT FOR THE CULTURE.
           </p>
-
-          <div className="footer-legal">
-            <a href="#" className="footer-link mono">
-              Terms
-            </a>
-            <a href="#" className="footer-link mono">
-              Privacy
-            </a>
-          </div>
         </div>
       </div>
     </footer>
