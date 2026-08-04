@@ -226,6 +226,7 @@
   flex-direction: column;
   padding: 14px;
   gap: 12px;
+  overflow-y: auto;
 }
 
 .quick-add-head {

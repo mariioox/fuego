@@ -2,14 +2,14 @@
 .archive-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 14px;
   margin-bottom: 3rem;
 }
 
 @media (min-width: 768px) {
   .archive-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 18px;
   }
 }
 

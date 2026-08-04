@@ -90,42 +90,6 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             <ShoppingBag size={14} />
           </button>
 
-          {quickAddOpen && (
-            <div
-              ref={quickRef}
-              className="quick-add-popover"
-              role="dialog"
-              aria-label={`Quick add ${sneaker.name}`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="quick-add-head mono">SELECT_SIZE</div>
-              <div className="quick-add-sizes">
-                {SNEAKER_SIZES.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    className={`quick-size-btn ${quickSize === size ? "active" : ""}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setQuickSize(size);
-                    }}
-                    aria-label={`Size ${size}`}
-                    aria-pressed={quickSize === size}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                className="quick-add-submit"
-                onClick={handleQuickAddSubmit}
-              >
-                {addStatus === "ADDED" ? "ADDED_TO_CART" : "ADD_TO_CART"}
-              </button>
-            </div>
-          )}
-
           <div className="card-overlay">
             <div className="mono text-[10px] tracking-widest font-black">
               VIEW_SPECIMEN
@@ -133,6 +97,42 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             <ArrowUpRight size={24} />
           </div>
         </div>
+
+        {quickAddOpen && (
+          <div
+            ref={quickRef}
+            className="quick-add-popover"
+            role="dialog"
+            aria-label={`Quick add ${sneaker.name}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="quick-add-head mono">SELECT_SIZE</div>
+            <div className="quick-add-sizes">
+              {SNEAKER_SIZES.map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  className={`quick-size-btn ${quickSize === size ? "active" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setQuickSize(size);
+                  }}
+                  aria-label={`Size ${size}`}
+                  aria-pressed={quickSize === size}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="quick-add-submit"
+              onClick={handleQuickAddSubmit}
+            >
+              {addStatus === "ADDED" ? "ADDED_TO_CART" : "ADD_TO_CART"}
+            </button>
+          </div>
+        )}
 
         <div className="card-info mono">
           <h3 className="card-name">{sneaker.name}</h3>
