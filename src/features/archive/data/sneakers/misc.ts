@@ -57,14 +57,14 @@ export const miscSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
     price: 30000,
   },
-  {
+  /*{
     sku: "A00916C",
     name: "Converse Chuck Taylor All Star 70 Hi Plus Canvas Black White",
     brand: "CONVERSE",
     color: ["BLACK", "WHITE"],
     status: "PREMIUM",
     price: 50000,
-  },
+  },*/
   {
     sku: "162058C",
     name: "Converse Chuck Taylor All Star 70 Ox Black White",
@@ -73,14 +73,14 @@ export const miscSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
     price: 45000,
   },
-  {
+  /*{
     sku: "150206C",
     name: "Converse Chuck Taylor All Star 70 Ox Comme des Garcons PLAY Black",
     brand: "CONVERSE",
     color: ["BLACK", "WHITE", "RED"],
     status: "PREMIUM",
     price: 45000,
-  },
+  },*/
   {
     sku: "1AD73H",
     name: "Louis Vuitton Timberland 6' Ankle Boot Black Monogram",
@@ -105,7 +105,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
     price: 70000,
   },
-  {
+  /*{
     sku: "TB010073-009",
     name: "Timberland 6' Waterproof Boot Black",
     brand: "TIMBERLAND",
@@ -120,5 +120,5 @@ export const miscSneakers: Partial<Sneaker>[] = [
     color: ["BLACK", "BROWN"],
     status: "AVAILABLE",
     price: 40000,
-  },
+  },*/
 ];

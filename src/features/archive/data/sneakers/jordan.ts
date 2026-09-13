@@ -41,7 +41,7 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
     price: 60000,
   },
-  {
+  /*{
     sku: "FQ8155-010",
     name: "Jordan 1 High Zoom Air CMFT 2 Día De Muertos",
     brand: "JORDAN",
@@ -56,7 +56,7 @@ export const jordanSneakers: Partial<Sneaker>[] = [
     color: ["WHITE", "BLACK"],
     price: 60000,
     status: "AVAILABLE",
-  },
+  },*/
   {
     sku: "HQ7978-100",
     name: "Jordan 5 Retro Grape",

@@ -73,12 +73,12 @@ export const newBalanceSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
     price: 45000,
   },
-  {
+  /*{
     sku: "U1906ANA",
     name: "New Balance 1906A Eggplant",
     brand: "NEW BALANCE",
     color: ["WHITE", "BROWN"],
     price: 60000,
     status: "AVAILABLE",
-  },
+  },*/
 ];

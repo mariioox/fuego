@@ -65,14 +65,14 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
     price: 40000,
   },
-  {
+  /*{
     sku: "FN5880-001",
     name: "Nike SB Dunk Low Premium City of Style",
     brand: "NIKE",
     color: ["YELLOW", "WHITE"],
     status: "PREMIUM",
     price: 40000,
-  },
+  },*/
   {
     sku: "FZ5251-001",
     name: "Nike SB Dunk Low Rayssa Leal",
@@ -89,7 +89,7 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     status: "PREMIUM",
     price: 40000,
   },
-  {
+  /*{
     sku: "CZ2239-600",
     name: "Nike SB Dunk Low What The P-Rod",
     brand: "NIKE",
@@ -105,7 +105,7 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     ],
     status: "PREMIUM",
     price: 70000,
-  },
+  },*/
   {
     sku: "FQ1180-001",
     name: "Nike SB Dunk Low Yuto Horigome",
@@ -170,7 +170,7 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     price: 25000,
     status: "AVAILABLE",
   },
-  {
+  /*{
     sku: "394053-005",
     name: "Nike Initiator Black Dark Smoke Grey",
     brand: "NIKE",
@@ -193,7 +193,7 @@ export const nikeSneakers: Partial<Sneaker>[] = [
     color: ["RED", "WHITE", "GREY", "BLACK"],
     price: 60000,
     status: "AVAILABLE",
-  },
+  },*/
   {
     sku: "FD8779-100",
     name: "Nike SB Dunk High Supreme Rammellzee",
