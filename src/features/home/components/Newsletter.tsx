@@ -73,6 +73,7 @@ export default function Newsletter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "LOADING" || status === "SUCCESS"}
+                aria-label="Email address"
                 required
               />
               <button

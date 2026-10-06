@@ -24,6 +24,7 @@ export default function SpecimenModal({
   const [imgLoaded, setImgLoaded] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const previousOverflow = useRef<string>("");
   const nameId = `specimen-name-${sneaker.id}`;
 
   const handleKeyDown = useCallback(
@@ -52,6 +53,7 @@ export default function SpecimenModal({
   );
 
   useEffect(() => {
+    previousOverflow.current = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     previouslyFocused.current = document.activeElement as HTMLElement | null;
     const firstFocusable = overlayRef.current?.querySelector<HTMLElement>(
@@ -60,7 +62,7 @@ export default function SpecimenModal({
     firstFocusable?.focus();
     window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = previousOverflow.current;
       window.removeEventListener("keydown", handleKeyDown);
       previouslyFocused.current?.focus();
     };

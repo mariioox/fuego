@@ -29,17 +29,22 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
       }
     };
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeQuickAdd();
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        closeQuickAdd();
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", handleEscape, true);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleEscape, true);
     };
   }, [quickAddOpen, closeQuickAdd]);
 
-  const handleQuickAdd = (e: React.MouseEvent) => {
+  const quickAddId = `quick-add-${sneaker.id}`;
+
+  const handleQuickAdd = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
     if (!quickAddOpen) {
       setQuickSize(42);
@@ -53,23 +58,18 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
     addItem(sneaker, quickSize);
     setAddStatus("ADDED");
     window.setTimeout(() => setAddStatus("IDLE"), 1200);
+    setQuickAddOpen(false);
   };
+
+  useEffect(() => {
+    if (quickAddOpen) {
+      quickRef.current?.focus();
+    }
+  }, [quickAddOpen]);
 
   return (
     <>
-      <div
-        className="archive-card"
-        role="button"
-        tabIndex={0}
-        aria-haspopup="dialog"
-        onClick={() => setShowModal(true)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setShowModal(true);
-          }
-        }}
-      >
+      <article className="archive-card" onClick={() => setShowModal(true)}>
         <div className="card-img-wrapper">
           {sneaker.status && <span className="card-tag">{sneaker.status}</span>}
           <img
@@ -85,25 +85,39 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             type="button"
             className="quick-add-btn"
             aria-label={`Quick add ${sneaker.name} to cart`}
+            aria-expanded={quickAddOpen}
+            aria-controls={quickAddId}
+            aria-haspopup="dialog"
             onClick={handleQuickAdd}
           >
             <ShoppingBag size={14} />
           </button>
 
-          <div className="card-overlay">
+          <button
+            type="button"
+            className="card-overlay"
+            aria-haspopup="dialog"
+            aria-label={`View ${sneaker.name} details`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowModal(true);
+            }}
+          >
             <div className="mono text-[10px] tracking-widest font-black">
               VIEW_SPECIMEN
             </div>
             <ArrowUpRight size={24} />
-          </div>
+          </button>
         </div>
 
         {quickAddOpen && (
           <div
             ref={quickRef}
+            id={quickAddId}
             className="quick-add-popover"
             role="dialog"
             aria-label={`Quick add ${sneaker.name}`}
+            tabIndex={-1}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="quick-add-head mono">SELECT_SIZE</div>
@@ -141,7 +155,7 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             <div className="card-price">{sneaker.priceFormatted}</div>
           </div>
         </div>
-      </div>
+      </article>
 
       {showModal && (
         <SpecimenModal sneaker={sneaker} onClose={() => setShowModal(false)} />

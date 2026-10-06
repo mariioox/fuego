@@ -83,12 +83,14 @@ export default function ShopIcons() {
               <button
                 onClick={() => handleScroll("left")}
                 className="nav-btn-circle"
+                aria-label="Scroll icons left"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={() => handleScroll("right")}
                 className="nav-btn-circle"
+                aria-label="Scroll icons right"
               >
                 <ChevronRight size={20} />
               </button>

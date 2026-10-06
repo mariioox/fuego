@@ -63,6 +63,7 @@ export default function CartDrawer() {
   const playClick = useSound("/sounds/click.mp3");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const drawerRef = useRef<HTMLElement>(null);
 
   const orderMessage = useMemo(
     () =>
@@ -103,15 +104,33 @@ export default function CartDrawer() {
     previousOverflow.current = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") handleClose();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleClose();
+        return;
+      }
+      if (event.key === "Tab" && drawerRef.current) {
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
 
-    window.addEventListener("keydown", handleEsc);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow.current;
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleClose, isCartOpen]);
 
@@ -159,6 +178,7 @@ export default function CartDrawer() {
       <aside
         className="flex h-screen w-[min(100vw,460px)] flex-col border-l border-edge bg-bg text-ink shadow-[-18px_0_60px_rgba(0,0,0,0.28)] max-md:w-full max-md:border-l-0"
         onClick={(event) => event.stopPropagation()}
+        ref={drawerRef}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"

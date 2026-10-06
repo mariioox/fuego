@@ -128,19 +128,16 @@ export default function Hero() {
             {SLIDES[current].sub}
           </span>
 
-          <a
+          <Button
             href={SLIDES[current].link}
             target={SLIDES[current].link.startsWith("http") ? "_blank" : undefined}
             rel={SLIDES[current].link.startsWith("http") ? "noopener noreferrer" : undefined}
+            size="lg"
+            className="w-fit rounded-full text-[15px]"
+            onClick={handleHeroClick}
           >
-            <Button
-              size="lg"
-              className="w-fit rounded-full text-[15px]"
-              onClick={handleHeroClick}
-            >
-              {SLIDES[current].btnText}
-            </Button>
-          </a>
+            {SLIDES[current].btnText}
+          </Button>
 
           <div className="corner-br"></div>
         </div>
@@ -148,19 +145,18 @@ export default function Hero() {
 
       <div className="hero-controls absolute bottom-10 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 max-md:bottom-6">
         <button
-          className="hero-nav-btn flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/30 font-mono text-sm text-white/70 transition-colors hover:border-white/60 hover:bg-white/15 hover:text-white"
+          className="hero-nav-btn flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/30 font-mono text-sm text-white/70 transition-colors hover:border-white/60 hover:bg-white/15 hover:text-white"
           aria-label="Previous slide"
           onClick={() => goTo((current - 1 + SLIDES.length) % SLIDES.length)}
         >
           &#8592;
         </button>
 
-        <div className="hero-dots flex gap-2" role="tablist" aria-label="Slides">
+        <div className="hero-dots flex gap-2">
           {SLIDES.map((slide, index) => (
             <button
               key={slide.id}
-              role="tab"
-              aria-selected={index === current}
+              aria-current={index === current ? "true" : undefined}
               aria-label={`Go to slide ${index + 1}`}
               className={`hero-dot h-2 w-2 cursor-pointer rounded-full border border-white/40 bg-transparent p-0 transition-all hover:border-white/80 ${index === current ? "scale-[1.3] border-brand bg-brand" : ""}`}
               onClick={() => goTo(index)}
@@ -169,7 +165,7 @@ export default function Hero() {
         </div>
 
         <button
-          className="hero-nav-btn flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/30 font-mono text-sm text-white/70 transition-colors hover:border-white/60 hover:bg-white/15 hover:text-white"
+          className="hero-nav-btn flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/30 font-mono text-sm text-white/70 transition-colors hover:border-white/60 hover:bg-white/15 hover:text-white"
           aria-label="Next slide"
           onClick={() => goTo((current + 1) % SLIDES.length)}
         >

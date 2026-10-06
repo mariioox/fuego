@@ -37,7 +37,7 @@ const breadcrumbsData = {
 
 export default function Catalogue() {
   return (
-    <main className="catalogue-page">
+    <div className="catalogue-page">
       <SEO
         title="Buy Sneakers Nigeria — Nike Jordan Adidas New Balance Archive"
         description="Browse the full Fuego sneaker archive. Buy Nike, Jordan, Adidas, New Balance & Puma sneakers in Nigeria. Filter by brand, color, price. Verified authentic, Lagos-based."
@@ -52,6 +52,6 @@ export default function Catalogue() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsData) }}
       />
       <ArchiveContainer />
-    </main>
+    </div>
   );
 }

@@ -52,6 +52,7 @@ export default function Navbar({
             target="_blank"
             rel="noopener noreferrer"
             className="nav-social-link"
+            aria-label="Fuego on Instagram"
           >
             <Instagram size={20} />
           </a>
@@ -61,6 +62,7 @@ export default function Navbar({
             target="_blank"
             rel="noopener noreferrer"
             className="nav-social-link"
+            aria-label="Chat on WhatsApp"
           >
             <MessageCircle size={20} />
           </a>

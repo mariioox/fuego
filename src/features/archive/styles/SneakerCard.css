@@ -100,14 +100,24 @@
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.3);
   opacity: 0;
   transition: opacity 0.3s ease;
   color: white;
-  pointer-events: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.card-overlay:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--orange);
+  outline-offset: -3px;
 }
 
 /* Trigger the overlay when the WHOLE card is hovered */

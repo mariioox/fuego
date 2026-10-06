@@ -60,8 +60,9 @@ export default function About() {
                 href="https://www.instagram.com/fuego.heat"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="btn-main"
               >
-                <button className="btn-main">Join the Collective</button>
+                Join the Collective
               </a>
             </div>
           </div>

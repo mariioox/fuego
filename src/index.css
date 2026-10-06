@@ -111,6 +111,11 @@ body {
   position: relative;
 }
 
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -129,6 +134,10 @@ body {
   }
 
   .btn-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     background-color: var(--text);
     color: var(--bg);
     padding: 14px 32px;

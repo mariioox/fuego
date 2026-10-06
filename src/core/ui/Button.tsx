@@ -1,7 +1,9 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import { cn } from "../utils/cn";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "target" | "rel"> {
   variant?: "solid" | "outline";
   size?: "sm" | "md" | "lg";
 }
@@ -25,9 +27,26 @@ export function Button({
   variant = "solid",
   size = "md",
   className,
+  href,
+  target,
+  rel,
   type = "button",
   ...props
 }: ButtonProps) {
+  if (href !== undefined) {
+    return (
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        className={cn(base, variants[variant], sizes[size], className)}
+        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {props.children}
+      </a>
+    );
+  }
+
   return (
     <button
       type={type}
