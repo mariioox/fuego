@@ -44,7 +44,7 @@ export default function ArchiveHeader({
   );
 
   return (
-    <header className="mb-8 mt-0 flex flex-col gap-8 border-b border-edge pb-8 lg:my-8 lg:flex-row lg:items-end lg:justify-between">
+    <header className="mb-8 mt-0 flex flex-col gap-8 border-b border-edge pb-8 lg:mt-0 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <span className="mono text-xs font-bold tracking-widest text-brand">
           COLLECTION_INDEX // 2026
@@ -54,7 +54,7 @@ export default function ArchiveHeader({
         </h1>
       </div>
 
-      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end border-b border-edge bg-bg py-2.5 lg:static lg:border-0 lg:bg-transparent lg:py-0">
+      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end border-b border-edge bg-bg/90 py-2.5 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
         <div className="relative mb-5 flex h-[30px] w-full max-w-[679px] items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand max-md:mb-3 max-md:h-10">
           <Search size={14} className="absolute left-3.5 opacity-30" />
           <input

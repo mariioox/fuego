@@ -71,7 +71,7 @@ export default function ArchiveContainer() {
   };
 
   return (
-    <section className="container py-20">
+    <section className="container py-14 md:py-16">
       <ArchiveHeader
         searchTerm={searchTerm}
         brandFilter={brandFilter}

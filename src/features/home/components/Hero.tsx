@@ -104,7 +104,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-static-content pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center" aria-live="polite" aria-atomic="true">
-        <div className="hero-content-box relative mx-auto flex w-[90%] max-w-[850px] flex-col items-center px-6 pt-10 pb-24 text-center pointer-events-auto md:p-16">
+        <div className="hero-content-box relative mx-auto flex w-[90%] max-w-[850px] flex-col items-center px-6 py-10 text-center pointer-events-auto md:p-16">
           <span
             key={SLIDES[current].id}
             className="hero-meta-animate block animate-meta-slide font-mono text-sm font-extrabold uppercase tracking-[0.2em] text-brand"
@@ -112,7 +112,7 @@ export default function Hero() {
             {SLIDES[current].meta}
           </span>
 
-          <h1 className="my-8 text-[clamp(3rem,7vw,5rem)] font-black italic uppercase leading-[0.8] tracking-[-0.04em] text-[rgba(238,223,209,0.65)] max-md:my-4">
+          <h1 className="my-8 text-[clamp(3rem,7vw,5rem)] font-black italic uppercase leading-[0.8] tracking-[-0.04em] text-[rgba(238,223,209,0.65)] max-md:my-4 max-md:text-[clamp(2.6rem,11vw,4rem)]">
             {SLIDES[current].title.map((line, i) => (
               <span key={i}>
                 {line}

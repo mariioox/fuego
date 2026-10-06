@@ -13,6 +13,13 @@
   }
 }
 
+@media (min-width: 1280px) {
+  .archive-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+}
+
 /* --- PAGINATION NAVIGATION --- */
 .pagination-nav {
   display: flex;
