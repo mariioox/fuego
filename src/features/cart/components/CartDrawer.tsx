@@ -3,9 +3,10 @@ import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useEffect, useCallback, useMemo, useRef, useState } from "react";
 import { useSound } from "../../../core/hooks/useSound";
 import { formatNaira } from "../../../core/utils/format";
+import { Button } from "../../../core/ui/Button";
+import { cn } from "../../../core/utils/cn";
 import { useCart } from "../hooks/useCart";
 import type { CartItem } from "../types/cart";
-import "../styles/CartDrawer.css";
 
 // Formatted with country code, omitting leading plus sign or internal spacing
 const WHATSAPP_PHONE = import.meta.env.VITE_WHATSAPP_PHONE || "2348151729606";
@@ -154,21 +155,21 @@ export default function CartDrawer() {
   };
 
   return (
-    <div className="cart-overlay" onClick={handleClose}>
+    <div className="fixed inset-0 z-[10000] flex justify-end bg-black/[0.62] backdrop-blur-[8px]" onClick={handleClose}>
       <aside
-        className="cart-drawer"
+        className="flex h-screen w-[min(100vw,460px)] flex-col border-l border-edge bg-bg text-ink shadow-[-18px_0_60px_rgba(0,0,0,0.28)] max-md:w-full max-md:border-l-0"
         onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
       >
-        <div className="cart-header">
+        <div className="flex h-[82px] flex-shrink-0 items-center justify-between border-b border-edge px-5 py-4 max-md:px-4">
           <div>
-            <span className="cart-kicker mono">ORDER_QUEUE</span>
-            <h2 className="cart-title">Cart</h2>
+            <span className="mono mb-1 block text-[10px] font-black text-brand">ORDER_QUEUE</span>
+            <h2 className="text-[2rem] font-[950] uppercase italic leading-none">Cart</h2>
           </div>
           <button
-            className="cart-icon-btn"
+            className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
             onClick={handleClose}
             aria-label="Close cart"
             ref={closeButtonRef}
@@ -179,23 +180,23 @@ export default function CartDrawer() {
 
         {items.length > 0 ? (
           <>
-            <div className="cart-items">
+            <div className="flex-1 overflow-y-auto p-4">
               {items.map((item) => (
-                <div className="cart-item" key={`${item.id}-${item.size}`}>
-                  <div className="cart-item-img-wrap">
-                    <img src={item.image} alt={item.name} className="cart-item-img" />
+                <div className="grid grid-cols-[94px_1fr] gap-3.5 border-b border-edge py-3.5 max-md:grid-cols-[82px_1fr]" key={`${item.id}-${item.size}`}>
+                  <div className="flex aspect-square items-center justify-center overflow-hidden bg-white">
+                    <img src={item.image} alt={item.name} className="h-[88%] w-[88%] object-contain drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)]" />
                   </div>
 
-                  <div className="cart-item-main">
-                    <div className="cart-item-top">
+                  <div className="flex min-w-0 flex-col justify-between gap-3">
+                    <div className="flex items-start justify-between gap-3">
                       <div>
-                        <h3 className="cart-item-name">{item.name}</h3>
-                        <p className="cart-item-meta mono">
+                        <h3 className="break-words text-[13px] font-[950] uppercase leading-[1.15]">{item.name}</h3>
+                        <p className="mono mt-[5px] text-[9px] font-black opacity-45">
                           {item.brand} // {item.sku} // EU {item.size}
                         </p>
                       </div>
                       <button
-                        className="cart-remove-btn"
+                        className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
                         onClick={() => removeItem(item.id, item.size)}
                         aria-label={`Remove ${item.name}`}
                       >
@@ -203,23 +204,25 @@ export default function CartDrawer() {
                       </button>
                     </div>
 
-                    <div className="cart-item-bottom">
-                      <div className="cart-qty-control" aria-label="Quantity controls">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="inline-flex h-8 items-center border border-edge bg-card" aria-label="Quantity controls">
                         <button
+                          className="flex h-[30px] w-8 cursor-pointer items-center justify-center border-0 bg-transparent text-inherit hover:text-brand"
                           onClick={() => handleQuantityAdjustment(() => decreaseQuantity(item.id, item.size))}
                           aria-label={`Decrease ${item.name} quantity`}
                         >
                           <Minus size={14} />
                         </button>
-                        <span>{String(item.quantity).padStart(2, "0")}</span>
+                        <span className="min-w-[30px] text-center font-mono text-[11px] font-black">{String(item.quantity).padStart(2, "0")}</span>
                         <button
+                          className="flex h-[30px] w-8 cursor-pointer items-center justify-center border-0 bg-transparent text-inherit hover:text-brand"
                           onClick={() => handleQuantityAdjustment(() => increaseQuantity(item.id, item.size))}
                           aria-label={`Increase ${item.name} quantity`}
                         >
                           <Plus size={14} />
                         </button>
                       </div>
-                      <span className="cart-item-price mono">
+                      <span className="mono whitespace-nowrap text-[11px] font-[950] text-brand">
                         {formatNaira(item.price * item.quantity)}
                       </span>
                     </div>
@@ -228,40 +231,39 @@ export default function CartDrawer() {
               ))}
             </div>
 
-            <div className="cart-footer">
-              <div className="cart-total-row">
-                <span className="mono">ITEMS // {cartCount}</span>
-                <strong>{formatNaira(cartTotal)}</strong>
+            <div className="flex-shrink-0 border-t border-edge bg-bg px-5 py-4 max-md:px-4">
+              <div className="mb-2.5 flex items-center justify-between gap-3">
+                <span className="mono text-[10px] font-black opacity-50">ITEMS // {cartCount}</span>
+                <strong className="text-[1.15rem] font-[950] text-brand">{formatNaira(cartTotal)}</strong>
               </div>
 
               {discount > 0 && (
-                <div className="cart-discount-row mono">
+                <div className="mono mb-2.5 flex items-center justify-between gap-3 text-[10px] font-black text-brand">
                   <span>
                     PROMO // {promoCode}{" "}
                     {appliedPromo ? `(${appliedPromo.influencer})` : ""}
                   </span>
-                  <span>-{formatNaira(discount)}</span>
+                  <span className="whitespace-nowrap">-{formatNaira(discount)}</span>
                 </div>
               )}
 
-              <div className="promo-form mono">
+              <div className="mono mb-1 flex h-[34px] items-stretch border border-edge bg-card">
                 <input
                   type="text"
                   value={promoInput}
                   onChange={(e) => setPromoInput(e.target.value)}
-                  placeholder={
-                    promoCode ? "PROMO_CODE_APPLIED" : "ENTER_PROMO_CODE"
-                  }
+                  placeholder={promoCode ? "PROMO_CODE_APPLIED" : "ENTER_PROMO_CODE"}
                   aria-label="Promo code"
                   disabled={!!promoCode}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") handleApplyPromo();
                   }}
+                  className="min-w-0 flex-1 bg-transparent px-3 text-[10px] font-extrabold uppercase text-ink outline-none placeholder:opacity-40"
                 />
                 {promoCode ? (
                   <button
                     type="button"
-                    className="promo-clear-btn"
+                    className="cursor-pointer border-l border-edge bg-transparent px-4 font-mono text-[10px] font-black tracking-[0.06em] text-ink hover:text-brand"
                     onClick={() => {
                       removePromo();
                       setPromoStatus("IDLE");
@@ -273,7 +275,7 @@ export default function CartDrawer() {
                 ) : (
                   <button
                     type="button"
-                    className="promo-apply-btn"
+                    className="cursor-pointer border-none bg-ink px-4 font-mono text-[10px] font-black tracking-[0.06em] text-bg hover:text-brand"
                     onClick={handleApplyPromo}
                   >
                     APPLY
@@ -282,7 +284,10 @@ export default function CartDrawer() {
               </div>
               {promoStatus !== "IDLE" && (
                 <p
-                  className={`promo-feedback mono ${promoStatus === "ACCEPTED" ? "ok" : "err"}`}
+                  className={cn(
+                    "mono mb-2.5 mt-1 text-[9px] font-black",
+                    promoStatus === "ACCEPTED" ? "text-brand" : "text-[#f32536]",
+                  )}
                   role="status"
                   aria-live="polite"
                 >
@@ -292,36 +297,40 @@ export default function CartDrawer() {
                 </p>
               )}
 
-              <button className="cart-checkout-btn" onClick={handleCheckout}>
+              <Button className="w-full" onClick={handleCheckout}>
                 <ShoppingBag size={18} />
                 ORDER_ON_WHATSAPP
-              </button>
+              </Button>
 
-              <div className="cart-actions-row">
-                <button
-                  className="cart-copy-btn mono"
+              <div className="mt-2 flex gap-2 max-md:gap-1.5">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1"
                   onClick={handleCopyOrder}
                 >
                   {copyStatus === "COPIED" ? "ORDER_TEXT_COPIED" : "COPY_ORDER_TEXT"}
-                </button>
+                </Button>
 
-                <button
-                  className="cart-clear-btn mono"
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1"
                   onClick={() => {
                     triggerSensoryFeedback();
                     clearCart();
                   }}
                 >
                   CLEAR_QUEUE
-                </button>
+                </Button>
               </div>
             </div>
           </>
         ) : (
-          <div className="cart-empty">
-            <ShoppingBag size={42} />
-            <h3>QUEUE_EMPTY</h3>
-            <p className="mono">
+          <div className="flex flex-1 flex-col items-center justify-center p-[30px] text-center text-ink">
+            <ShoppingBag size={42} className="mb-[18px] text-brand" />
+            <h3 className="mb-2 text-[1.6rem] font-[950] italic">QUEUE_EMPTY</h3>
+            <p className="mono max-w-[260px] text-[10px] leading-[1.6] opacity-50">
               ADD SPECIMENS FROM THE ARCHIVE TO BEGIN AN ORDER.
             </p>
           </div>
