@@ -3,7 +3,7 @@ import { ShoppingBag, X } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
 import type { SneakerSize } from "../../cart/types/cart";
 import { SNEAKER_SIZES } from "../data/sizes";
-import { useCart } from "../../cart/context/CartContext";
+import { useCart } from "../../cart/hooks/useCart";
 import "../styles/SpecimenModal.css";
 
 // Helper to map your color strings to hex/css values
@@ -138,7 +138,7 @@ export default function SpecimenModal({
 
               <div className="data-row">
                 <span className="label">COLOR_PROFILE</span>
-                <div className="flex gap-1">
+                <div className="flex gap-2">
                   {sneaker.color.map((c) => (
                     <div
                       key={c}

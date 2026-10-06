@@ -8,7 +8,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCart } from "../cart/context/CartContext";
+import { useCart } from "../cart/hooks/useCart";
 import "./styles/Navbar.css";
 
 export default function Navbar({

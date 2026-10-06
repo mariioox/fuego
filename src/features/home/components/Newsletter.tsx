@@ -21,9 +21,10 @@ export default function Newsletter() {
   const triggerFeedback = () => {
     playClick(0.4);
 
-    document.body.classList.add("trigger-flicker");
+    const overlay = document.getElementById("flicker-overlay");
+    overlay?.classList.add("trigger-flicker");
     flickerTimer.current = setTimeout(
-      () => document.body.classList.remove("trigger-flicker"),
+      () => overlay?.classList.remove("trigger-flicker"),
       300,
     );
   };

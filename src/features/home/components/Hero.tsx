@@ -73,8 +73,9 @@ export default function Hero() {
   const handleHeroClick = () => {
     playClick(0.4);
 
-    document.body.classList.add("trigger-flicker");
-    setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
+    const overlay = document.getElementById("flicker-overlay");
+    overlay?.classList.add("trigger-flicker");
+    setTimeout(() => overlay?.classList.remove("trigger-flicker"), 300);
   };
 
   return (

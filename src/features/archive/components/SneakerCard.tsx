@@ -3,7 +3,7 @@ import { ArrowUpRight, ShoppingBag } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
 import type { SneakerSize } from "../../cart/types/cart";
 import { SNEAKER_SIZES } from "../data/sizes";
-import { useCart } from "../../cart/context/CartContext";
+import { useCart } from "../../cart/hooks/useCart";
 import SpecimenModal from "./SpecimenModal";
 import "../styles/SneakerCard.css";
 

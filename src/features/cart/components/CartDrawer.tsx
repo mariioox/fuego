@@ -1,21 +1,14 @@
 // src/features/cart/components/CartDrawer.tsx
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useCallback, useMemo, useRef, useState } from "react";
 import { useSound } from "../../../core/hooks/useSound";
-import { useCart } from "../context/CartContext";
+import { formatNaira } from "../../../core/utils/format";
+import { useCart } from "../hooks/useCart";
 import type { CartItem } from "../types/cart";
 import "../styles/CartDrawer.css";
 
 // Formatted with country code, omitting leading plus sign or internal spacing
 const WHATSAPP_PHONE = import.meta.env.VITE_WHATSAPP_PHONE || "2348151729606";
-
-function formatNaira(value: number) {
-  return new Intl.NumberFormat("en-NG", {
-    style: "currency",
-    currency: "NGN",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
 
 function buildOrderMessage(
   items: CartItem[],
@@ -86,35 +79,43 @@ export default function CartDrawer() {
   const triggerSensoryFeedback = () => {
     playClick(0.4);
 
-    document.body.classList.add("trigger-flicker");
-    setTimeout(() => document.body.classList.remove("trigger-flicker"), 300);
+    document.getElementById("flicker-overlay")?.classList.add("trigger-flicker");
+    setTimeout(
+      () => document.getElementById("flicker-overlay")?.classList.remove("trigger-flicker"),
+      300,
+    );
   };
+
+  const handleClose = useCallback(() => {
+    setCopyStatus("IDLE");
+    setPromoStatus("IDLE");
+    previouslyFocused.current?.focus?.();
+    previouslyFocused.current = null;
+    closeCart();
+  }, [closeCart]);
+
+  const previousOverflow = useRef<string>("");
 
   useEffect(() => {
     if (!isCartOpen) return;
 
+    previousOverflow.current = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeCart();
+      if (event.key === "Escape") handleClose();
     };
 
     window.addEventListener("keydown", handleEsc);
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = previousOverflow.current;
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [closeCart, isCartOpen]);
+  }, [handleClose, isCartOpen]);
 
   useEffect(() => {
-    if (!isCartOpen) {
-      setCopyStatus("IDLE");
-      setPromoStatus("IDLE");
-      previouslyFocused.current?.focus?.();
-      previouslyFocused.current = null;
-      return;
-    }
+    if (!isCartOpen) return;
 
     previouslyFocused.current = document.activeElement as HTMLElement | null;
     closeButtonRef.current?.focus();
@@ -153,7 +154,7 @@ export default function CartDrawer() {
   };
 
   return (
-    <div className="cart-overlay" onClick={closeCart}>
+    <div className="cart-overlay" onClick={handleClose}>
       <aside
         className="cart-drawer"
         onClick={(event) => event.stopPropagation()}
@@ -168,7 +169,7 @@ export default function CartDrawer() {
           </div>
           <button
             className="cart-icon-btn"
-            onClick={closeCart}
+            onClick={handleClose}
             aria-label="Close cart"
             ref={closeButtonRef}
           >
@@ -195,7 +196,7 @@ export default function CartDrawer() {
                       </div>
                       <button
                         className="cart-remove-btn"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeItem(item.id, item.size)}
                         aria-label={`Remove ${item.name}`}
                       >
                         <Trash2 size={15} />
@@ -205,14 +206,14 @@ export default function CartDrawer() {
                     <div className="cart-item-bottom">
                       <div className="cart-qty-control" aria-label="Quantity controls">
                         <button
-                          onClick={() => handleQuantityAdjustment(() => decreaseQuantity(item.id))}
+                          onClick={() => handleQuantityAdjustment(() => decreaseQuantity(item.id, item.size))}
                           aria-label={`Decrease ${item.name} quantity`}
                         >
                           <Minus size={14} />
                         </button>
                         <span>{String(item.quantity).padStart(2, "0")}</span>
                         <button
-                          onClick={() => handleQuantityAdjustment(() => increaseQuantity(item.id))}
+                          onClick={() => handleQuantityAdjustment(() => increaseQuantity(item.id, item.size))}
                           aria-label={`Increase ${item.name} quantity`}
                         >
                           <Plus size={14} />

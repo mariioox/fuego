@@ -21,7 +21,7 @@ export default function App() {
     <HelmetProvider>
       <CartProvider>
         <Router>
-          <div className="flicker-overlay"></div>
+          <div id="flicker-overlay" className="flicker-overlay" aria-hidden="true"></div>
           <ScrollToTop />
           <MainLayout theme={theme} toggleTheme={toggleTheme}>
             <Suspense>

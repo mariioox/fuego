@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, beforeEach } from "vitest";
-import { CartProvider, useCart } from "../CartContext";
+import { CartProvider } from "../CartContext";
+import { useCart } from "../../hooks/useCart";
 import type { Sneaker } from "../../../archive/types/sneaker";
 import type { SneakerSize } from "../../types/cart";
 import type { ReactNode } from "react";
@@ -73,7 +74,7 @@ describe("CartContext", () => {
     act(() => result.current.addItem(mockSneaker, TEST_SIZE));
 
     for (let i = 0; i < 100; i++) {
-      act(() => result.current.increaseQuantity(1));
+      act(() => result.current.increaseQuantity(1, TEST_SIZE));
     }
 
     expect(result.current.items[0].quantity).toBe(99);
@@ -83,7 +84,7 @@ describe("CartContext", () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => result.current.addItem(mockSneaker, TEST_SIZE));
-    act(() => result.current.removeItem(1));
+    act(() => result.current.removeItem(1, TEST_SIZE));
 
     expect(result.current.items).toHaveLength(0);
     expect(result.current.cartCount).toBe(0);
@@ -95,7 +96,7 @@ describe("CartContext", () => {
 
     act(() => result.current.addItem(mockSneaker, TEST_SIZE));
     act(() => result.current.addItem(mockSneaker, TEST_SIZE));
-    act(() => result.current.decreaseQuantity(1));
+    act(() => result.current.decreaseQuantity(1, TEST_SIZE));
 
     expect(result.current.items[0].quantity).toBe(1);
     expect(result.current.cartCount).toBe(1);
@@ -106,9 +107,23 @@ describe("CartContext", () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => result.current.addItem(mockSneaker, TEST_SIZE));
-    act(() => result.current.decreaseQuantity(1));
+    act(() => result.current.decreaseQuantity(1, TEST_SIZE));
 
     expect(result.current.items).toHaveLength(0);
+  });
+
+  it("operates on items by id and size independently", () => {
+    const otherSize: SneakerSize = 43;
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => result.current.addItem(mockSneaker, TEST_SIZE));
+    act(() => result.current.addItem(mockSneaker, otherSize));
+    act(() => result.current.increaseQuantity(1, TEST_SIZE));
+    act(() => result.current.removeItem(1, otherSize));
+
+    expect(result.current.items).toHaveLength(1);
+    expect(result.current.items[0].size).toBe(TEST_SIZE);
+    expect(result.current.items[0].quantity).toBe(2);
   });
 
   it("clears the cart", () => {

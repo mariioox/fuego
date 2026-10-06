@@ -1,40 +1,11 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Sneaker } from "../../archive/types/sneaker";
 import type { CartItem, CartProduct, SneakerSize } from "../types/cart";
 import { PROMO_CODES, type PromoCode } from "../data/promo";
+import { CartContext, type CartContextValue } from "./cartContext";
 
 const CART_STORAGE_KEY = "fuego-cart";
 const PROMO_STORAGE_KEY = "fuego-promo";
-
-interface CartContextValue {
-  items: CartItem[];
-  isCartOpen: boolean;
-  cartCount: number;
-  subtotal: number;
-  discount: number;
-  cartTotal: number;
-  promoCode: string;
-  appliedPromo: PromoCode | null;
-  addItem: (product: Sneaker | CartProduct, size: SneakerSize) => void;
-  removeItem: (id: number) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
-  clearCart: () => void;
-  openCart: () => void;
-  closeCart: () => void;
-  applyPromo: (code: string) => { ok: boolean; error?: string };
-  removePromo: () => void;
-}
-
-const CartContext = createContext<CartContextValue | null>(null);
 
 function readStoredCart() {
   try {
@@ -106,25 +77,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsCartOpen(true);
   }, []);
 
-  const removeItem = useCallback((id: number) => {
-    setItems((currentItems) => currentItems.filter((item) => item.id !== id));
+  const removeItem = useCallback((id: number, size: SneakerSize) => {
+    setItems((currentItems) =>
+      currentItems.filter((item) => !(item.id === id && item.size === size)),
+    );
   }, []);
 
-  const increaseQuantity = useCallback((id: number) => {
+  const increaseQuantity = useCallback((id: number, size: SneakerSize) => {
     setItems((currentItems) =>
       currentItems.map((item) =>
-        item.id === id && item.quantity < 99
+        item.id === id && item.size === size && item.quantity < 99
           ? { ...item, quantity: item.quantity + 1 }
           : item,
       ),
     );
   }, []);
 
-  const decreaseQuantity = useCallback((id: number) => {
+  const decreaseQuantity = useCallback((id: number, size: SneakerSize) => {
     setItems((currentItems) =>
       currentItems
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+          item.id === id && item.size === size
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
         )
         .filter((item) => item.quantity > 0),
     );
@@ -193,14 +168,4 @@ export function CartProvider({ children }: { children: ReactNode }) {
   ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-
-  return context;
 }

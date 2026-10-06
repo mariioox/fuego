@@ -1,4 +1,5 @@
 import type { Sneaker } from "../types/sneaker";
+import { formatNaira } from "../../../core/utils/format";
 import { nikeSneakers } from "./sneakers/nike";
 import { jordanSneakers } from "./sneakers/jordan";
 import { adidasSneakers } from "./sneakers/adidas";
@@ -27,14 +28,6 @@ Object.entries(imageModules).forEach(([path, url]) => {
 
 /* STEP 3: IMAGE LOOKUP HELPER */
 const getSneakerImage = (sku: string) => imageMap[sku] || "/placeholder-shoe.webp";
-
-const formatNaira = (value: number) => {
-  return new Intl.NumberFormat("en-NG", {
-    style: "currency",
-    currency: "NGN",
-    maximumFractionDigits: 0,
-  }).format(value);
-};
 
 /* STEP 2: MERGE & AUTOMATE REGISTRY */
 const rawRegistry = [

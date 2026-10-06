@@ -1,3 +1,22 @@
+@import "tailwindcss";
+
+/* --- SELF-HOSTED FONTS --- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/Inter.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/GeistMono.woff2") format("woff2");
+}
+
 /* --- SYSTEM DESIGN TOKENS --- */
 :root {
   --orange: #fd6200;
@@ -12,6 +31,26 @@
   --text: #f5f5f5;
   --card: #151515;
   --border: rgba(255, 255, 255, 0.08);
+}
+
+@theme {
+  --color-brand: var(--orange);
+  --color-bg: var(--bg);
+  --color-ink: var(--text);
+  --color-card: var(--card);
+  --color-edge: var(--border);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* --- BASE STYLES --- */
@@ -46,7 +85,7 @@ body {
 }
 .mono {
   font-family: "Geist Mono", monospace;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
 }
 
 .btn-main {
