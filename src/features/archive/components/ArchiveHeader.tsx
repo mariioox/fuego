@@ -44,7 +44,7 @@ export default function ArchiveHeader({
   );
 
   return (
-    <header className="mb-8 mt-0 flex flex-col gap-8 border-b border-edge pb-8 lg:mt-0 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+    <header className="mb-12 mt-0 flex flex-col gap-8 border-b border-edge pb-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <span className="mono text-xs font-bold tracking-widest text-brand">
           COLLECTION_INDEX // 2026
@@ -54,13 +54,13 @@ export default function ArchiveHeader({
         </h1>
       </div>
 
-      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end border-b border-edge bg-bg/90 py-2.5 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
-        <div className="relative mb-5 flex h-[30px] w-full max-w-[679px] items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand max-md:mb-3 max-md:h-10">
+      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end gap-4 border-b border-edge bg-bg/90 py-3 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:max-w-[680px] lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
+        <div className="relative flex h-10 w-full items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand">
           <Search size={14} className="absolute left-3.5 opacity-30" />
           <input
             type="text"
             placeholder="SEARCH_BY_MODEL..."
-            className="mono w-full bg-transparent pl-10 pr-3.5 text-[11px] uppercase outline-none max-md:text-xs"
+            className="mono w-full bg-transparent pl-11 pr-3.5 text-[11px] uppercase outline-none max-md:text-xs"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             aria-label="Search by model name or SKU"
@@ -79,7 +79,7 @@ export default function ArchiveHeader({
 
         <button
           type="button"
-          className="mb-3 hidden h-[38px] w-full cursor-pointer items-center justify-center gap-2 border border-edge bg-card text-[11px] font-black text-ink max-md:flex"
+          className="hidden h-[38px] w-full cursor-pointer items-center justify-center gap-2 border border-edge bg-card text-[11px] font-black text-ink max-md:flex"
           onClick={() => setFiltersOpen((open) => !open)}
           aria-expanded={filtersOpen}
           aria-controls="archive-filter-row"
@@ -91,7 +91,7 @@ export default function ArchiveHeader({
         <div
           id="archive-filter-row"
           className={cn(
-            "flex flex-wrap items-end gap-2.5 max-md:w-full max-md:items-stretch max-md:gap-2",
+            "flex flex-wrap items-end gap-x-2.5 gap-y-4 max-md:items-stretch max-md:gap-2",
             !filtersOpen && "max-md:hidden",
           )}
         >
@@ -124,7 +124,7 @@ export default function ArchiveHeader({
             <option value="PRICE_DESC">SORT: PRICE(HIGH TO LOW)</option>
           </select>
 
-          <div className="flex flex-col items-start max-md:w-full">
+          <div className="flex w-full flex-col items-start">
             <span className="mono mb-[5px] text-[10px] font-bold uppercase opacity-40">
               SPEC_COLOR_INDEX
             </span>
