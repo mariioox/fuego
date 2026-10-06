@@ -80,7 +80,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-[91vh] w-full overflow-hidden bg-black" aria-label="Hero slideshow">
+    <section className="relative h-[91dvh] w-full overflow-hidden bg-black" aria-label="Hero slideshow">
       <div className="hero-top-nav absolute left-0 top-0 z-50 flex w-full gap-0.5">
         <div className="top-progress-track relative h-[1.5px] flex-1 cursor-progress bg-white/10">
           <div className="top-progress-fill absolute left-0 top-0 h-full w-0 animate-fill-progress bg-brand" key={current} />
@@ -104,7 +104,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-static-content pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center" aria-live="polite" aria-atomic="true">
-        <div className="hero-content-box relative mx-auto flex w-[90%] max-w-[850px] flex-col items-center px-6 py-10 text-center pointer-events-auto md:p-16">
+        <div className="hero-content-box relative mx-auto flex w-[90%] max-w-[850px] flex-col items-center px-6 pt-10 pb-24 text-center pointer-events-auto md:p-16">
           <span
             key={SLIDES[current].id}
             className="hero-meta-animate block animate-meta-slide font-mono text-sm font-extrabold uppercase tracking-[0.2em] text-brand"

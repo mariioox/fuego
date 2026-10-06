@@ -54,7 +54,7 @@ export default function ArchiveHeader({
         </h1>
       </div>
 
-      <div className="sticky top-0 z-40 flex w-full flex-col items-end border-b border-edge bg-bg py-2.5 lg:static lg:border-0 lg:bg-transparent lg:py-0">
+      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end border-b border-edge bg-bg py-2.5 lg:static lg:border-0 lg:bg-transparent lg:py-0">
         <div className="relative mb-5 flex h-[30px] w-full max-w-[679px] items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand max-md:mb-3 max-md:h-10">
           <Search size={14} className="absolute left-3.5 opacity-30" />
           <input

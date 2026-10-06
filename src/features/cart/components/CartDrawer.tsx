@@ -176,7 +176,7 @@ export default function CartDrawer() {
   return (
     <div className="fixed inset-0 z-[10000] flex justify-end bg-black/[0.62] backdrop-blur-[8px]" onClick={handleClose}>
       <aside
-        className="flex h-screen w-[min(100vw,460px)] flex-col border-l border-edge bg-bg text-ink shadow-[-18px_0_60px_rgba(0,0,0,0.28)] max-md:w-full max-md:border-l-0"
+        className="flex h-dvh w-[min(100vw,460px)] flex-col border-l border-edge bg-bg text-ink shadow-[-18px_0_60px_rgba(0,0,0,0.28)] max-md:w-full max-md:border-l-0"
         onClick={(event) => event.stopPropagation()}
         ref={drawerRef}
         role="dialog"
@@ -251,7 +251,7 @@ export default function CartDrawer() {
               ))}
             </div>
 
-            <div className="flex-shrink-0 border-t border-edge bg-bg px-5 py-4 max-md:px-4">
+            <div className="flex-shrink-0 border-t border-edge bg-bg px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-md:px-4">
               <div className="mb-2.5 flex items-center justify-between gap-3">
                 <span className="mono text-[10px] font-black opacity-50">ITEMS // {cartCount}</span>
                 <strong className="text-[1.15rem] font-[950] text-brand">{formatNaira(cartTotal)}</strong>

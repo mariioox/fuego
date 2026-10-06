@@ -1,6 +1,6 @@
 /* --- FOOTER --- */
 .footer-main {
-  padding: 2rem 0;
+  padding: 2rem 0 max(2rem, env(safe-area-inset-bottom));
   background: var(--bg);
 }
 
