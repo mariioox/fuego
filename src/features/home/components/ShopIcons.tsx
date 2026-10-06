@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import Container from "../../../core/ui/Container";
-import "../styles/ShopIcons.css";
+import Section from "../../../core/ui/Section";
+import SectionHeader from "../../../core/ui/SectionHeader";
 import LV_TIMB_black from "../../archive/data/assets/Louis Vuitton Timberland 6 Ankle Boot Wheat Monogram - 1AD72X.webp";
 import Speedcat_BW from "../../archive/data/assets/Puma Speedcat OG Black White - 398846-01.webp";
 import Forest_green from "../../archive/data/assets/New Balance 9060 Team Forest Green - U9060VRA.webp";
@@ -71,67 +71,75 @@ export default function ShopIcons() {
   };
 
   return (
-    <section className="shop-section">
-      <Container>
-        <div className="mb-10">
-          {/* Main Row */}
-          <div className="shop-header-top">
-            <h2 className="shop-header-title">
-              Shop Our <span className="about-highlight">Icons</span>
-            </h2>
-
-            <div className="shop-nav-group">
+    <Section>
+      <div className="mb-10">
+        <SectionHeader
+          title={
+            <>
+              Shop Our <span className="text-brand">Icons</span>
+            </>
+          }
+          action={
+            <div className="flex gap-3">
               <button
                 onClick={() => handleScroll("left")}
-                className="nav-btn-circle"
+                className="flex h-10 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-ink bg-transparent text-ink transition-all duration-300 hover:border-brand hover:text-brand"
                 aria-label="Scroll icons left"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={() => handleScroll("right")}
-                className="nav-btn-circle"
+                className="flex h-10 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-ink bg-transparent text-ink transition-all duration-300 hover:border-brand hover:text-brand"
                 aria-label="Scroll icons right"
               >
                 <ChevronRight size={20} />
               </button>
             </div>
-          </div>
+          }
+        />
 
-          {/* Independent Link Row */}
-          <div>
-            <Link to="/catalogue" className="shop-sublink">
-              View Full Archive // →
-            </Link>
-          </div>
-        </div>
+        {/* Independent Link Row */}
+        <Link
+          to="/catalogue"
+          className="w-fit border-b border-current font-mono text-[13px] font-bold uppercase tracking-[0.1em] text-inherit opacity-40 no-underline transition-opacity duration-500 hover:text-brand hover:opacity-100"
+        >
+          View Full Archive // →
+        </Link>
+      </div>
 
-        {/* Carousel Row */}
-        <div ref={scrollRef} className="shop-carousel-container no-scrollbar">
-          {ICONS.map((icon) => (
-            <div key={icon.id} className="icon-item-card">
-              <div className="icon-image-container">
-                <img src={icon.img} alt={icon.name} />
-              </div>
-              <div className="text-center mt-5">
-                <h3 className="text-[13px] font-black uppercase tracking-tight">
-                  {icon.name}
-                </h3>
-                <p className="mono text-[10px] opacity-40 uppercase font-bold mt-1">
-                  {icon.tag}
-                </p>
-              </div>
+      {/* Carousel Row */}
+      <div ref={scrollRef} className="no-scrollbar mt-5 flex gap-[30px] overflow-x-auto pb-8 snap-x snap-mandatory">
+        {ICONS.map((icon) => (
+          <div key={icon.id} className="group flex min-w-[250px] flex-shrink-0 flex-col self-stretch snap-start">
+            <div className="mb-2.5 mt-2.5 aspect-square w-[280px] overflow-hidden rounded-[15px] border border-edge bg-card">
+              <img
+                src={icon.img}
+                alt={icon.name}
+                className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+              />
             </div>
-          ))}
+            <div className="mt-5 text-center">
+              <h3 className="text-[13px] font-black uppercase tracking-tight">
+                {icon.name}
+              </h3>
+              <p className="mono mt-1 text-[10px] font-bold uppercase opacity-40">
+                {icon.tag}
+              </p>
+            </div>
+          </div>
+        ))}
 
-          <Link to="/catalogue" className="view-all-card">
-            <ArrowRight size={32} className="text-[var(--orange)]" />
-            <span className="mono text-[11px] font-black uppercase tracking-widest">
-              Explore Archive
-            </span>
-          </Link>
-        </div>
-      </Container>
-    </section>
+        <Link
+          to="/catalogue"
+          className="flex h-[280px] min-w-[280px] flex-shrink-0 flex-col items-center justify-center gap-3 rounded-[15px] border-2 border-dashed border-edge text-inherit no-underline transition-all duration-500 hover:border-brand hover:bg-brand/5"
+        >
+          <ArrowRight size={32} className="text-brand" />
+          <span className="mono text-[11px] font-black uppercase tracking-widest">
+            Explore Archive
+          </span>
+        </Link>
+      </div>
+    </Section>
   );
 }

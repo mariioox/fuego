@@ -1,6 +1,5 @@
 import type { Sneaker } from "../types/sneaker";
 import SneakerCard from "./SneakerCard";
-import "../styles/ArchiveGrid.css";
 
 interface Props {
   data: Sneaker[];
@@ -8,7 +7,7 @@ interface Props {
 
 export default function ArchiveGrid({ data }: Props) {
   return (
-    <div className="archive-grid">
+    <div className="mb-12 grid grid-cols-2 gap-[14px] md:grid-cols-3 md:gap-[18px] xl:grid-cols-4">
       {data.map((sneaker) => (
         <SneakerCard key={sneaker.id} sneaker={sneaker} />
       ))}

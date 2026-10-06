@@ -1,12 +1,11 @@
 import { useState, useMemo } from "react";
+import { cn } from "../../../core/utils/cn";
 import { useDebounce } from "../../../core/hooks/useDebounce";
 import Section from "../../../core/ui/Section";
 import { SNEAKER_REGISTRY } from "../data/sneakerRegistry";
 import ArchiveHeader from "./ArchiveHeader";
 import ArchiveGrid from "./ArchiveGrid";
 import type { Sneaker } from "../types/sneaker";
-import "../styles/ArchiveContainer.css";
-import "../styles/ArchiveGrid.css";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -92,21 +91,25 @@ export default function ArchiveContainer() {
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="pagination-nav">
+            <div className="my-20 flex items-center justify-center gap-8 border-t border-edge pt-12 max-sm:my-12 max-sm:gap-2 max-sm:pt-8">
               <button
                 disabled={currentPage === 1}
                 onClick={() => handlePageChange(currentPage - 1)}
-                className="nav-btn mono"
+                className="mono cursor-pointer border border-edge bg-transparent px-6 py-2 text-[10px] font-black uppercase text-ink transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-20 enabled:hover:border-ink enabled:hover:bg-ink enabled:hover:text-bg max-sm:px-[0.7rem] max-sm:py-1 max-sm:text-[9px] max-sm:whitespace-nowrap"
               >
                 PREV
               </button>
 
-              <div className="page-numbers mono">
+              <div className="mono flex gap-4 max-sm:flex-nowrap max-sm:gap-1 max-sm:overflow-x-auto max-sm:no-scrollbar">
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i + 1}
                     onClick={() => handlePageChange(i + 1)}
-                    className={`page-num ${currentPage === i + 1 ? "active" : ""}`}
+                    className={cn(
+                      "cursor-pointer border-none bg-transparent p-2 text-[12px] font-black text-ink opacity-30 transition-all duration-200 max-sm:p-[0.35rem_0.45rem] max-sm:text-[11px]",
+                      currentPage === i + 1 &&
+                        "text-brand opacity-100 underline underline-offset-4",
+                    )}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </button>
@@ -116,7 +119,7 @@ export default function ArchiveContainer() {
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
-                className="nav-btn mono"
+                className="mono cursor-pointer border border-edge bg-transparent px-6 py-2 text-[10px] font-black uppercase text-ink transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-20 enabled:hover:border-ink enabled:hover:bg-ink enabled:hover:text-bg max-sm:px-[0.7rem] max-sm:py-1 max-sm:text-[9px] max-sm:whitespace-nowrap"
               >
                 NEXT
               </button>
@@ -125,18 +128,20 @@ export default function ArchiveContainer() {
         </>
       ) : (
         /* NEW HIGH-TECH EMPTY STATE */
-        <div className="no-results-container">
-          <div className="no-results-content">
-            <div className="error-code orange-text mono">
+        <div className="mt-8 flex w-full items-center justify-center border border-dashed border-edge bg-white/2 px-8 py-32">
+          <div className="max-w-[500px] text-center">
+            <div className="mono mb-4 text-[11px] font-black text-brand">
               SYSTEM_ERROR // NULL_SEARCH
             </div>
-            <h3 className="no-results-title italic">NO_MATCHING_ITEMS_FOUND</h3>
-            <p className="no-results-text mono">
+            <h3 className="mb-4 text-[2rem] font-black uppercase leading-none italic">
+              NO_MATCHING_ITEMS_FOUND
+            </h3>
+            <p className="mono mb-10 text-[11px] uppercase leading-relaxed tracking-[0.05em] opacity-50">
               SEARCH PARAMETERS RETURNED ZERO DATA POINTS. PLEASE RECALIBRATE
               FILTERS.
             </p>
             <button
-              className="reset-search-btn mono"
+              className="mono cursor-pointer border-none bg-ink px-7 py-3.5 text-[10px] font-black text-bg transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand hover:text-white"
               onClick={() => {
                 setSearchTerm("");
                 setBrandFilter("ALL");

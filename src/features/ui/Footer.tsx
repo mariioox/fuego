@@ -1,41 +1,40 @@
 import { Flame, Instagram, MessageCircle } from "lucide-react";
 import Container from "../../core/ui/Container";
-import "./styles/Footer.css";
 
 export default function Footer() {
   return (
-    <footer className="footer-main">
+    <footer className="bg-bg pb-[max(2rem,env(safe-area-inset-bottom))] pt-8">
       <Container>
         {/* Top Row: Brand & Mission */}
-        <div className="footer-top-row">
+        <div className="mb-8 flex flex-wrap justify-between gap-12">
           <div className="footer-brand-sec">
-            <div className="footer-logo-wrap">
-              <span className="footer-logo-text">FUEG</span>
+            <div className="flex items-center">
+              <span className="text-[1.5rem] font-black italic">FUEG</span>
               <Flame size={25} fill="var(--orange)" color="var(--orange)" />
             </div>
-            <p className="footer-mission">
+            <p className="mt-4 max-w-[350px] text-sm leading-relaxed opacity-60">
               More than a store. A community documenting the sneaker culture
               across Nigeria. From the streets of Lagos to the world.
             </p>
           </div>
 
           {/* Nav & Socials */}
-          <div className="footer-nav-groups">
+          <div className="flex gap-16">
             <div>
-              <p className="footer-group-title mono">Navigation</p>
-              <div className="footer-link-list">
-                <a href="/catalogue" className="footer-link">
+              <p className="mono">Navigation</p>
+              <div className="mt-4 flex flex-col gap-2">
+                <a href="/catalogue" className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand">
                   Archive
                 </a>
               </div>
             </div>
 
             <div>
-              <p className="footer-group-title mono">Connect</p>
-              <div className="footer-social-icons">
+              <p className="mono">Connect</p>
+              <div className="mt-4 flex items-center justify-around">
                 <a
                   href="https://www.instagram.com/fuego.heat"
-                  className="footer-link"
+                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="Instagram"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -44,7 +43,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://x.com/fuego_heatng"
-                  className="footer-link"
+                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="Twitter / X"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -55,7 +54,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://www.tiktok.com/@fuego_heatng"
-                  className="footer-link"
+                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="TikTok"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -66,7 +65,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://wa.me/message/MNPXIERXZVHPK1"
-                  className="footer-link"
+                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="WhatsApp"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -79,13 +78,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Row: Specs & Copyright */}
-        <div className="footer-bottom-row">
-          <div className="footer-status">
-            <span className="status-dot"></span>
+        <div className="flex items-center justify-between border-t border-edge pt-6 text-[0.55rem] opacity-60">
+          <div className="flex items-center gap-[5px]">
+            <span className="mr-2 block h-2 w-2 rounded-full bg-[#1ff56d] shadow-[0_0_10px_rgba(40,223,107,0.76)]"></span>
             <p className="mono">Verified // NG-Ops Active</p>
           </div>
 
-          <p className="footer-copyright uppercase">
+          <p className="uppercase">
             © {new Date().getFullYear()} FUEGO NIGERIA. BUILT FOR THE CULTURE.
           </p>
         </div>

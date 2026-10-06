@@ -80,6 +80,22 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
   }
+
+  @keyframes badgePop {
+    0% { transform: scale(0.5); }
+    60% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 6px 18px rgba(255, 94, 0, 0.35); }
+    50% { box-shadow: 0 8px 28px rgba(255, 94, 0, 0.6); }
+  }
+
+  @keyframes iconNudge {
+    0%, 86%, 100% { transform: translateX(0); }
+    92% { transform: translateX(3px); }
+  }
 }
 
 @layer utilities {
@@ -123,29 +139,6 @@ body {
     letter-spacing: 0.06em;
   }
 
-  .btn-main {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    background-color: var(--text);
-    color: var(--bg);
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 900;
-    font-size: 15px;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .btn-main:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-    color: var(--orange);
-  }
-
   /* Screen Flicker Animation */
   .flicker-overlay {
     position: fixed;
@@ -181,13 +174,10 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .trigger-flicker,
-  .btn-main,
   .hero-slide-bg,
   .hero-meta-animate,
   .hero-desc-animate,
-  .card-img,
-  .modal-content,
-  .cart-drawer {
+  .card-img {
     animation: none !important;
     transition: none !important;
   }
