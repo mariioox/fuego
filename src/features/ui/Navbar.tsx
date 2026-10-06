@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../cart/hooks/useCart";
+import Container from "../../core/ui/Container";
 import "./styles/Navbar.css";
 
 export default function Navbar({
@@ -22,7 +23,7 @@ export default function Navbar({
 
   return (
     <nav className="nav-wrapper">
-      <div className="container nav-container">
+      <Container className="nav-container">
         {/* Logo Section */}
         <Link to="/" className="nav-logo-group">
           <span className="nav-logo-text">FUEG</span>
@@ -80,7 +81,7 @@ export default function Navbar({
             )}
           </button>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }

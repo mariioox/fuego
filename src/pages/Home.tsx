@@ -117,13 +117,13 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsData) }}
       />
       <Hero />
-      <div className="section-divider">
+      <div className="border-t border-edge">
         <ShopIcons />
       </div>
-      <div className="section-divider">
+      <div className="border-t border-edge">
         <About />
       </div>
-      <div className="section-divider">
+      <div className="border-t border-edge">
         <Newsletter />
       </div>
     </>

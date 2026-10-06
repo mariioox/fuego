@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Container from "../../../core/ui/Container";
 import "../styles/ShopIcons.css";
 import LV_TIMB_black from "../../archive/data/assets/Louis Vuitton Timberland 6 Ankle Boot Wheat Monogram - 1AD72X.webp";
 import Speedcat_BW from "../../archive/data/assets/Puma Speedcat OG Black White - 398846-01.webp";
@@ -71,7 +72,7 @@ export default function ShopIcons() {
 
   return (
     <section className="shop-section">
-      <div className="container">
+      <Container>
         <div className="mb-10">
           {/* Main Row */}
           <div className="shop-header-top">
@@ -130,7 +131,7 @@ export default function ShopIcons() {
             </span>
           </Link>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

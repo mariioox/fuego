@@ -1,9 +1,10 @@
 import "../styles/About.css";
+import Container from "../../../core/ui/Container";
 
 export default function About() {
   return (
     <section className="about-section">
-      <div className="container">
+      <Container>
         <div className="about-grid">
           {/* Left Column: Heading & Data */}
           <div>
@@ -67,7 +68,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

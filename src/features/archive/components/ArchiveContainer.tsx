@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useDebounce } from "../../../core/hooks/useDebounce";
+import Section from "../../../core/ui/Section";
 import { SNEAKER_REGISTRY } from "../data/sneakerRegistry";
 import ArchiveHeader from "./ArchiveHeader";
 import ArchiveGrid from "./ArchiveGrid";
@@ -71,7 +72,7 @@ export default function ArchiveContainer() {
   };
 
   return (
-    <section className="container py-14 md:py-16">
+    <Section className="py-[clamp(3rem,6vw,5.5rem)]">
       <ArchiveHeader
         searchTerm={searchTerm}
         brandFilter={brandFilter}
@@ -147,6 +148,6 @@ export default function ArchiveContainer() {
           </div>
         </div>
       )}
-    </section>
+    </Section>
   );
 }

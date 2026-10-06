@@ -1,10 +1,11 @@
 import { Flame, Instagram, MessageCircle } from "lucide-react";
+import Container from "../../core/ui/Container";
 import "./styles/Footer.css";
 
 export default function Footer() {
   return (
     <footer className="footer-main">
-      <div className="container">
+      <Container>
         {/* Top Row: Brand & Mission */}
         <div className="footer-top-row">
           <div className="footer-brand-sec">
@@ -88,7 +89,7 @@ export default function Footer() {
             © {new Date().getFullYear()} FUEGO NIGERIA. BUILT FOR THE CULTURE.
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

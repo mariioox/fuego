@@ -16,7 +16,7 @@ export default function MainLayout({ children, theme, toggleTheme }: Props) {
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main id="main-content" className="flex-grow">{children}</main>
       <MobileCatalogueButton />
-      <div className="section-divider">
+      <div className="border-t border-edge">
         <Footer />
       </div>
     </div>

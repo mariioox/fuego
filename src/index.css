@@ -83,16 +83,6 @@
 }
 
 @layer utilities {
-  /* Custom container: later source order in the utilities layer means this
-     always wins over Tailwind's built-in `.container` (breakpoint widths).
-     `padding-inline` leaves vertical padding utilities (py-*, pt-*) intact. */
-  .container {
-    width: 100%;
-    max-width: 1440px;
-    margin-inline: auto;
-    padding-inline: 20px;
-  }
-
   .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -128,9 +118,6 @@ body {
 
 /* --- UTILITIES & GLOBAL COMPONENTS --- */
 @layer components {
-  .section-divider {
-    border-top: 1px solid var(--border);
-  }
   .mono {
     font-family: "Geist Mono", monospace;
     letter-spacing: 0.06em;

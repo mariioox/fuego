@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSound } from "../../../core/hooks/useSound";
 import { subscribeEmail } from "../../../core/api/subscribe";
+import Container from "../../../core/ui/Container";
 import "../styles/Newsletter.css";
 
 export default function Newsletter() {
@@ -47,7 +48,7 @@ export default function Newsletter() {
 
   return (
     <section id="newsletter" className="newsletter-section">
-      <div className="container">
+      <Container>
         <div className="newsletter-grid">
           <div className="news-content">
             <h2 className="news-title">
@@ -97,7 +98,7 @@ export default function Newsletter() {
             </div>
           </form>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
