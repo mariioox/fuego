@@ -20,10 +20,17 @@
 /* --- SYSTEM DESIGN TOKENS --- */
 :root {
   --orange: #fd6200;
-  --bg: #f8f8f8ec;
+  --bg: #f4f4f6;
   --text: #0a0a0a;
   --card: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
+  --gutter: clamp(20px, 6vw, 96px);
+
+  /* --- GLASS --- */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-edge: rgba(0, 0, 0, 0.07);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --glow: rgba(253, 98, 0, 0.14);
 }
 
 [data-theme="dark"] {
@@ -31,6 +38,12 @@
   --text: #f5f5f5;
   --card: #151515;
   --border: rgba(255, 255, 255, 0.08);
+
+  /* --- GLASS --- */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-edge: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --glow: rgba(253, 98, 0, 0.2);
 }
 
 @theme {
@@ -39,6 +52,8 @@
   --color-ink: var(--text);
   --color-card: var(--card);
   --color-edge: var(--border);
+  --color-glass: var(--glass-bg);
+  --color-glass-edge: var(--glass-edge);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
@@ -117,8 +132,7 @@
   }
 }
 
-html,
-body {
+html {
   scrollbar-width: auto;
   scrollbar-color: var(--orange) var(--bg);
   background-color: var(--bg);
@@ -126,7 +140,26 @@ body {
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+}
+
+body {
   position: relative;
+  z-index: 0;
+  background-color: transparent;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* --- FAINT AMBIENT GLOW --- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(100% 55% at 50% 0%, var(--glow), transparent 65%);
 }
 
 :focus-visible {
@@ -139,6 +172,15 @@ body {
   .mono {
     font-family: "Geist Mono", monospace;
     letter-spacing: 0.06em;
+  }
+
+  /* --- GLASS SURFACE --- */
+  .glass-panel {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-edge);
+    box-shadow: var(--glass-shadow);
   }
 
   /* Screen Flicker Animation */
