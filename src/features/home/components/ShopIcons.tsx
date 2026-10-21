@@ -76,7 +76,7 @@ export default function ShopIcons() {
         <SectionHeader
           title={
             <>
-              Shop Our <span className="text-brand">Icons</span>
+              Shop our <span className="text-brand">icons</span>
             </>
           }
           action={
