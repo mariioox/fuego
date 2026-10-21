@@ -9,8 +9,8 @@ interface SEOProps {
 }
 
 const SITE_NAME = "Fuego Archive";
-const DEFAULT_IMAGE = "/fuego_logo.jpeg";
-const SITE_URL = "https://feugo-heat.vercel.app";
+const DEFAULT_IMAGE = "/og-banner.jpg";
+const SITE_URL = "https://fuego-heat.vercel.app";
 const TW_HANDLE = "@fuego_heatng";
 
 export default function SEO({
@@ -35,6 +35,7 @@ export default function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={absoluteImage} />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={description} />

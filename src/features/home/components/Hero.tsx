@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useSound } from "../../../core/hooks/useSound";
 import { Button } from "../../../core/ui/Button";
 import "../styles/Hero.css";
-import heroThree from "../../../assets/Hero3.jpeg";
-import heroSix from "../../../assets/Hero6.jpeg";
-import heroOne from "../../../assets/Hero1.jpeg";
+// Served from /public so the first slide can be preloaded with a stable path
+const heroThree = "/assets/Hero3.webp";
+const heroSix = "/assets/Hero6.webp";
+const heroOne = "/assets/Hero1.webp";
 
 const SLIDES = [
   {

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://feugo-heat.vercel.app/sitemap.xml
+Sitemap: https://fuego-heat.vercel.app/sitemap.xml

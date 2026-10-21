@@ -9,8 +9,8 @@ const organizationData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Fuego Archive",
-  url: "https://feugo-heat.vercel.app",
-  logo: "https://feugo-heat.vercel.app/flame.svg",
+  url: "https://fuego-heat.vercel.app",
+  logo: "https://fuego-heat.vercel.app/flame.svg",
   description:
     "Nigeria's premier sneaker archive and streetwear community. Curated Nike, Jordan, Adidas, New Balance, Puma collections — Lagos to the world.",
   sameAs: [
@@ -35,18 +35,18 @@ const websiteData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Fuego Archive",
-  url: "https://feugo-heat.vercel.app",
+  url: "https://fuego-heat.vercel.app",
   description:
     "Buy sneakers in Nigeria — curated Nike, Jordan, Adidas, New Balance, Puma. Verified authentic, Lagos-based sneaker store.",
   inLanguage: "en-NG",
   publisher: {
     "@type": "Organization",
     name: "Fuego Archive",
-    logo: "https://feugo-heat.vercel.app/flame.svg",
+    logo: "https://fuego-heat.vercel.app/flame.svg",
   },
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://feugo-heat.vercel.app/catalogue?search={search_term_string}",
+    target: "https://fuego-heat.vercel.app/catalogue?search={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };
@@ -55,8 +55,8 @@ const localBusinessData = {
   "@context": "https://schema.org",
   "@type": "Store",
   name: "Fuego Archive",
-  url: "https://feugo-heat.vercel.app",
-  logo: "https://feugo-heat.vercel.app/flame.svg",
+  url: "https://fuego-heat.vercel.app",
+  logo: "https://fuego-heat.vercel.app/flame.svg",
   description:
     "Premium sneaker store in Nigeria. Buy Nike, Jordan, Adidas, New Balance, Puma sneakers online. Verified authentic streetwear.",
   areaServed: {
@@ -87,7 +87,7 @@ const breadcrumbsData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://feugo-heat.vercel.app",
+      item: "https://fuego-heat.vercel.app",
     },
   ],
 };
@@ -98,7 +98,7 @@ export default function Home() {
       <SEO
         title="Buy Sneakers in Nigeria | Premium Nike Jordan Adidas Store"
         description="Buy sneakers in Nigeria — Fuego Archive is Lagos' premium sneaker store. Shop verified authentic Nike, Jordan, Adidas, New Balance & Puma sneakers. Streetwear culture from Lagos to the world."
-        url="https://feugo-heat.vercel.app"
+        url="https://fuego-heat.vercel.app"
       />
       <script
         type="application/ld+json"
