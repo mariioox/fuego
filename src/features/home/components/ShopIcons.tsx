@@ -109,7 +109,7 @@ export default function ShopIcons() {
       </div>
 
       {/* Carousel Row */}
-      <div ref={scrollRef} className="no-scrollbar mt-5 flex gap-[30px] overflow-x-auto pb-8 snap-x snap-mandatory">
+      <div ref={scrollRef} className="mt-5 flex gap-[30px] overflow-x-auto pb-8 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {ICONS.map((icon) => (
           <div key={icon.id} className="group flex min-w-[250px] flex-shrink-0 flex-col self-stretch snap-start">
             <div className="mb-2.5 mt-2.5 aspect-square w-[280px] overflow-hidden rounded-[15px] border border-edge bg-card">

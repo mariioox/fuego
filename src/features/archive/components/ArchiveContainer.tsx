@@ -102,7 +102,7 @@ export default function ArchiveContainer() {
                 Previous
               </button>
 
-              <div className="flex gap-4 max-sm:flex-nowrap max-sm:gap-1 max-sm:overflow-x-auto max-sm:no-scrollbar">
+              <div className="flex gap-4 max-sm:flex-nowrap max-sm:gap-1 max-sm:overflow-x-auto max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden">
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i + 1}

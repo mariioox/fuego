@@ -11,7 +11,7 @@ interface Props {
 
 export default function MainLayout({ children, theme, toggleTheme }: Props) {
   return (
-    <div className="min-h-screen flex flex-col pb-[72px] md:pb-0">
+    <div className="relative isolate flex min-h-screen flex-col overflow-x-clip pb-[72px] before:fixed before:inset-0 before:-z-10 before:pointer-events-none before:bg-[radial-gradient(100%_55%_at_50%_0%,var(--glow),transparent_65%)] md:pb-0">
       <a
         href="#main-content"
         className="absolute left-0 top-[-100%] z-[10001] bg-brand px-6 py-3 text-sm font-semibold text-white no-underline focus:top-0"

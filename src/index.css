@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* --- FONT --- */
+/* --- SELF-HOSTED FONT --- */
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -9,24 +9,42 @@
   src: url("./assets/fonts/Inter.woff2") format("woff2");
 }
 
-/* --- TOKENS --- */
+/* --- PALETTE (flipped by the theme attribute) --- */
 :root {
-  --gutter: clamp(20px, 6vw, 96px);
+  --brand: #fd6200;
+  --bg: #f4f4f6;
+  --ink: #0a0a0a;
+  --card: #ffffff;
+  --edge: rgba(0, 0, 0, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-edge: rgba(0, 0, 0, 0.07);
   --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   --glow: rgba(253, 98, 0, 0.14);
+  --gutter: clamp(20px, 6vw, 96px);
 }
 
-@theme {
-  --color-brand: #fd6200;
-  --color-bg: #f4f4f6;
-  --color-ink: #0a0a0a;
-  --color-card: #ffffff;
-  --color-edge: rgba(0, 0, 0, 0.08);
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --ink: #f5f5f5;
+  --card: #151515;
+  --edge: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-edge: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --glow: rgba(253, 98, 0, 0.2);
+}
+
+/* --- TAILWIND THEME --- */
+@theme inline {
+  --color-brand: var(--brand);
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-card: var(--card);
+  --color-edge: var(--edge);
   --color-glass: var(--glass-bg);
   --color-glass-edge: var(--glass-edge);
   --shadow-glass: var(--glass-shadow);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --animate-shimmer: shimmer 1.5s infinite;
 
   @keyframes shimmer {
@@ -40,58 +58,13 @@
   }
 }
 
-[data-theme="dark"] {
-  --color-bg: #0a0a0a;
-  --color-ink: #f5f5f5;
-  --color-card: #151515;
-  --color-edge: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-edge: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  --glow: rgba(253, 98, 0, 0.2);
-}
-
-/* --- BASE --- */
-html {
-  background-color: var(--color-bg);
-  color: var(--color-ink);
-  font-family: "Inter", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  scrollbar-color: var(--color-brand) var(--color-bg);
-  overflow-x: clip;
-}
-
-body {
-  position: relative;
-  z-index: 0;
-  overflow-x: clip;
-}
-
-/* faint ambient glow */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(100% 55% at 50% 0%, var(--glow), transparent 65%);
-}
-
+/* --- GLOBAL FOCUS RING --- */
 :focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
 
-@layer utilities {
-  .no-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-}
-
+/* --- REDUCED MOTION --- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
