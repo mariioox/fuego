@@ -45,7 +45,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(): [
 export function revealStyle(shown: boolean, delay = 0): CSSProperties {
   return {
     opacity: shown ? 1 : 0,
-    transform: shown ? "translateY(0)" : "translateY(18px)",
+    transform: shown ? "none" : "translateY(18px)",
     transition: `opacity 0.8s var(--ease-soft) ${delay}ms, transform 0.8s var(--ease-soft) ${delay}ms`,
   };
 }

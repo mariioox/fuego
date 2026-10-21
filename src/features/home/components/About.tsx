@@ -10,7 +10,7 @@ export default function About() {
 
   return (
     <Section>
-      <div className="flex flex-wrap items-center gap-[clamp(32px,5vw,72px)]">
+      <div className="flex flex-wrap items-center gap-[clamp(20px,5vw,72px)]">
         <div
           ref={imageRef}
           style={revealStyle(imageShown)}
@@ -18,7 +18,7 @@ export default function About() {
         >
           <div className="aspect-[4/5] w-full overflow-hidden rounded-surface bg-tile">
             <img
-              src="/assets/Hero1.webp"
+              src="/curated.jpeg"
               alt="The Fuego team curating sneakers in Lagos"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -29,15 +29,15 @@ export default function About() {
         <div
           ref={textRef}
           style={revealStyle(textShown, 140)}
-          className="flex flex-1 basis-[380px] flex-col items-start gap-5"
+          className="flex flex-1 basis-[320px] flex-col items-start gap-4 sm:basis-[380px] sm:gap-5"
         >
           <span className="text-[13px] text-muted">About Fuego</span>
-          <h2 className="font-display text-[clamp(36px,4.4vw,60px)] font-semibold leading-[1] tracking-[-0.04em] text-ink">
+          <h2 className="font-display text-[clamp(30px,6vw,60px)] font-semibold leading-[1] tracking-[-0.04em] text-ink">
             Curated,
             <br />
             not crowded.
           </h2>
-          <p className="max-w-[460px] text-[17px] leading-[1.55] text-muted">
+          <p className="max-w-[460px] text-[16px] leading-[1.55] text-muted sm:text-[17px]">
             We&apos;re an independent team of sneakerheads in Lagos. We hand-pick
             every pair, check it ourselves, and only list what we&apos;d wear.
           </p>

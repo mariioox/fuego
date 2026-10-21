@@ -12,8 +12,6 @@ interface Props {
   setBrandFilter: (val: string) => void;
   colorFilter: string;
   setColorFilter: (val: string) => void;
-  stockOnly: boolean;
-  setStockOnly: (val: boolean) => void;
   setSortOrder: (val: string) => void;
   sortOrder: string;
   count: number;
@@ -52,14 +50,12 @@ export default function ArchiveHeader({
   brandFilter,
   setSearchTerm,
   setBrandFilter,
-  colorFilter,
-  setColorFilter,
-  stockOnly,
-  setStockOnly,
-  setSortOrder,
-  sortOrder,
-  count,
-}: Props) {
+        colorFilter,
+        setColorFilter,
+        setSortOrder,
+        sortOrder,
+        count,
+      }: Props) {
   const [moreOpen, setMoreOpen] = useState(false);
   const popRef = useRef<HTMLDivElement>(null);
 
@@ -101,17 +97,17 @@ export default function ArchiveHeader({
         </span>
       </nav>
 
-      <div className="mt-5 flex flex-wrap items-end justify-between gap-4 animate-[riseIn_0.8s_ease-soft_both]" style={{ animationDelay: "80ms" }}>
-        <h1 className="font-display text-[clamp(44px,5.6vw,80px)] font-semibold leading-[0.98] tracking-[-0.045em] text-ink">
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-3 animate-[riseIn_0.8s_ease-soft_both] sm:gap-4" style={{ animationDelay: "80ms" }}>
+        <h1 className="font-display text-[clamp(36px,7vw,80px)] font-semibold leading-[0.98] tracking-[-0.045em] text-ink">
           The archive
         </h1>
-        <p className="text-[15px] text-muted">
+        <p className="text-[14px] text-muted sm:text-[15px]">
           {count} {count === 1 ? "pair" : "pairs"}
         </p>
       </div>
 
       <div
-        className="mt-8 flex flex-wrap items-center gap-2 rounded-nav glass p-2 animate-[riseIn_0.8s_ease-soft_both]"
+        className="mt-6 flex flex-wrap items-center gap-2 rounded-nav glass p-2 animate-[riseIn_0.8s_ease-soft_both] sm:mt-8"
         style={{ animationDelay: "160ms" }}
       >
         <label className="flex h-11 min-w-0 flex-[1_1_260px] items-center gap-2 rounded-control border border-line bg-card px-3 transition-colors duration-300 ease-soft focus-within:border-text">
@@ -165,7 +161,7 @@ export default function ArchiveHeader({
             aria-haspopup="dialog"
               className={cn(
                 "inline-flex h-11 cursor-pointer items-center gap-2 rounded-control border px-4 text-[14px] font-medium transition-colors duration-300 ease-soft",
-                colorFilter !== "ALL" || stockOnly
+                colorFilter !== "ALL"
                   ? "border-text bg-text text-bg"
                   : "border-line bg-card text-ink hover:border-text",
               )}
@@ -176,32 +172,11 @@ export default function ArchiveHeader({
 
           {moreOpen && (
             <div
-              className="absolute right-0 top-full z-30 mt-2 w-[268px] rounded-surface glass p-4 max-sm:fixed max-sm:inset-x-4 max-sm:bottom-4 max-sm:top-auto max-sm:mt-0 max-sm:w-auto"
+              className="absolute right-0 top-full z-[90] mt-2 w-[268px] rounded-surface glass p-4 max-sm:fixed max-sm:inset-x-3 max-sm:bottom-4 max-sm:top-auto max-sm:mt-0 max-sm:w-auto"
               role="dialog"
               aria-label="More filters"
             >
-              <button
-                type="button"
-                onClick={() => setStockOnly(!stockOnly)}
-                aria-pressed={stockOnly}
-                className={cn(
-                  "flex h-10 w-full cursor-pointer items-center justify-between rounded-control border px-3 text-[14px] font-medium transition-colors duration-300 ease-soft",
-                  stockOnly
-                    ? "border-text bg-text text-bg"
-                    : "border-line bg-transparent text-ink hover:border-text",
-                )}
-              >
-                In stock now
-                <span
-                  className={cn(
-                    "h-1.5 w-1.5 rounded-full",
-                    stockOnly ? "bg-orange" : "bg-muted",
-                  )}
-                  aria-hidden="true"
-                />
-              </button>
-
-              <span className="mt-4 block text-[13px] text-muted">Colour</span>
+              <span className="block text-[13px] text-muted">Colour</span>
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <button
                   type="button"
@@ -238,7 +213,7 @@ export default function ArchiveHeader({
       </div>
 
       <div
-        className="mt-5 mb-8 flex flex-wrap items-center gap-2.5 animate-[riseIn_0.8s_ease-soft_both]"
+        className="mt-4 mb-6 flex flex-wrap items-center gap-2 animate-[riseIn_0.8s_ease-soft_both] sm:mt-5 sm:mb-8 sm:gap-2.5"
         style={{ animationDelay: "220ms" }}
       >
         {BRAND_FILTERS.map((filter) => (

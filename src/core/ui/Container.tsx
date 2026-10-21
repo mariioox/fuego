@@ -15,7 +15,7 @@ export default function Container({
   return (
     <Tag
       className={cn(
-        "mx-auto w-full max-w-[1240px] px-[clamp(16px,3vw,32px)]",
+        "mx-auto w-full max-w-[1240px] px-[clamp(14px,3vw,32px)]",
         className,
       )}
     >

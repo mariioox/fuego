@@ -112,7 +112,7 @@ function SneakerCard({
           <button
             type="button"
             className={cn(
-              "absolute bottom-3 right-3 z-10 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-control border transition-[background-color,color,border-color,transform] duration-300 ease-soft group-hover:scale-[1.06]",
+              "absolute bottom-3 right-3 z-10 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-control border transition-[background-color,color,border-color,transform] duration-300 ease-soft group-hover:scale-[1.06] sm:h-11 sm:w-11",
               added
                 ? "border-transparent bg-[#0B0B0C] text-white"
                 : "border-white/80 bg-white/55 text-[#0B0B0C] backdrop-blur-[16px]",
@@ -134,20 +134,20 @@ function SneakerCard({
             <div
               ref={quickRef}
               id={quickAddId}
-              className="absolute inset-0 z-20 flex flex-col gap-3 overflow-y-auto rounded-surface bg-card p-4"
+              className="absolute inset-0 z-20 flex flex-col gap-3 overflow-y-auto rounded-surface bg-card p-4 max-sm:fixed max-sm:inset-x-3 max-sm:bottom-3 max-sm:top-auto max-sm:z-[95] max-sm:gap-4 max-sm:p-5 max-sm:shadow-glass"
               role="dialog"
               aria-label={`Quick add ${sneaker.name}`}
               tabIndex={-1}
               onClick={(e) => e.stopPropagation()}
             >
               <span className="text-[13px] text-muted">Select size</span>
-              <div className="grid grid-cols-4 gap-1.5">
+              <div className="grid grid-cols-4 gap-1.5 max-sm:grid-cols-5 max-sm:gap-2">
                 {SNEAKER_SIZES.map((size) => (
                   <button
                     key={size}
                     type="button"
                     className={cn(
-                      "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line bg-transparent text-[13px] font-medium text-ink transition-colors duration-300 ease-soft hover:border-text",
+                      "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line bg-transparent text-[13px] font-medium text-ink transition-colors duration-300 ease-soft hover:border-text max-sm:h-11",
                       quickSize === size && "border-text bg-text text-bg",
                     )}
                     onClick={(e) => {
@@ -172,12 +172,12 @@ function SneakerCard({
           )}
         </div>
 
-        <div className="flex flex-col gap-1 px-1">
-          <span className="text-[13px] text-muted">{formatBrand(sneaker.brand)}</span>
-          <h3 className="text-[15px] font-medium leading-[1.35] text-ink">
+        <div className="flex flex-col gap-1 px-0.5 sm:px-1">
+          <span className="text-[12px] text-muted sm:text-[13px]">{formatBrand(sneaker.brand)}</span>
+          <h3 className="text-[14px] font-medium leading-[1.35] text-ink sm:text-[15px]">
             {sneaker.name}
           </h3>
-          <span className="text-[15px] font-semibold text-ink">
+          <span className="text-[14px] font-semibold text-ink sm:text-[15px]">
             {sneaker.priceFormatted}
           </span>
         </div>

@@ -13,7 +13,7 @@ export default function ArchiveGrid({
   stagger = 60,
 }: Props) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(max(160px,calc((100%_-_60px)/4)),1fr))] gap-x-5 gap-y-8">
+    <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-[repeat(auto-fill,minmax(max(160px,calc((100%_-_60px)/4)),1fr))]">
       {data.map((sneaker, index) => (
         <SneakerCard
           key={sneaker.id}

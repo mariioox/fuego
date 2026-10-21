@@ -31,7 +31,7 @@ export default function NewIn() {
   return (
     <Section id="new-in">
       <div className="flex flex-wrap items-end justify-between gap-6">
-        <h2 className="font-display text-[clamp(32px,3.6vw,48px)] font-semibold leading-none tracking-[-0.035em] text-ink">
+        <h2 className="font-display text-[clamp(26px,5vw,48px)] font-semibold leading-none tracking-[-0.035em] text-ink">
           New in
         </h2>
         <Link
@@ -46,7 +46,7 @@ export default function NewIn() {
         </Link>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center gap-2.5">
+      <div className="mt-6 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-2.5">
         {BRAND_FILTERS.map((filter) => (
           <Pill
             key={filter.value}
@@ -59,7 +59,7 @@ export default function NewIn() {
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-[repeat(auto-fill,minmax(max(160px,calc((100%_-_60px)/4)),1fr))] gap-x-5 gap-y-8">
+      <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-[repeat(auto-fill,minmax(max(160px,calc((100%_-_60px)/4)),1fr))]">
         {featured.map((sneaker, index) => (
           <SneakerCard
             key={sneaker.id}

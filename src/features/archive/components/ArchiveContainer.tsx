@@ -15,7 +15,6 @@ export default function ArchiveContainer() {
   const [searchTerm, setSearchTerm] = useState("");
   const [brandFilter, setBrandFilter] = useState("ALL");
   const [colorFilter, setColorFilter] = useState("ALL");
-  const [stockOnly, setStockOnly] = useState(false);
   const [sortOrder, setSortOrder] = useState("FEATURED");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -45,11 +44,6 @@ export default function ArchiveContainer() {
       result = result.filter((item) => item.brand === brandFilter);
     }
 
-    // Availability Filter
-    if (stockOnly) {
-      result = result.filter((item) => item.availability === "IN_HAND");
-    }
-
     // Color Filter (Strict Type Safety)
     if (colorFilter !== "ALL") {
       result = result.filter((item) =>
@@ -63,7 +57,7 @@ export default function ArchiveContainer() {
       if (sortOrder === "PRICE_DESC") return b.price - a.price;
       return a.id - b.id;
     });
-  }, [debouncedSearch, brandFilter, colorFilter, stockOnly, sortOrder]);
+  }, [debouncedSearch, brandFilter, colorFilter, sortOrder]);
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredAndSortedData.length / ITEMS_PER_PAGE);
@@ -82,7 +76,6 @@ export default function ArchiveContainer() {
     setSearchTerm("");
     setBrandFilter("ALL");
     setColorFilter("ALL");
-    setStockOnly(false);
     setSortOrder("FEATURED");
     setCurrentPage(1);
   };
@@ -93,14 +86,9 @@ export default function ArchiveContainer() {
         searchTerm={searchTerm}
         brandFilter={brandFilter}
         colorFilter={colorFilter}
-        stockOnly={stockOnly}
         setSearchTerm={(v) => handleFilterChange(setSearchTerm, v)}
         setBrandFilter={(v) => handleFilterChange(setBrandFilter, v)}
         setColorFilter={(v) => handleFilterChange(setColorFilter, v)}
-        setStockOnly={(v) => {
-          setStockOnly(v);
-          setCurrentPage(1);
-        }}
         setSortOrder={(v) => handleFilterChange(setSortOrder, v)}
         sortOrder={sortOrder}
         count={filteredAndSortedData.length}

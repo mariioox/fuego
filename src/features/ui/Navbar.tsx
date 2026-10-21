@@ -30,9 +30,9 @@ export default function Navbar({
   ];
 
   return (
-    <nav aria-label="Main" className="w-full px-4 max-sm:px-0">
+    <nav aria-label="Main" className="w-full px-3 sm:px-4">
       <div
-        className="glass relative mx-auto flex h-[72px] w-full max-w-[1120px] items-center rounded-nav pl-[26px] pr-3 transition-[box-shadow] duration-[400ms] ease-soft"
+        className="glass relative mx-auto flex h-[68px] w-full max-w-[1120px] items-center rounded-nav px-3 pl-[18px] pr-2 transition-[box-shadow] duration-[400ms] ease-soft sm:h-[72px] sm:pl-[26px] sm:pr-3"
         style={{
           boxShadow: scrolled ? "var(--glass-shadow-up)" : "var(--glass-shadow)",
         }}
@@ -42,13 +42,13 @@ export default function Navbar({
           className="flex shrink-0 items-center gap-0.5 text-ink no-underline"
           aria-label="Fuego — home"
         >
-          <span className="font-display text-[21px] font-bold tracking-[0.06em]">
+          <span className="font-display text-[19px] font-bold tracking-[0.06em] sm:text-[21px]">
             FUEG
           </span>
-          <Flame size={18} fill="var(--orange)" color="var(--orange)" />
+          <Flame size={16} fill="var(--orange)" color="var(--orange)" className="sm:h-[18px] sm:w-[18px]" />
         </Link>
 
-        <div className="flex h-[72px] flex-1 flex-wrap items-center justify-center gap-8 overflow-hidden max-sm:hidden">
+        <div className="flex h-[68px] flex-1 flex-wrap items-center justify-center gap-6 overflow-hidden max-sm:hidden sm:h-[72px] sm:gap-8">
           {links.map((link) => {
             const active = pathname === link.to;
             return (
@@ -68,11 +68,11 @@ export default function Navbar({
           })}
         </div>
 
-        <div className="flex shrink-0 items-center gap-1 max-sm:gap-0.5">
+        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
           <Link
             to="/catalogue"
             aria-label="Search the archive"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-control text-ink transition-colors duration-300 ease-soft hover:bg-chip"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-control text-ink transition-colors duration-300 ease-soft hover:bg-chip sm:h-12 sm:w-12"
           >
             <Search size={20} />
           </Link>
@@ -100,7 +100,7 @@ export default function Navbar({
 
           <button
             onClick={openCart}
-            className="relative inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-control bg-btn text-btn-ink transition-transform duration-300 ease-soft active:translate-y-px"
+            className="relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-control bg-btn text-btn-ink transition-transform duration-300 ease-soft active:translate-y-px sm:h-12 sm:w-12"
             aria-label={`Open bag with ${cartCount} item${cartCount === 1 ? "" : "s"}`}
           >
             <ShoppingBag size={20} />
