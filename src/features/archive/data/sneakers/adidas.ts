@@ -63,6 +63,8 @@ export const adidasSneakers: Partial<Sneaker>[] = [
     brand: "ADIDAS",
     color: ["BLACK", "WHITE", "GREY"],
     status: "AVAILABLE",
+    availability: "IN_HAND",
+    inHandSizes: [43],
     price: 35000,
   },
   {

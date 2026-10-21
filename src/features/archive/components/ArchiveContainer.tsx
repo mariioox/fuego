@@ -37,8 +37,10 @@ export default function ArchiveContainer() {
       );
     }
 
-    // Brand Filter
-    if (brandFilter !== "ALL") {
+    // Brand / Availability Filter
+    if (brandFilter === "IN_HAND") {
+      result = result.filter((item) => item.availability === "IN_HAND");
+    } else if (brandFilter !== "ALL") {
       result = result.filter((item) => item.brand === brandFilter);
     }
 

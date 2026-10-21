@@ -20,7 +20,7 @@ export default function Section({
     <Tag
       id={id}
       className={cn(
-        "mx-auto w-full max-w-[1440px] px-[clamp(20px,_6vw,_96px)] py-[clamp(4rem,_7vw,_6rem)]",
+        "mx-auto w-full max-w-[1440px] px-[var(--gutter)] py-[clamp(4rem,_7vw,_6rem)]",
         borderTop && "border-t border-edge",
         className,
       )}

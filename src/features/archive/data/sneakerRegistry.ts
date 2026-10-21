@@ -47,7 +47,10 @@ export const SNEAKER_REGISTRY: Sneaker[] = rawRegistry.map((shoe, index) => ({
   brand: shoe.brand!,
   color: shoe.color || [],
   status: shoe.status || 'AVAILABLE',
+  availability: shoe.availability || 'PRE_ORDER',
+  inHandSizes: shoe.inHandSizes,
   price: shoe.price || 0,
   priceFormatted: formatNaira(shoe.price || 0),
   image: getSneakerImage(shoe.sku!),
+  description: shoe.description,
 }));

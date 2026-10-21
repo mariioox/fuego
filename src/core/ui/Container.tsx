@@ -11,7 +11,7 @@ export default function Container({ as: Tag = "div", className, children }: Cont
   return (
     <Tag
       className={cn(
-        "mx-auto w-full max-w-[1440px] px-[clamp(20px,_6vw,_96px)]",
+        "mx-auto w-full max-w-[1440px] px-[var(--gutter)]",
         className,
       )}
     >

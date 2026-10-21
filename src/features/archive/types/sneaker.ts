@@ -7,6 +7,8 @@ export interface Sneaker {
   price: number;
   priceFormatted: string;
   status?: 'AVAILABLE' | 'PREMIUM' | 'SOLD_OUT' | 'ARCHIVED';
+  availability?: 'IN_HAND' | 'PRE_ORDER';
+  inHandSizes?: number[];
   image: string;
   description?: string;
 }

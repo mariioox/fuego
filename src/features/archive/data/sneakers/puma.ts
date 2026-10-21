@@ -24,6 +24,8 @@ export const pumaSneakers: Partial<Sneaker>[] = [
     color: ["RED", "WHITE"],
     price: 40000,
     status: "AVAILABLE",
+    availability: "IN_HAND",
+    inHandSizes: [43],
   },
   {
     sku: "01PSXOW",

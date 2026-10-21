@@ -2,6 +2,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "../../../core/utils/cn";
 import { SWATCH_COLORS } from "../data/swatchColors";
+import FilterPills from "./FilterPills";
 
 interface Props {
   searchTerm: string;
@@ -44,130 +45,141 @@ export default function ArchiveHeader({
   );
 
   return (
-    <header className="mb-12 mt-0 flex flex-col gap-8 border-b border-edge pb-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <span className="mono text-xs font-bold tracking-widest text-brand">
-          COLLECTION_INDEX // 2026
-        </span>
-        <h1 className="mt-8 text-[clamp(3rem,5vw,4rem)] font-[950] italic uppercase leading-[0.85] tracking-[-0.05em]">
-          FULL ARCHIVE.
-        </h1>
-      </div>
-
-      <div className="sticky top-[70px] z-40 flex w-full flex-col items-end gap-4 border-b border-edge bg-bg/90 py-3 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:max-w-[680px] lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
-        <div className="relative flex h-10 w-full items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand">
-          <Search size={14} className="absolute left-3.5 opacity-30" />
-          <input
-            type="text"
-            placeholder="SEARCH_BY_MODEL..."
-            className="mono w-full bg-transparent pl-11 pr-3.5 text-[11px] uppercase outline-none max-md:text-xs"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            aria-label="Search by model name or SKU"
-          />
-          {searchTerm && (
-            <button
-              type="button"
-              className="absolute right-1.5 flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent text-ink opacity-50 transition-opacity hover:opacity-100"
-              onClick={() => setSearchTerm("")}
-              aria-label="Clear search"
-            >
-              <X size={14} />
-            </button>
-          )}
+    <header className="mb-12 mt-0 flex flex-col gap-6 border-b border-edge pb-8 lg:mb-16">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <span className="mono text-xs font-bold tracking-widest text-brand">
+            COLLECTION_INDEX // 2026
+          </span>
+          <h1 className="mt-8 text-[clamp(3rem,5vw,4rem)] font-[950] italic uppercase leading-[0.85] tracking-[-0.05em]">
+            FULL ARCHIVE.
+          </h1>
         </div>
 
-        <button
-          type="button"
-          className="hidden h-[38px] w-full cursor-pointer items-center justify-center gap-2 border border-edge bg-card text-[11px] font-black text-ink max-md:flex"
-          onClick={() => setFiltersOpen((open) => !open)}
-          aria-expanded={filtersOpen}
-          aria-controls="archive-filter-row"
-        >
-          FILTERS
-          <ChevronDown size={14} className={cn("transition-transform", filtersOpen && "rotate-180")} />
-        </button>
-
-        <div
-          id="archive-filter-row"
-          className={cn(
-            "flex flex-wrap items-end gap-x-2.5 gap-y-4 max-md:items-stretch max-md:gap-2",
-            !filtersOpen && "max-md:hidden",
-          )}
-        >
-          <select
-            className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
-            value={brandFilter}
-            onChange={(e) => setBrandFilter(e.target.value)}
-            aria-label="Filter by brand"
-          >
-            <option value="ALL">BRAND: ALL</option>
-            <option value="NIKE">NIKE</option>
-            <option value="JORDAN">JORDAN</option>
-            <option value="ADIDAS">ADIDAS</option>
-            <option value="ASICS">ASICS</option>
-            <option value="PUMA">PUMA</option>
-            <option value="VANS">VANS</option>
-            <option value="CONVERSE">CONVERSE</option>
-            <option value="NEW BALANCE">NEW BALANCE</option>
-            <option value="TIMBERLAND">TIMBERLAND</option>
-          </select>
-
-          <select
-            className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            aria-label="Sort sneakers"
-          >
-            <option value="NEWEST">SORT: NEWEST</option>
-            <option value="PRICE_ASC">SORT: PRICE(LOW TO HIGH)</option>
-            <option value="PRICE_DESC">SORT: PRICE(HIGH TO LOW)</option>
-          </select>
-
-          <div className="flex w-full flex-col items-start">
-            <span className="mono mb-[5px] text-[10px] font-bold uppercase opacity-40">
-              SPEC_COLOR_INDEX
-            </span>
-
-            <div className="flex flex-wrap items-center gap-1">
+        <div className="sticky top-[70px] z-40 flex w-full flex-col items-end gap-4 border-b border-edge bg-bg/90 py-3 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:max-w-[680px] lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
+          <div className="relative flex h-10 w-full items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand">
+            <Search size={14} className="absolute left-3.5 opacity-30" />
+            <input
+              type="text"
+              placeholder="SEARCH_BY_MODEL..."
+              className="mono w-full bg-transparent pl-11 pr-3.5 text-[11px] uppercase outline-none max-md:text-xs"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search by model name or SKU"
+            />
+            {searchTerm && (
               <button
                 type="button"
-                className={cn(
-                  "mono flex h-[30px] cursor-pointer items-center justify-center border border-edge bg-card px-2.5 text-[9px] font-black text-ink transition-colors duration-300 hover:border-ink max-md:h-9",
-                  colorFilter === "ALL" && "border-brand",
-                )}
-                onClick={() => setColorFilter("ALL")}
-                aria-pressed={colorFilter === "ALL"}
-                aria-label="Show all colors"
+                className="absolute right-1.5 flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent text-ink opacity-50 transition-opacity hover:opacity-100"
+                onClick={() => setSearchTerm("")}
+                aria-label="Clear search"
               >
-                ALL
+                <X size={14} />
               </button>
+            )}
+          </div>
 
-              {COLORS.map((color) => (
+          <button
+            type="button"
+            className="hidden h-[38px] w-full cursor-pointer items-center justify-center gap-2 border border-edge bg-card text-[11px] font-black text-ink max-md:flex"
+            onClick={() => setFiltersOpen((open) => !open)}
+            aria-expanded={filtersOpen}
+            aria-controls="archive-filter-row"
+          >
+            FILTERS
+            <ChevronDown
+              size={14}
+              className={cn(
+                "transition-transform",
+                filtersOpen && "rotate-180",
+              )}
+            />
+          </button>
+
+          <div
+            id="archive-filter-row"
+            className={cn(
+              "flex flex-wrap items-end gap-x-2.5 gap-y-4 max-md:items-stretch max-md:gap-2",
+              !filtersOpen && "max-md:hidden",
+            )}
+          >
+            <select
+              className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
+              value={brandFilter}
+              onChange={(e) => setBrandFilter(e.target.value)}
+              aria-label="Filter by brand"
+            >
+              <option value="ALL">BRAND: ALL</option>
+              <option value="IN_HAND">IN HAND READY</option>
+              <option value="NIKE">NIKE</option>
+              <option value="JORDAN">JORDAN</option>
+              <option value="ADIDAS">ADIDAS</option>
+              <option value="ASICS">ASICS</option>
+              <option value="PUMA">PUMA</option>
+              <option value="VANS">VANS</option>
+              <option value="CONVERSE">CONVERSE</option>
+              <option value="NEW BALANCE">NEW BALANCE</option>
+              <option value="TIMBERLAND">TIMBERLAND</option>
+            </select>
+
+            <select
+              className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              aria-label="Sort sneakers"
+            >
+              <option value="NEWEST">SORT: NEWEST</option>
+              <option value="PRICE_ASC">SORT: PRICE(LOW TO HIGH)</option>
+              <option value="PRICE_DESC">SORT: PRICE(HIGH TO LOW)</option>
+            </select>
+
+            <div className="flex w-full flex-col items-start">
+              <span className="mono mb-[5px] text-[10px] font-bold uppercase opacity-40">
+                SPEC_COLOR_INDEX
+              </span>
+
+              <div className="flex flex-wrap items-center gap-1">
                 <button
-                  key={color}
                   type="button"
-                  aria-label={`Filter by ${color}`}
-                  aria-pressed={colorFilter === color}
                   className={cn(
-                    "relative flex h-[30px] w-[30px] cursor-pointer items-center justify-center border border-edge bg-card transition-colors duration-300 hover:border-ink max-md:h-9 max-md:w-9",
-                    colorFilter === color && "border-brand",
+                    "mono flex h-[30px] cursor-pointer items-center justify-center border border-edge bg-card px-2.5 text-[9px] font-black text-ink transition-colors duration-300 hover:border-ink max-md:h-9",
+                    colorFilter === "ALL" && "border-brand",
                   )}
-                  onClick={() => setColorFilter(color)}
+                  onClick={() => setColorFilter("ALL")}
+                  aria-pressed={colorFilter === "ALL"}
+                  aria-label="Show all colors"
                 >
-                  <div
-                    className="h-[15px] w-[15px] border border-black/5 max-md:h-[18px] max-md:w-[18px]"
-                    style={{ background: SWATCH_COLORS[color] }}
-                  />
-                  {colorFilter === color && (
-                    <div className="absolute -right-1 -top-1 h-1.5 w-1.5 bg-brand" />
-                  )}
+                  ALL
                 </button>
-              ))}
+
+                {COLORS.map((color) => (
+                  <button
+                    key={color}
+                    type="button"
+                    aria-label={`Filter by ${color}`}
+                    aria-pressed={colorFilter === color}
+                    className={cn(
+                      "relative flex h-[30px] w-[30px] cursor-pointer items-center justify-center border border-edge bg-card transition-colors duration-300 hover:border-ink max-md:h-9 max-md:w-9",
+                      colorFilter === color && "border-brand",
+                    )}
+                    onClick={() => setColorFilter(color)}
+                  >
+                    <div
+                      className="h-[15px] w-[15px] border border-black/5 max-md:h-[18px] max-md:w-[18px]"
+                      style={{ background: SWATCH_COLORS[color] }}
+                    />
+                    {colorFilter === color && (
+                      <div className="absolute -right-1 -top-1 h-1.5 w-1.5 bg-brand" />
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <FilterPills brandFilter={brandFilter} setBrandFilter={setBrandFilter} />
     </header>
   );
 }
