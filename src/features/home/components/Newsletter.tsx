@@ -32,7 +32,7 @@ export default function Newsletter() {
         className="flex flex-wrap items-center justify-between gap-6 rounded-surface bg-panel p-[clamp(22px,5vw,64px)] sm:gap-10"
       >
         <div className="max-w-[520px]">
-          <span className="inline-flex items-center gap-2 text-[13px] text-[#F4F4F2]">
+          <span className="inline-flex items-center gap-2 text-[12px] text-[#F4F4F2] sm:text-[13px]">
             <span
               className="h-1.5 w-1.5 rounded-full bg-orange"
               aria-hidden="true"
@@ -50,21 +50,21 @@ export default function Newsletter() {
         </div>
 
         <form
-          className="w-full max-w-[480px] flex flex-col gap-2.5 sm:gap-3"
+          className="w-full max-w-[480px] flex flex-col gap-2 sm:gap-3"
           onSubmit={handleSubscribe}
         >
           <label
             htmlFor="newsletter-email"
-            className="text-[13px] text-[#A1A1A8]"
+            className="text-[12px] text-[#A1A1A8] sm:text-[13px]"
           >
             Email address
           </label>
-          <div className="flex flex-col gap-2 min-[480px]:flex-row">
+          <div className="flex flex-col gap-2 min-[500px]:flex-row min-[500px]:items-center">
             <input
               id="newsletter-email"
               type="email"
               placeholder="you@example.com"
-              className="h-[48px] min-w-0 flex-1 rounded-control border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.06)] px-4 text-[14px] text-[#F4F4F2] outline-none transition-colors duration-300 ease-soft placeholder:text-[rgba(244,244,242,0.45)] focus-visible:outline-[#F4F4F2] sm:h-[52px] sm:text-[15px]"
+              className="h-[46px] w-full min-w-0 flex-1 rounded-control border border-white/12 bg-white/5 px-3.5 text-[14px] text-[#F4F4F2] outline-none transition-colors duration-300 ease-soft placeholder:text-white/40 focus-visible:border-white/30 focus-visible:outline-none sm:h-[52px] sm:px-4 sm:text-[15px]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "LOADING" || status === "SUCCESS"}
@@ -72,14 +72,14 @@ export default function Newsletter() {
             />
             <button
               type="submit"
-              className="h-[48px] cursor-pointer rounded-control border-none bg-orange px-6 text-[14px] font-semibold text-[#0B0B0C] transition-[filter,transform] duration-300 ease-soft hover:brightness-105 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-[#F4F4F2] sm:h-[52px] sm:px-7 sm:text-[15px]"
+              className="h-[46px] w-full rounded-control border-none bg-orange px-6 text-[14px] font-semibold text-[#0B0B0C] transition-[filter,transform] duration-300 ease-soft hover:brightness-105 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-[#F4F4F2] min-[500px]:w-auto sm:h-[52px] sm:px-7 sm:text-[15px]"
               disabled={status === "LOADING" || status === "SUCCESS"}
             >
               {status === "LOADING" ? "Joining…" : "Join the list"}
             </button>
           </div>
           <p
-            className="min-h-[20px] text-[13px] text-[#A1A1A8]"
+            className="min-h-5 text-[13px] text-[#A1A1A8]"
             role="status"
             aria-live="polite"
           >
