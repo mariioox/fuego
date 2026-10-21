@@ -88,7 +88,7 @@ export default function SpecimenModal({
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute right-2.5 top-2.5 z-[100] flex h-8 w-8 cursor-pointer items-center justify-center rounded-[2px] border-none bg-ink text-bg"
+          className="absolute right-2.5 top-2.5 z-[100] flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none bg-ink text-bg"
           onClick={onClose}
           aria-label="Close specimen details"
         >
@@ -111,14 +111,14 @@ export default function SpecimenModal({
             />
           </div>
 
-          <div className="relative flex flex-col p-5 lg:p-[45px] mono">
+          <div className="relative flex flex-col p-5 lg:p-[45px]">
             <div className="mb-6 flex items-start justify-between">
               <div>
-                <div className="text-[10px] font-black tracking-tighter text-brand">
-                  SPECIMEN_ID // {sneaker.sku}
+                <div className="text-[10px] font-semibold tracking-[0.16em] text-brand uppercase">
+                  {sneaker.sku}
                 </div>
                 <h2
-                  className="my-2 mb-6 text-[clamp(1.8rem,8vw,2.5rem)] font-[950] uppercase italic leading-[0.95]"
+                  className="my-2 mb-6 text-[clamp(1.6rem,6vw,2.2rem)] font-bold leading-[1.05] tracking-[-0.02em]"
                   id={nameId}
                 >
                   {sneaker.name}
@@ -128,22 +128,22 @@ export default function SpecimenModal({
 
             <div className="mb-6 border-t border-edge">
               <div className="flex items-center justify-between gap-2.5 border-b border-edge py-3">
-                <span className="text-[10px] font-extrabold whitespace-nowrap tracking-[0.05em] opacity-40">
-                  ARCHIVE_STATUS
+                <span className="text-[10px] font-semibold whitespace-nowrap tracking-[0.12em] text-ink/40 uppercase">
+                  Status
                 </span>
                 <StatusBadge status={sneaker.status} />
               </div>
 
               <div className="flex items-center justify-between gap-2.5 border-b border-edge py-3">
-                <span className="text-[10px] font-extrabold whitespace-nowrap tracking-[0.05em] opacity-40">
-                  BRAND_ORIGIN
+                <span className="text-[10px] font-semibold whitespace-nowrap tracking-[0.12em] text-ink/40 uppercase">
+                  Brand
                 </span>
-                <span className="text-right text-[11px] font-black break-all">{sneaker.brand}</span>
+                <span className="text-right text-[12px] font-semibold break-all">{sneaker.brand}</span>
               </div>
 
               <div className="flex items-center justify-between gap-2.5 border-b border-edge py-3">
-                <span className="text-[10px] font-extrabold whitespace-nowrap tracking-[0.05em] opacity-40">
-                  COLOR_PROFILE
+                <span className="text-[10px] font-semibold whitespace-nowrap tracking-[0.12em] text-ink/40 uppercase">
+                  Colour
                 </span>
                 <div className="flex gap-2">
                   {sneaker.color.map((c) => (
@@ -158,17 +158,17 @@ export default function SpecimenModal({
               </div>
 
               <div className="flex items-center justify-between gap-2.5 border-b border-edge py-3">
-                <span className="text-[10px] font-extrabold whitespace-nowrap tracking-[0.05em] opacity-40">
-                  MARKET_VALUATION
+                <span className="text-[10px] font-semibold whitespace-nowrap tracking-[0.12em] text-ink/40 uppercase">
+                  Price
                 </span>
-                <span className="text-right text-[11px] font-black break-all text-brand">
+                <span className="text-right text-[12px] font-semibold break-all text-brand">
                   {sneaker.priceFormatted}
                 </span>
               </div>
 
               <div className="flex items-center justify-between gap-2.5 border-b border-edge py-3">
-                <span className="text-[10px] font-extrabold whitespace-nowrap tracking-[0.05em] opacity-40">
-                  SELECT_SIZE
+                <span className="text-[10px] font-semibold whitespace-nowrap tracking-[0.12em] text-ink/40 uppercase">
+                  Select size
                 </span>
                 <div className="flex flex-wrap justify-end gap-1.5">
                   {SNEAKER_SIZES.map((size) => (
@@ -176,7 +176,7 @@ export default function SpecimenModal({
                       key={size}
                       type="button"
                       className={cn(
-                        "flex h-[34px] w-[38px] cursor-pointer items-center justify-center border border-edge bg-transparent font-mono text-[11px] font-bold text-ink transition-[border-color,background-color,color] duration-200 hover:border-brand",
+                        "flex h-[34px] w-[38px] cursor-pointer items-center justify-center border border-edge bg-transparent text-[11px] font-semibold text-ink transition-[border-color,background-color,color] duration-200 hover:border-brand",
                         selectedSize === size && "border-ink bg-ink text-bg",
                       )}
                       onClick={() => setSelectedSize(size)}
@@ -189,19 +189,17 @@ export default function SpecimenModal({
               </div>
             </div>
 
-            <p className="mb-6 border-l-2 border-brand bg-white/[0.02] p-4 text-[11px] uppercase leading-[1.6] tracking-[0.05em] opacity-70">
+            <p className="mb-6 border-l-2 border-brand bg-white/[0.02] p-4 text-[13px] leading-[1.6] text-ink/70">
               {sneaker.description ||
-                `TECHNICAL ANALYSIS: ${sneaker.name} EXHIBITS SUPERIOR ARCHITECTURAL INTEGRITY. 
-                DESIGNED BY ${sneaker.brand}, THIS UNIT REMAINS A HIGH-PRIORITY SPECIMEN WITHIN 
-                THE ${sneaker.color.join("/")} COLOR SEQUENCE.`}
+                `A ${sneaker.brand} classic in ${sneaker.color.join(" / ")}. Hand-checked and ready to wear.`}
             </p>
 
             <Button
-              className="sticky bottom-0 z-10 mt-auto w-full min-h-[48px] text-xs tracking-[0.08em] hover:-translate-y-px"
+              className="sticky bottom-0 z-10 mt-auto w-full min-h-[48px]"
               onClick={handleAddToCart}
             >
               <ShoppingBag size={18} />
-              {addStatus === "ADDED" ? "ADDED_TO_CART" : "ADD_TO_CART"}
+              {addStatus === "ADDED" ? "Added to bag" : "Add to bag"}
             </Button>
           </div>
         </div>

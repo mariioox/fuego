@@ -18,11 +18,11 @@ export default function SectionHeader({
     <div className={cn("flex flex-wrap items-end justify-between gap-6", className)}>
       <div>
         {eyebrow && (
-          <span className="mono text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
             {eyebrow}
           </span>
         )}
-        <h2 className="mt-8 mb-4 text-[clamp(2rem,4.5vw,3.2rem)] font-black italic uppercase leading-[0.9] tracking-[-0.04em]">
+        <h2 className="mt-6 mb-4 text-[clamp(1.9rem,4vw,2.9rem)] font-bold leading-[1.05] tracking-[-0.035em]">
           {title}
         </h2>
       </div>

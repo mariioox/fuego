@@ -102,9 +102,9 @@ export default function ShopIcons() {
         {/* Independent Link Row */}
         <Link
           to="/catalogue"
-          className="w-fit border-b border-current font-mono text-[13px] font-bold uppercase tracking-[0.1em] text-inherit opacity-40 no-underline transition-opacity duration-500 hover:text-brand hover:opacity-100"
+          className="w-fit border-b border-current text-[13px] font-medium text-inherit opacity-50 no-underline transition-opacity duration-200 hover:text-brand hover:opacity-100"
         >
-          View Full Archive // →
+          View the full archive →
         </Link>
       </div>
 
@@ -116,16 +116,14 @@ export default function ShopIcons() {
               <img
                 src={icon.img}
                 alt={icon.name}
-                className="h-full w-full object-contain p-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                className="h-full w-full object-contain p-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
               />
             </div>
             <div className="mt-5 text-center">
-              <h3 className="text-[13px] font-black uppercase tracking-tight">
+              <h3 className="text-[14px] font-semibold tracking-tight">
                 {icon.name}
               </h3>
-              <p className="mono mt-1 text-[10px] font-bold uppercase opacity-40">
-                {icon.tag}
-              </p>
+              <p className="mt-1 text-[11px] text-ink/40">{icon.tag}</p>
             </div>
           </div>
         ))}
@@ -135,9 +133,7 @@ export default function ShopIcons() {
           className="flex h-[280px] min-w-[280px] flex-shrink-0 flex-col items-center justify-center gap-3 rounded-[15px] border-2 border-dashed border-edge text-inherit no-underline transition-all duration-500 hover:border-brand hover:bg-brand/5"
         >
           <ArrowRight size={32} className="text-brand" />
-          <span className="mono text-[11px] font-black uppercase tracking-widest">
-            Explore Archive
-          </span>
+          <span className="text-[12px] font-semibold">Explore the archive</span>
         </Link>
       </div>
     </Section>

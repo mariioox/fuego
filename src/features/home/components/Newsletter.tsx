@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import { useSound } from "../../../core/hooks/useSound";
+import { useState } from "react";
 import { subscribeEmail } from "../../../core/api/subscribe";
 import Section from "../../../core/ui/Section";
 
@@ -9,29 +8,9 @@ export default function Newsletter() {
     "IDLE" | "LOADING" | "SUCCESS" | "ERROR"
   >("IDLE");
   const [errorMessage, setErrorMessage] = useState("");
-  const playClick = useSound("/sounds/click.mp3");
-  const flickerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (flickerTimer.current) clearTimeout(flickerTimer.current);
-    };
-  }, []);
-
-  const triggerFeedback = () => {
-    playClick(0.4);
-
-    const overlay = document.getElementById("flicker-overlay");
-    overlay?.classList.add("trigger-flicker");
-    flickerTimer.current = setTimeout(
-      () => overlay?.classList.remove("trigger-flicker"),
-      300,
-    );
-  };
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    triggerFeedback();
     setStatus("LOADING");
 
     const result = await subscribeEmail(email);
@@ -41,7 +20,7 @@ export default function Newsletter() {
       setEmail("");
     } else {
       setStatus("ERROR");
-      setErrorMessage(result.error || "SUBSCRIPTION_FAILED // TRY_AGAIN.");
+      setErrorMessage(result.error || "Subscription failed — please try again.");
     }
   };
 
@@ -49,13 +28,12 @@ export default function Newsletter() {
     <Section id="newsletter" className="bg-ink text-bg">
       <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <div>
-          <h2 className="mb-8 text-[clamp(2.5rem,6vw,4.5rem)] font-black italic uppercase leading-[0.85] tracking-[-0.05em]">
-            NEVER MISS
-            <br />A RELEASE
+          <h2 className="mb-8 text-[clamp(2.2rem,5vw,3.6rem)] font-bold leading-[1] tracking-[-0.04em]">
+            Never miss a release
           </h2>
-          <p className="max-w-[450px] font-mono text-[13px] leading-relaxed opacity-70">
-            JOIN THE INNER CIRCLE FOR EARLY ACCESS TO NEW ARCHIVE ADDITIONS,
-            PROMOS AND GIVEAWAYS.
+          <p className="max-w-[450px] text-[14px] leading-relaxed opacity-70">
+            Join the list for early access to new archive additions, promos and
+            giveaways.
           </p>
         </div>
 
@@ -64,11 +42,9 @@ export default function Newsletter() {
             <input
               type="email"
               placeholder={
-                status === "SUCCESS"
-                  ? "SUBSCRIPTION_ACTIVE"
-                  : "ENTER_EMAIL_ADDRESS"
+                status === "SUCCESS" ? "You're subscribed" : "Email address"
               }
-              className="flex-1 border border-white/20 bg-transparent p-[18px] font-mono text-xs text-white outline-none transition-colors duration-300 focus:border-brand"
+              className="flex-1 border border-white/20 bg-transparent p-[18px] text-[13px] text-white outline-none transition-colors duration-200 focus:border-brand placeholder:text-white/40"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "LOADING" || status === "SUCCESS"}
@@ -77,22 +53,22 @@ export default function Newsletter() {
             />
             <button
               type="submit"
-              className="cursor-pointer border-none bg-brand px-10 py-[18px] font-mono text-xs font-black text-white transition-transform duration-300 hover:-translate-y-[3px] hover:brightness-110 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60"
+              className="cursor-pointer border-none rounded-full bg-brand px-10 py-[16px] text-[13px] font-semibold text-white transition-colors duration-200 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
               disabled={status === "LOADING" || status === "SUCCESS"}
             >
-              {status === "LOADING" ? "COMMUNICATING..." : "SUBSCRIBE"}
+              {status === "LOADING" ? "Sending…" : "Subscribe"}
             </button>
           </div>
           <div
-            className="mono text-[10px] tracking-[0.1em] opacity-40"
+            className="text-[12px] opacity-50"
             role="status"
             aria-live="polite"
           >
             {status === "SUCCESS"
-              ? "// ACCESS_GRANTED. CHECK_INBOX."
+              ? "You're on the list — check your inbox."
               : status === "ERROR"
-                ? `// ${errorMessage}`
-                : "// SECURE_CONNECTION_REQUIRED."}
+                ? errorMessage
+                : "No spam. One email when something worth having drops."}
           </div>
         </form>
       </div>

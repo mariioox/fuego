@@ -77,15 +77,9 @@ export default function CartDrawer() {
     [appliedPromo, discount, items, promoCode, subtotal],
   );
 
-  // Trigger sensory feedback loops (Click sound + Screen flicker)
+  // Subtle click as tactile feedback
   const triggerSensoryFeedback = () => {
-    playClick(0.4);
-
-    document.getElementById("flicker-overlay")?.classList.add("trigger-flicker");
-    setTimeout(
-      () => document.getElementById("flicker-overlay")?.classList.remove("trigger-flicker"),
-      300,
-    );
+    playClick(0.3);
   };
 
   const handleClose = useCallback(() => {
@@ -185,11 +179,13 @@ export default function CartDrawer() {
       >
         <div className="flex h-[82px] flex-shrink-0 items-center justify-between border-b border-edge px-5 py-4 max-md:px-4">
           <div>
-            <span className="mono mb-1 block text-[10px] font-black text-brand">ORDER_QUEUE</span>
-            <h2 className="text-[2rem] font-[950] uppercase italic leading-none">Cart</h2>
+            <span className="mb-1 block text-[10px] font-semibold tracking-[0.16em] text-brand uppercase">
+              Your bag
+            </span>
+            <h2 className="text-[1.9rem] font-bold leading-none tracking-[-0.03em]">Cart</h2>
           </div>
           <button
-            className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
+            className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-full border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
             onClick={handleClose}
             aria-label="Close cart"
             ref={closeButtonRef}
@@ -210,13 +206,13 @@ export default function CartDrawer() {
                   <div className="flex min-w-0 flex-col justify-between gap-3">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <h3 className="break-words text-[13px] font-[950] uppercase leading-[1.15]">{item.name}</h3>
-                        <p className="mono mt-[5px] text-[9px] font-black opacity-45">
-                          {item.brand} // {item.sku} // EU {item.size}
+                        <h3 className="text-[14px] font-semibold leading-[1.25] break-words">{item.name}</h3>
+                        <p className="mt-1 text-[11px] text-ink/45">
+                          {item.brand} · {item.sku} · EU {item.size}
                         </p>
                       </div>
                       <button
-                        className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
+                        className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-edge bg-card text-ink transition-colors hover:border-brand hover:text-brand"
                         onClick={() => removeItem(item.id, item.size)}
                         aria-label={`Remove ${item.name}`}
                       >
@@ -233,7 +229,7 @@ export default function CartDrawer() {
                         >
                           <Minus size={14} />
                         </button>
-                        <span className="min-w-[30px] text-center font-mono text-[11px] font-black">{String(item.quantity).padStart(2, "0")}</span>
+                        <span className="min-w-[30px] text-center text-[12px] font-semibold">{item.quantity}</span>
                         <button
                           className="flex h-[30px] w-8 cursor-pointer items-center justify-center border-0 bg-transparent text-inherit hover:text-brand"
                           onClick={() => handleQuantityAdjustment(() => increaseQuantity(item.id, item.size))}
@@ -242,7 +238,7 @@ export default function CartDrawer() {
                           <Plus size={14} />
                         </button>
                       </div>
-                      <span className="mono whitespace-nowrap text-[11px] font-[950] text-brand">
+                      <span className="whitespace-nowrap text-[13px] font-semibold text-brand">
                         {formatNaira(item.price * item.quantity)}
                       </span>
                     </div>
@@ -253,37 +249,38 @@ export default function CartDrawer() {
 
             <div className="flex-shrink-0 border-t border-edge bg-bg px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-md:px-4">
               <div className="mb-2.5 flex items-center justify-between gap-3">
-                <span className="mono text-[10px] font-black opacity-50">ITEMS // {cartCount}</span>
-                <strong className="text-[1.15rem] font-[950] text-brand">{formatNaira(cartTotal)}</strong>
+                <span className="text-[12px] text-ink/50">
+                  {cartCount} {cartCount === 1 ? "item" : "items"}
+                </span>
+                <strong className="text-[1.15rem] font-bold text-brand">{formatNaira(cartTotal)}</strong>
               </div>
 
               {discount > 0 && (
-                <div className="mono mb-2.5 flex items-center justify-between gap-3 text-[10px] font-black text-brand">
+                <div className="mb-2.5 flex items-center justify-between gap-3 text-[11px] font-semibold text-brand">
                   <span>
-                    PROMO // {promoCode}{" "}
-                    {appliedPromo ? `(${appliedPromo.influencer})` : ""}
+                    {promoCode} {appliedPromo ? `(${appliedPromo.influencer})` : ""}
                   </span>
                   <span className="whitespace-nowrap">-{formatNaira(discount)}</span>
                 </div>
               )}
 
-              <div className="mono mb-1 flex h-[34px] items-stretch border border-edge bg-card">
+              <div className="mb-1 flex h-[42px] items-stretch overflow-hidden rounded-full border border-edge bg-card">
                 <input
                   type="text"
                   value={promoInput}
                   onChange={(e) => setPromoInput(e.target.value)}
-                  placeholder={promoCode ? "PROMO_CODE_APPLIED" : "ENTER_PROMO_CODE"}
+                  placeholder={promoCode ? "Code applied" : "Promo code"}
                   aria-label="Promo code"
                   disabled={!!promoCode}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") handleApplyPromo();
                   }}
-                  className="min-w-0 flex-1 bg-transparent px-3 text-[10px] font-extrabold uppercase text-ink outline-none placeholder:opacity-40"
+                  className="min-w-0 flex-1 bg-transparent px-4 text-[12px] text-ink outline-none placeholder:text-ink/40"
                 />
                 {promoCode ? (
                   <button
                     type="button"
-                    className="cursor-pointer border-l border-edge bg-transparent px-4 font-mono text-[10px] font-black tracking-[0.06em] text-ink hover:text-brand"
+                    className="cursor-pointer border-l border-edge bg-transparent px-4 text-[12px] font-semibold text-ink hover:text-brand"
                     onClick={() => {
                       removePromo();
                       setPromoStatus("IDLE");
@@ -295,31 +292,31 @@ export default function CartDrawer() {
                 ) : (
                   <button
                     type="button"
-                    className="cursor-pointer border-none bg-ink px-4 font-mono text-[10px] font-black tracking-[0.06em] text-bg hover:text-brand"
+                    className="cursor-pointer border-none bg-ink px-5 text-[12px] font-semibold text-bg hover:text-brand"
                     onClick={handleApplyPromo}
                   >
-                    APPLY
+                    Apply
                   </button>
                 )}
               </div>
               {promoStatus !== "IDLE" && (
                 <p
                   className={cn(
-                    "mono mb-2.5 mt-1 text-[9px] font-black",
+                    "mb-2.5 mt-1 text-[11px] font-medium",
                     promoStatus === "ACCEPTED" ? "text-brand" : "text-[#f32536]",
                   )}
                   role="status"
                   aria-live="polite"
                 >
                   {promoStatus === "ACCEPTED"
-                    ? "CODE_ACCEPTED // ₦1,000 OFF"
-                    : "INVALID_CODE"}
+                    ? "Code applied — ₦1,000 off"
+                    : "That code isn't valid"}
                 </p>
               )}
 
               <Button className="w-full" onClick={handleCheckout}>
                 <ShoppingBag size={18} />
-                ORDER_ON_WHATSAPP
+                Order on WhatsApp
               </Button>
 
               <div className="mt-2 flex gap-2 max-md:gap-1.5">
@@ -329,7 +326,7 @@ export default function CartDrawer() {
                   className="flex-1"
                   onClick={handleCopyOrder}
                 >
-                  {copyStatus === "COPIED" ? "ORDER_TEXT_COPIED" : "COPY_ORDER_TEXT"}
+                  {copyStatus === "COPIED" ? "Order copied" : "Copy order"}
                 </Button>
 
                 <Button
@@ -341,7 +338,7 @@ export default function CartDrawer() {
                     clearCart();
                   }}
                 >
-                  CLEAR_QUEUE
+                  Clear bag
                 </Button>
               </div>
             </div>
@@ -349,9 +346,9 @@ export default function CartDrawer() {
         ) : (
           <div className="flex flex-1 flex-col items-center justify-center p-[30px] text-center text-ink">
             <ShoppingBag size={42} className="mb-[18px] text-brand" />
-            <h3 className="mb-2 text-[1.6rem] font-[950] italic">QUEUE_EMPTY</h3>
-            <p className="mono max-w-[260px] text-[10px] leading-[1.6] opacity-50">
-              ADD SPECIMENS FROM THE ARCHIVE TO BEGIN AN ORDER.
+            <h3 className="mb-2 text-[1.5rem] font-bold tracking-[-0.02em]">Your bag is empty</h3>
+            <p className="max-w-[260px] text-[13px] leading-[1.6] text-ink/50">
+              Add a pair from the archive to start an order.
             </p>
           </div>
         )}

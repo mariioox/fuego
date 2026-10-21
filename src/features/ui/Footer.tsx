@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="mb-8 flex flex-wrap justify-between gap-12">
           <div className="footer-brand-sec">
             <div className="flex items-center">
-              <span className="text-[1.5rem] font-black italic">FUEG</span>
+              <span className="text-[1.5rem] font-bold tracking-[-0.03em]">FUEG</span>
               <Flame size={25} fill="var(--orange)" color="var(--orange)" />
             </div>
             <p className="mt-4 max-w-[350px] text-sm leading-relaxed opacity-60">
@@ -21,20 +21,27 @@ export default function Footer() {
           {/* Nav & Socials */}
           <div className="flex gap-16">
             <div>
-              <p className="mono">Navigation</p>
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-ink/40 uppercase">
+                Navigation
+              </p>
               <div className="mt-4 flex flex-col gap-2">
-                <a href="/catalogue" className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand">
+                <a
+                  href="/catalogue"
+                  className="text-[13px] font-medium text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                >
                   Archive
                 </a>
               </div>
             </div>
 
             <div>
-              <p className="mono">Connect</p>
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-ink/40 uppercase">
+                Connect
+              </p>
               <div className="mt-4 flex items-center justify-around">
                 <a
                   href="https://www.instagram.com/fuego.heat"
-                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                  className="text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="Instagram"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -43,7 +50,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://x.com/fuego_heatng"
-                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                  className="text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="Twitter / X"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -54,7 +61,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://www.tiktok.com/@fuego_heatng"
-                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                  className="text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="TikTok"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -65,7 +72,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://wa.me/message/MNPXIERXZVHPK1"
-                  className="text-[0.6rem] font-bold uppercase text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                  className="text-inherit no-underline transition-colors duration-200 hover:text-brand"
                   aria-label="WhatsApp"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -78,15 +85,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Row: Specs & Copyright */}
-        <div className="flex items-center justify-between border-t border-edge pt-6 text-[0.55rem] opacity-60">
-          <div className="flex items-center gap-[5px]">
-            <span className="mr-2 block h-2 w-2 rounded-full bg-[#1ff56d] shadow-[0_0_10px_rgba(40,223,107,0.76)]"></span>
-            <p className="mono">Verified // NG-Ops Active</p>
+        <div className="flex items-center justify-between border-t border-edge pt-6 text-[12px] opacity-60">
+          <div className="flex items-center gap-2">
+            <span className="block h-2 w-2 rounded-full bg-[#1ff56d]"></span>
+            <p>Open for orders</p>
           </div>
 
-          <p className="uppercase">
-            © {new Date().getFullYear()} FUEGO NIGERIA. BUILT FOR THE CULTURE.
-          </p>
+          <p>© {new Date().getFullYear()} Fuego Nigeria</p>
         </div>
       </Container>
     </footer>

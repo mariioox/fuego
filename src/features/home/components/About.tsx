@@ -1,3 +1,4 @@
+import { MessageCircle, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import Section from "../../../core/ui/Section";
 import { Button } from "../../../core/ui/Button";
 
@@ -7,33 +8,59 @@ export default function About() {
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_1fr]">
         {/* Left Column: Heading & Data */}
         <div>
-          <span className="mb-6 inline-block bg-ink px-3 py-1 text-[0.7rem] font-black uppercase text-bg">
-            Mission Archive // 001
+          <span className="mb-6 inline-block rounded-full bg-ink px-4 py-1.5 text-[0.7rem] font-semibold text-bg">
+            Lagos, Nigeria
           </span>
-          <h2 className="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-black italic uppercase leading-[0.85] tracking-[-0.04em]">
-            Drop <span className="text-brand">Heat</span>
+          <h2 className="mt-4 text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-[1] tracking-[-0.04em]">
+            Drop <span className="text-brand">heat</span>.
             <br />
             Stay lit.
           </h2>
 
           <div className="mt-12 grid grid-cols-2 gap-10 border-t border-edge pt-10">
             <div>
-              <span className="block text-5xl font-black leading-none tracking-[-0.02em] text-brand">
-                +234
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <ShieldCheck size={22} />
               </span>
-              <span className="mono mt-1 block text-[10px] font-black uppercase opacity-30">Region Code</span>
+              <span className="mt-4 block text-[15px] font-semibold">
+                Verified authentic
+              </span>
+              <span className="mt-1 block text-[13px] leading-relaxed text-ink/50">
+                Every pair checked by hand before it ships.
+              </span>
             </div>
             <div>
-              <span className="block text-5xl font-black leading-none tracking-[-0.02em]">100%</span>
-              <span className="mono mt-1 block text-[10px] font-black uppercase opacity-30">Street Verified</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <Truck size={22} />
+              </span>
+              <span className="mt-4 block text-[15px] font-semibold">
+                Nationwide delivery
+              </span>
+              <span className="mt-1 block text-[13px] leading-relaxed text-ink/50">
+                Lagos to every corner of the country.
+              </span>
             </div>
             <div>
-              <span className="block text-5xl font-black leading-none tracking-[-0.02em]">NG</span>
-              <span className="mono mt-1 block text-[10px] font-black uppercase opacity-30">HQ Location</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <MessageCircle size={22} />
+              </span>
+              <span className="mt-4 block text-[15px] font-semibold">
+                Order in a chat
+              </span>
+              <span className="mt-1 block text-[13px] leading-relaxed text-ink/50">
+                WhatsApp us, no forms or friction.
+              </span>
             </div>
             <div>
-              <span className="block text-5xl font-black leading-none tracking-[-0.02em]">∞</span>
-              <span className="mono mt-1 block text-[10px] font-black uppercase opacity-30">Community Driven</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <Sparkles size={22} />
+              </span>
+              <span className="mt-4 block text-[15px] font-semibold">
+                Curated, not crowded
+              </span>
+              <span className="mt-1 block text-[13px] leading-relaxed text-ink/50">
+                A tight archive, edited by people who care.
+              </span>
             </div>
           </div>
         </div>
@@ -65,7 +92,7 @@ export default function About() {
               size="lg"
               className="rounded-full"
             >
-              Join the Collective
+              Join the community
             </Button>
           </div>
         </div>

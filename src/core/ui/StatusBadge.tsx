@@ -11,11 +11,11 @@ export function StatusBadge({ status }: { status?: string }) {
   return (
     <span
       className={cn(
-        "self-start whitespace-nowrap rounded border border-edge px-2 py-1 font-mono text-[9px] font-black uppercase tracking-[0.05em]",
+        "self-start whitespace-nowrap rounded-full border border-edge px-2.5 py-1 text-[10px] font-semibold tracking-[0.06em] uppercase",
         statusStyles[key] ?? "border-edge text-ink/40",
       )}
     >
-      {status ?? "ARCHIVED"}
+      {status ?? "Archived"}
     </span>
   );
 }

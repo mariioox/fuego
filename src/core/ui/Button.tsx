@@ -9,7 +9,7 @@ interface ButtonProps
 }
 
 const base =
-  "inline-flex select-none cursor-pointer items-center justify-center gap-2.5 font-black uppercase tracking-[0.06em] transition-[color,transform] duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:translate-y-px";
+  "inline-flex select-none cursor-pointer items-center justify-center gap-2.5 font-semibold tracking-[-0.01em] transition-[color,background-color,border-color,transform] duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:translate-y-px";
 
 const variants = {
   solid: "bg-ink text-bg hover:text-brand",
@@ -18,9 +18,9 @@ const variants = {
 };
 
 const sizes = {
-  sm: "min-h-[36px] px-4 text-[9px]",
-  md: "min-h-[46px] px-6 text-[11px]",
-  lg: "min-h-[52px] px-8 text-xs",
+  sm: "min-h-[38px] px-5 text-[12px]",
+  md: "min-h-[46px] px-6 text-[13px]",
+  lg: "min-h-[52px] px-8 text-[14px]",
 };
 
 export function Button({

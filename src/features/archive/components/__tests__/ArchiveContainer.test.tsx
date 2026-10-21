@@ -58,7 +58,7 @@ describe("ArchiveContainer", () => {
     vi.useFakeTimers();
     renderWithCart(<ArchiveContainer />);
 
-    const searchInput = screen.getByPlaceholderText("SEARCH_BY_MODEL...");
+    const searchInput = screen.getByPlaceholderText("Search by model or SKU");
     fireEvent.change(searchInput, { target: { value: "Nike" } });
 
     act(() => {
@@ -75,7 +75,7 @@ describe("ArchiveContainer", () => {
   it("filters by brand", () => {
     renderWithCart(<ArchiveContainer />);
 
-    const brandSelect = screen.getByDisplayValue("BRAND: ALL");
+    const brandSelect = screen.getByDisplayValue("All brands");
     fireEvent.change(brandSelect, { target: { value: "JORDAN" } });
 
     expect(screen.queryByText("Nike Air Force 1")).not.toBeInTheDocument();
@@ -85,13 +85,13 @@ describe("ArchiveContainer", () => {
 
   it("shows page title", () => {
     renderWithCart(<ArchiveContainer />);
-    expect(screen.getByText("FULL ARCHIVE.")).toBeInTheDocument();
+    expect(screen.getByText("The full archive")).toBeInTheDocument();
   });
 
   it("renders filter controls", () => {
     renderWithCart(<ArchiveContainer />);
-    expect(screen.getByPlaceholderText("SEARCH_BY_MODEL...")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("BRAND: ALL")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("SORT: NEWEST")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Search by model or SKU")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("Newest first")).toBeInTheDocument();
   });
 });

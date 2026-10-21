@@ -20,9 +20,11 @@ export default class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         this.props.fallback ?? (
-          <div style={{ padding: "4rem 2rem", textAlign: "center", fontFamily: "monospace" }}>
-            <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>SYSTEM_ERROR</h2>
-            <p style={{ opacity: 0.6 }}>Something went wrong. Please refresh the page.</p>
+          <div style={{ padding: "4rem 2rem", textAlign: "center" }}>
+            <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
+              Something went wrong
+            </h2>
+            <p style={{ opacity: 0.6 }}>Please refresh the page and try again.</p>
           </div>
         )
       );
