@@ -7,11 +7,15 @@ interface ContainerProps {
   children: ReactNode;
 }
 
-export default function Container({ as: Tag = "div", className, children }: ContainerProps) {
+export default function Container({
+  as: Tag = "div",
+  className,
+  children,
+}: ContainerProps) {
   return (
     <Tag
       className={cn(
-        "mx-auto w-full max-w-[1440px] px-[var(--gutter)]",
+        "mx-auto w-full max-w-[1240px] px-[clamp(16px,3vw,32px)]",
         className,
       )}
     >

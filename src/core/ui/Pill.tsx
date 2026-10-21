@@ -7,8 +7,8 @@ interface PillProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Small filter chip. Inactive chips are frosted glass, the active one is
- * filled with the brand colour.
+ * Filter chip used for the brand rows. Inactive chips are frosted glass, the
+ * active one is filled with the current text colour.
  */
 export default function Pill({
   active = false,
@@ -21,10 +21,10 @@ export default function Pill({
     <button
       type={type}
       className={cn(
-        "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-4 text-[11px] font-semibold tracking-wide transition-colors duration-200",
+        "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-control border px-[18px] text-[14px] font-medium backdrop-blur-[10px] transition-[background-color,border-color,color] duration-300 ease-soft",
         active
-          ? "border-transparent bg-brand text-white"
-          : "border-glass-edge bg-glass text-ink backdrop-blur-[10px] hover:border-brand hover:text-brand",
+          ? "border-text bg-text text-bg"
+          : "border-line bg-glass text-ink hover:border-text",
         className,
       )}
       {...props}

@@ -9,11 +9,11 @@ export default function MobileCatalogueButton() {
   return (
     <Link
       to="/catalogue"
-      className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-0 right-0 z-[90] mx-auto flex h-11 w-fit items-center justify-center gap-2 rounded-full bg-brand px-[22px] text-[13px] font-semibold text-white no-underline shadow-[0_8px_24px_rgba(255,94,0,0.28)] transition-transform duration-200 hover:-translate-y-0.5 active:scale-95 min-[769px]:hidden"
-      aria-label="Browse the catalogue"
+      className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-1/2 z-[90] mx-auto inline-flex h-12 w-fit -translate-x-1/2 items-center justify-center gap-2 rounded-control border border-glass-line bg-glass px-6 text-[14px] font-medium text-ink no-underline backdrop-blur-[16px] transition-colors duration-300 ease-soft hover:border-text min-[769px]:hidden"
+      aria-label="Shop all sneakers"
     >
       <LayoutGrid size={16} />
-      <span>Catalogue</span>
+      <span>Shop all</span>
     </Link>
   );
 }

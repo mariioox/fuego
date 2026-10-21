@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { subscribeEmail } from "../../../core/api/subscribe";
 import Section from "../../../core/ui/Section";
+import { revealStyle, useReveal } from "../../../core/hooks/useReveal";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "IDLE" | "LOADING" | "SUCCESS" | "ERROR"
   >("IDLE");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [ref, shown] = useReveal<HTMLDivElement>();
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,56 +21,71 @@ export default function Newsletter() {
       setEmail("");
     } else {
       setStatus("ERROR");
-      setErrorMessage(result.error || "Subscription failed — please try again.");
     }
   };
 
   return (
-    <Section id="newsletter" className="bg-ink text-bg">
-      <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-        <div>
-          <h2 className="mb-8 text-[clamp(2.2rem,5vw,3.6rem)] font-bold leading-[1] tracking-[-0.04em]">
-            Never miss a release
+    <Section id="newsletter">
+      <div
+        ref={ref}
+        style={revealStyle(shown)}
+        className="flex flex-wrap items-center justify-between gap-10 rounded-surface bg-panel p-[clamp(28px,5vw,64px)]"
+      >
+        <div className="max-w-[520px]">
+          <span className="inline-flex items-center gap-2 text-[13px] text-[#F4F4F2]">
+            <span className="h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true" />
+            Giveaway
+          </span>
+          <h2 className="mt-4 font-display text-[clamp(36px,4.4vw,60px)] font-semibold leading-[1] tracking-[-0.04em] text-[#F4F4F2]">
+            Win a new pair of
+            <br />
+            Air Force 1s.
           </h2>
-          <p className="max-w-[450px] text-[14px] leading-relaxed opacity-70">
-            Join the list for early access to new archive additions, promos and
-            giveaways.
+          <p className="mt-5 max-w-[440px] text-[16px] leading-[1.55] text-[#A1A1A8]">
+            Join the list for early drops, restocks and the giveaway draw.
           </p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubscribe}>
-          <div className="flex flex-col gap-[10px] min-[600px]:flex-row">
+        <form
+          className="w-full max-w-[480px] flex flex-col gap-3"
+          onSubmit={handleSubscribe}
+        >
+          <label
+            htmlFor="newsletter-email"
+            className="text-[13px] text-[#A1A1A8]"
+          >
+            Email address
+          </label>
+          <div className="flex flex-col gap-2.5 min-[480px]:flex-row">
             <input
+              id="newsletter-email"
               type="email"
-              placeholder={
-                status === "SUCCESS" ? "You're subscribed" : "Email address"
-              }
-              className="flex-1 border border-white/20 bg-transparent p-[18px] text-[13px] text-white outline-none transition-colors duration-200 focus:border-brand placeholder:text-white/40"
+              placeholder="you@example.com"
+              className="h-[52px] min-w-0 flex-1 rounded-control border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.06)] px-4 text-[15px] text-[#F4F4F2] outline-none transition-colors duration-300 ease-soft placeholder:text-[rgba(244,244,242,0.45)] focus-visible:outline-[#F4F4F2]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "LOADING" || status === "SUCCESS"}
-              aria-label="Email address"
               required
             />
             <button
               type="submit"
-              className="cursor-pointer border-none rounded-full bg-brand px-10 py-[16px] text-[13px] font-semibold text-white transition-colors duration-200 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-[52px] cursor-pointer rounded-control border-none bg-orange px-7 text-[15px] font-semibold text-[#0B0B0C] transition-[filter,transform] duration-300 ease-soft hover:brightness-105 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-[#F4F4F2]"
               disabled={status === "LOADING" || status === "SUCCESS"}
             >
-              {status === "LOADING" ? "Sending…" : "Subscribe"}
+              {status === "LOADING" ? "Joining…" : "Join the list"}
             </button>
           </div>
-          <div
-            className="text-[12px] opacity-50"
+          <p
+            className="min-h-[20px] text-[13px] text-[#A1A1A8]"
             role="status"
             aria-live="polite"
           >
             {status === "SUCCESS"
-              ? "You're on the list — check your inbox."
+              ? "You're in. Watch your inbox for the next drop."
               : status === "ERROR"
-                ? errorMessage
-                : "No spam. One email when something worth having drops."}
-          </div>
+                ? "Something went wrong. Please try again."
+                : ""}
+          </p>
         </form>
       </div>
     </Section>

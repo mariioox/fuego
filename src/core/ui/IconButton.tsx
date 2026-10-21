@@ -9,7 +9,7 @@ interface IconButtonProps
 }
 
 /**
- * Round icon control used across the navbar and cards.
+ * Square icon control used across the navbar and cards.
  */
 export default function IconButton({
   label,
@@ -22,7 +22,7 @@ export default function IconButton({
   ...props
 }: IconButtonProps) {
   const base =
-    "inline-flex h-9 w-9 items-center justify-center rounded-full text-ink/70 transition-colors duration-200 hover:bg-card hover:text-brand";
+    "inline-flex h-12 w-12 items-center justify-center rounded-control text-ink transition-colors duration-300 ease-soft hover:bg-chip";
 
   if (href !== undefined) {
     return (

@@ -11,19 +11,24 @@ interface Props {
 
 export default function MainLayout({ children, theme, toggleTheme }: Props) {
   return (
-    <div className="relative isolate flex min-h-screen flex-col overflow-x-clip pb-[72px] before:fixed before:inset-0 before:-z-10 before:pointer-events-none before:bg-[radial-gradient(100%_55%_at_50%_0%,var(--glow),transparent_65%)] md:pb-0">
+    <div className="relative isolate flex min-h-screen flex-col pb-[76px] max-md:pb-0">
       <a
         href="#main-content"
-        className="absolute left-0 top-[-100%] z-[10001] bg-brand px-6 py-3 text-sm font-semibold text-white no-underline focus:top-0"
+        className="absolute left-0 top-[-100%] z-[10001] rounded-control bg-ink px-6 py-3 text-sm font-semibold text-bg no-underline focus:top-0"
       >
         Skip to content
       </a>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <main id="main-content" className="flex-grow">{children}</main>
-      <MobileCatalogueButton />
-      <div className="border-t border-edge">
-        <Footer />
+
+      <div className="sticky top-0 z-[60] pt-3">
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
       </div>
+
+      <main id="main-content" className="flex-grow">
+        {children}
+      </main>
+
+      <MobileCatalogueButton />
+      <Footer />
     </div>
   );
 }

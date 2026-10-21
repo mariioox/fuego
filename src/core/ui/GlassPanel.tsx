@@ -8,8 +8,8 @@ interface GlassPanelProps {
 }
 
 /**
- * Translucent frosted surface used for the navbar, filter chips and cards.
- * Values live in the design tokens (`--glass-bg`, `--glass-edge`,
+ * Translucent frosted surface used for the navbar, toolbar and floating cards.
+ * Values live in the design tokens (`--glass`, `--glass-line`,
  * `--glass-shadow`) so light and dark stay in sync.
  */
 export default function GlassPanel({
@@ -18,13 +18,6 @@ export default function GlassPanel({
   children,
 }: GlassPanelProps) {
   return (
-    <Tag
-      className={cn(
-        "rounded-2xl border border-glass-edge bg-glass shadow-glass backdrop-blur-[10px]",
-        className,
-      )}
-    >
-      {children}
-    </Tag>
+    <Tag className={cn("rounded-surface glass", className)}>{children}</Tag>
   );
 }

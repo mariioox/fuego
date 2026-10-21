@@ -1,13 +1,21 @@
 import { memo, useState, useEffect, useRef, useCallback } from "react";
-import { ArrowUpRight, ShoppingBag } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import type { Sneaker } from "../types/sneaker";
 import type { SneakerSize } from "../../cart/types/cart";
 import { SNEAKER_SIZES } from "../data/sizes";
 import { useCart } from "../../cart/hooks/useCart";
 import { cn } from "../../../core/utils/cn";
+import { formatBrand } from "../../../core/utils/format";
+import { revealStyle, useReveal } from "../../../core/hooks/useReveal";
 import SpecimenModal from "./SpecimenModal";
 
-function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
+function SneakerCard({
+  sneaker,
+  delay = 0,
+}: {
+  sneaker: Sneaker;
+  delay?: number;
+}) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
@@ -15,6 +23,7 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
   const [addStatus, setAddStatus] = useState<"IDLE" | "ADDED">("IDLE");
   const quickRef = useRef<HTMLDivElement>(null);
   const { addItem } = useCart();
+  const [ref, shown] = useReveal<HTMLElement>();
 
   const closeQuickAdd = useCallback(() => {
     setQuickAddOpen(false);
@@ -57,7 +66,7 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
     e.stopPropagation();
     addItem(sneaker, quickSize);
     setAddStatus("ADDED");
-    window.setTimeout(() => setAddStatus("IDLE"), 1200);
+    window.setTimeout(() => setAddStatus("IDLE"), 1400);
     setQuickAddOpen(false);
   };
 
@@ -67,25 +76,26 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
     }
   }, [quickAddOpen]);
 
-  const inHand = sneaker.availability === "IN_HAND";
+  const added = addStatus === "ADDED";
 
   return (
     <>
       <article
-        className="group relative flex w-full min-w-0 cursor-pointer flex-col overflow-hidden rounded-2xl border border-glass-edge bg-glass shadow-glass backdrop-blur-[10px] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_24px_48px_rgba(0,0,0,0.08)]"
+        ref={ref}
+        style={revealStyle(shown, delay)}
+        className="group flex w-full min-w-0 cursor-pointer flex-col gap-3.5"
         onClick={() => setShowModal(true)}
       >
-        <div className="relative m-2.5 aspect-square overflow-hidden rounded-xl bg-[radial-gradient(68%_52%_at_50%_56%,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0)_72%)] dark:bg-[radial-gradient(68%_52%_at_50%_56%,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0)_72%)]">
+        <div className="relative aspect-square w-full overflow-hidden rounded-surface bg-tile">
           {!isLoaded && (
             <div className="absolute inset-5 animate-shimmer rounded-[8%] bg-[linear-gradient(90deg,rgba(128,128,128,0.06)_25%,rgba(128,128,128,0.12)_50%,rgba(128,128,128,0.06)_75%)] bg-[length:200%_100%]" />
           )}
 
-          <span className="pointer-events-none absolute left-3 top-3 z-[5] text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand">
-            {sneaker.brand}
-          </span>
-
-          {/* Soft contact shadow so the cut-out shoe sits on the glass */}
-          <div className="pointer-events-none absolute bottom-[16%] left-1/2 z-[1] h-[7%] w-[52%] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.22)_0%,rgba(0,0,0,0)_70%)] blur-[4px] transition-transform duration-500 group-hover:scale-110" />
+          {sneaker.status === "SOLD_OUT" && (
+            <span className="absolute left-3 top-3 z-[5] rounded-control border border-white/80 bg-white/55 px-2.5 py-1 text-[12px] font-medium text-[#0B0B0C] backdrop-blur-[10px]">
+              Sold out
+            </span>
+          )}
 
           <img
             src={sneaker.image}
@@ -94,105 +104,82 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             decoding="async"
             onLoad={() => setIsLoaded(true)}
             className={cn(
-              "relative z-[2] h-full w-full object-contain p-3.5 transition-[transform,opacity] duration-500 group-hover:scale-105",
+              "h-full w-full object-contain p-[10%] mix-blend-multiply transition-[transform,opacity] duration-700 ease-soft group-hover:scale-[1.05] group-hover:-translate-y-1 group-hover:-rotate-2",
               isLoaded ? "opacity-100" : "opacity-0",
             )}
           />
 
           <button
             type="button"
-            className="absolute bottom-3.5 right-3.5 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-edge bg-card text-ink shadow-[0_4px_14px_rgba(0,0,0,0.08)] transition-[background-color,color,border-color,transform] duration-200 hover:scale-105 hover:border-ink hover:bg-ink hover:text-bg max-sm:h-9 max-sm:w-9 max-sm:bottom-3 max-sm:right-3"
-            aria-label={`Quick add ${sneaker.name} to cart`}
+            className={cn(
+              "absolute bottom-3 right-3 z-10 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-control border transition-[background-color,color,border-color,transform] duration-300 ease-soft group-hover:scale-[1.06]",
+              added
+                ? "border-transparent bg-[#0B0B0C] text-white"
+                : "border-white/80 bg-white/55 text-[#0B0B0C] backdrop-blur-[16px]",
+            )}
+            aria-label={
+              added
+                ? `${sneaker.name} added to bag`
+                : `Quick add ${sneaker.name} to bag`
+            }
             aria-expanded={quickAddOpen}
             aria-controls={quickAddId}
             aria-haspopup="dialog"
             onClick={handleQuickAdd}
           >
-            <ShoppingBag size={14} />
+            {added ? <Check size={18} /> : <Plus size={18} />}
           </button>
 
-          <button
-            type="button"
-            className="absolute bottom-3 left-3 z-[6] inline-flex translate-y-1 cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-black/55 px-2.5 py-1.5 text-[10px] font-bold tracking-wide text-white opacity-0 backdrop-blur-[6px] transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-            aria-haspopup="dialog"
-            aria-label={`View ${sneaker.name} details`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowModal(true);
-            }}
-          >
-            View details
-            <ArrowUpRight size={14} />
-          </button>
+          {quickAddOpen && (
+            <div
+              ref={quickRef}
+              id={quickAddId}
+              className="absolute inset-0 z-20 flex flex-col gap-3 overflow-y-auto rounded-surface bg-card p-4"
+              role="dialog"
+              aria-label={`Quick add ${sneaker.name}`}
+              tabIndex={-1}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="text-[13px] text-muted">Select size</span>
+              <div className="grid grid-cols-4 gap-1.5">
+                {SNEAKER_SIZES.map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    className={cn(
+                      "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line bg-transparent text-[13px] font-medium text-ink transition-colors duration-300 ease-soft hover:border-text",
+                      quickSize === size && "border-text bg-text text-bg",
+                    )}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setQuickSize(size);
+                    }}
+                    aria-label={`Size ${size}`}
+                    aria-pressed={quickSize === size}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="mt-auto h-11 w-full cursor-pointer rounded-control border-none bg-btn text-[14px] font-medium text-btn-ink transition-transform duration-300 ease-soft active:translate-y-px"
+                onClick={handleQuickAddSubmit}
+              >
+                {added ? "Added to bag" : "Add to bag"}
+              </button>
+            </div>
+          )}
         </div>
 
-        {quickAddOpen && (
-          <div
-            ref={quickRef}
-            id={quickAddId}
-            className="absolute inset-0 z-20 flex flex-col gap-3 overflow-y-auto border border-edge bg-bg p-3.5"
-            role="dialog"
-            aria-label={`Quick add ${sneaker.name}`}
-            tabIndex={-1}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="text-[10px] font-bold uppercase tracking-[0.1em] opacity-50">
-              Select size
-            </div>
-            <div className="grid grid-cols-6 gap-1.5">
-              {SNEAKER_SIZES.map((size) => (
-                <button
-                  key={size}
-                  type="button"
-                  className={cn(
-                    "flex h-[34px] cursor-pointer items-center justify-center border border-edge bg-transparent text-[11px] font-semibold text-ink transition-colors duration-200 hover:border-brand",
-                    quickSize === size && "border-ink bg-ink text-bg hover:border-ink",
-                  )}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setQuickSize(size);
-                  }}
-                  aria-label={`Size ${size}`}
-                  aria-pressed={quickSize === size}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-            <button
-              type="button"
-              className="mt-auto h-10 w-full cursor-pointer border-none bg-ink text-[11px] font-bold uppercase tracking-[0.08em] text-bg transition-colors duration-200 hover:text-brand"
-              onClick={handleQuickAddSubmit}
-            >
-              {addStatus === "ADDED" ? "Added to bag" : "Add to bag"}
-            </button>
-          </div>
-        )}
-
-        <div className="border-t border-edge px-4 pb-4 pt-3.5 max-sm:px-3.5 max-sm:pb-3.5 max-sm:pt-3">
-          <h3 className="mb-2 min-h-[3.15rem] text-[1.05rem] font-semibold leading-[1.25] text-ink max-sm:min-h-[2.85rem] max-sm:text-[0.95rem] max-sm:leading-[1.2]">
+        <div className="flex flex-col gap-1 px-1">
+          <span className="text-[13px] text-muted">{formatBrand(sneaker.brand)}</span>
+          <h3 className="text-[15px] font-medium leading-[1.35] text-ink">
             {sneaker.name}
           </h3>
-          <div className="flex items-end justify-between gap-3 border-t border-edge pt-2">
-            <span
-              className={cn(
-                "truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-ink/45",
-                inHand && "text-brand",
-              )}
-              title={
-                inHand
-                  ? `In stock, EU ${sneaker.inHandSizes?.join("/") ?? ""}`
-                  : "Pre-order"
-              }
-            >
-              {inHand
-                ? `In stock · ${sneaker.inHandSizes?.join("/") ?? "—"}`
-                : "Pre-order"}
-            </span>
-            <div className="ml-auto shrink-0 whitespace-nowrap text-[0.85rem] font-semibold text-ink max-sm:text-[0.8rem]">
-              {sneaker.priceFormatted}
-            </div>
-          </div>
+          <span className="text-[15px] font-semibold text-ink">
+            {sneaker.priceFormatted}
+          </span>
         </div>
       </article>
 

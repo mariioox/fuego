@@ -29,7 +29,7 @@ const breadcrumbsData = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Full Archive",
+      name: "Shop all",
       item: "https://fuego-heat.vercel.app/catalogue",
     },
   ],
@@ -39,7 +39,7 @@ export default function Catalogue() {
   return (
     <div className="catalogue-page">
       <SEO
-        title="Buy Sneakers Nigeria — Nike Jordan Adidas New Balance Archive"
+        title="Buy sneakers in Nigeria — Nike, Jordan, Adidas, New Balance"
         description="Browse the full Fuego sneaker archive. Buy Nike, Jordan, Adidas, New Balance & Puma sneakers in Nigeria. Filter by brand, color, price. Verified authentic, Lagos-based."
         url="https://fuego-heat.vercel.app/catalogue"
       />

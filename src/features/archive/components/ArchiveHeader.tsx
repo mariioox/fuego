@@ -1,5 +1,6 @@
-import { ChevronDown, Search, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "../../../core/utils/cn";
 import { SWATCH_COLORS } from "../data/swatchColors";
 import Pill from "../../../core/ui/Pill";
@@ -11,8 +12,11 @@ interface Props {
   setBrandFilter: (val: string) => void;
   colorFilter: string;
   setColorFilter: (val: string) => void;
+  stockOnly: boolean;
+  setStockOnly: (val: boolean) => void;
   setSortOrder: (val: string) => void;
   sortOrder: string;
+  count: number;
 }
 
 const COLORS = [
@@ -30,6 +34,19 @@ const COLORS = [
   "MULTI",
 ];
 
+const BRAND_FILTERS = [
+  { value: "ALL", label: "All" },
+  { value: "NIKE", label: "Nike" },
+  { value: "JORDAN", label: "Jordan" },
+  { value: "ADIDAS", label: "adidas" },
+  { value: "NEW BALANCE", label: "New Balance" },
+  { value: "PUMA", label: "Puma" },
+  { value: "TIMBERLAND", label: "Timberland" },
+  { value: "ASICS", label: "ASICS" },
+  { value: "CONVERSE", label: "Converse" },
+  { value: "VANS", label: "Vans" },
+];
+
 export default function ArchiveHeader({
   searchTerm,
   brandFilter,
@@ -37,139 +54,203 @@ export default function ArchiveHeader({
   setBrandFilter,
   colorFilter,
   setColorFilter,
+  stockOnly,
+  setStockOnly,
   setSortOrder,
   sortOrder,
+  count,
 }: Props) {
-  const [filtersOpen, setFiltersOpen] = useState(
-    () => typeof window === "undefined" || window.innerWidth > 768,
-  );
+  const [moreOpen, setMoreOpen] = useState(false);
+  const popRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!moreOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (popRef.current && !popRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMoreOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [moreOpen]);
 
   return (
-    <header className="mb-12 mt-0 flex flex-col gap-6 border-b border-edge pb-8 lg:mb-16">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <span className="text-[11px] font-semibold tracking-[0.18em] text-brand uppercase">
-            The collection
-          </span>
-          <h1 className="mt-6 text-[clamp(2.6rem,5vw,3.6rem)] font-bold leading-[0.95] tracking-[-0.035em]">
-            The full archive
-          </h1>
+    <header>
+      <nav
+        aria-label="Breadcrumb"
+        className="text-[13px] text-muted animate-[riseIn_0.8s_ease-soft_both]"
+      >
+        <Link
+          to="/"
+          className="text-muted no-underline transition-colors duration-300 ease-soft hover:text-ink"
+        >
+          Home
+        </Link>
+        <span className="mx-1.5" aria-hidden="true">
+          /
+        </span>
+        <span aria-current="page" className="text-ink">
+          Shop all
+        </span>
+      </nav>
+
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-4 animate-[riseIn_0.8s_ease-soft_both]" style={{ animationDelay: "80ms" }}>
+        <h1 className="font-display text-[clamp(44px,5.6vw,80px)] font-semibold leading-[0.98] tracking-[-0.045em] text-ink">
+          The archive
+        </h1>
+        <p className="text-[15px] text-muted">
+          {count} {count === 1 ? "pair" : "pairs"}
+        </p>
+      </div>
+
+      <div
+        className="mt-8 flex flex-wrap items-center gap-2 rounded-nav glass p-2 animate-[riseIn_0.8s_ease-soft_both]"
+        style={{ animationDelay: "160ms" }}
+      >
+        <label className="flex h-11 min-w-0 flex-[1_1_260px] items-center gap-2 rounded-control border border-line bg-card px-3 transition-colors duration-300 ease-soft focus-within:border-text">
+          <span className="sr-only">Search the archive</span>
+          <Search size={16} className="shrink-0 text-muted" aria-hidden="true" />
+          <input
+            type="text"
+            placeholder="Search Samba, Jordan 4, 9060…"
+            className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-ink outline-none placeholder:text-muted"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {searchTerm && (
+            <button
+              type="button"
+              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-muted transition-colors duration-300 ease-soft hover:text-ink"
+              onClick={() => setSearchTerm("")}
+              aria-label="Clear search"
+            >
+              <X size={14} />
+            </button>
+          )}
+        </label>
+
+        <div className="relative flex h-11 items-center rounded-control border border-line bg-card pr-8">
+          <label className="sr-only" htmlFor="archive-sort">
+            Sort by
+          </label>
+          <select
+            id="archive-sort"
+            className="h-full cursor-pointer appearance-none rounded-control bg-transparent pl-4 text-[14px] font-medium text-ink outline-none"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="FEATURED">Sort: Featured</option>
+            <option value="PRICE_ASC">Price: low to high</option>
+            <option value="PRICE_DESC">Price: high to low</option>
+          </select>
+          <ChevronDown
+            size={15}
+            className="pointer-events-none absolute right-3 text-muted"
+            aria-hidden="true"
+          />
         </div>
 
-        <div className="flex w-full flex-col items-end gap-4 lg:max-w-[680px]">
-          <div className="relative flex h-11 w-full items-center rounded-full border border-edge bg-card transition-colors duration-200 focus-within:border-brand">
-            <Search size={15} className="absolute left-4 opacity-30" />
-            <input
-              type="text"
-              placeholder="Search by model or SKU"
-              className="w-full bg-transparent pl-11 pr-10 text-[13px] outline-none placeholder:text-ink/40"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              aria-label="Search by model name or SKU"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                className="absolute right-3 flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent text-ink opacity-50 transition-opacity hover:opacity-100"
-                onClick={() => setSearchTerm("")}
-                aria-label="Clear search"
-              >
-                <X size={14} />
-              </button>
-            )}
-          </div>
-
+        <div ref={popRef} className="relative">
           <button
             type="button"
-            className="hidden h-[42px] w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-edge bg-card text-[12px] font-semibold text-ink max-md:flex"
-            onClick={() => setFiltersOpen((open) => !open)}
-            aria-expanded={filtersOpen}
-            aria-controls="archive-filter-row"
-          >
-            Filters
-            <ChevronDown
-              size={14}
+            onClick={() => setMoreOpen((open) => !open)}
+            aria-expanded={moreOpen}
+            aria-haspopup="dialog"
               className={cn(
-                "transition-transform",
-                filtersOpen && "rotate-180",
+                "inline-flex h-11 cursor-pointer items-center gap-2 rounded-control border px-4 text-[14px] font-medium transition-colors duration-300 ease-soft",
+                colorFilter !== "ALL" || stockOnly
+                  ? "border-text bg-text text-bg"
+                  : "border-line bg-card text-ink hover:border-text",
               )}
-            />
-          </button>
-
-          <div
-            id="archive-filter-row"
-            className={cn(
-              "flex flex-wrap items-center gap-2.5",
-              !filtersOpen && "max-md:hidden",
-            )}
-          >
-            <select
-              className="h-10 cursor-pointer rounded-full border border-edge bg-card px-4 text-[12px] font-medium text-ink outline-none transition-colors duration-200 hover:border-brand"
-              value={brandFilter}
-              onChange={(e) => setBrandFilter(e.target.value)}
-              aria-label="Filter by brand"
             >
-              <option value="ALL">All brands</option>
-              <option value="IN_HAND">In stock now</option>
-              <option value="NIKE">Nike</option>
-              <option value="JORDAN">Jordan</option>
-              <option value="ADIDAS">Adidas</option>
-              <option value="ASICS">Asics</option>
-              <option value="PUMA">Puma</option>
-              <option value="VANS">Vans</option>
-              <option value="CONVERSE">Converse</option>
-              <option value="NEW BALANCE">New Balance</option>
-              <option value="TIMBERLAND">Timberland</option>
-            </select>
+              <SlidersHorizontal size={15} aria-hidden="true" />
+              More filters
+            </button>
 
-            <select
-              className="h-10 cursor-pointer rounded-full border border-edge bg-card px-4 text-[12px] font-medium text-ink outline-none transition-colors duration-200 hover:border-brand"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-              aria-label="Sort sneakers"
+          {moreOpen && (
+            <div
+              className="absolute right-0 top-full z-30 mt-2 w-[268px] rounded-surface glass p-4 max-sm:fixed max-sm:inset-x-4 max-sm:bottom-4 max-sm:top-auto max-sm:mt-0 max-sm:w-auto"
+              role="dialog"
+              aria-label="More filters"
             >
-              <option value="NEWEST">Newest first</option>
-              <option value="PRICE_ASC">Price: low to high</option>
-              <option value="PRICE_DESC">Price: high to low</option>
-            </select>
+              <button
+                type="button"
+                onClick={() => setStockOnly(!stockOnly)}
+                aria-pressed={stockOnly}
+                className={cn(
+                  "flex h-10 w-full cursor-pointer items-center justify-between rounded-control border px-3 text-[14px] font-medium transition-colors duration-300 ease-soft",
+                  stockOnly
+                    ? "border-text bg-text text-bg"
+                    : "border-line bg-transparent text-ink hover:border-text",
+                )}
+              >
+                In stock now
+                <span
+                  className={cn(
+                    "h-1.5 w-1.5 rounded-full",
+                    stockOnly ? "bg-orange" : "bg-muted",
+                  )}
+                  aria-hidden="true"
+                />
+              </button>
 
-            <div className="flex w-full flex-col items-start">
-              <span className="mb-2 text-[10px] font-semibold tracking-[0.14em] text-ink/40 uppercase">
-                Colour
-              </span>
-
-              <div className="flex flex-wrap items-center gap-1.5">
-                <Pill
-                  active={colorFilter === "ALL"}
-                  onClick={() => setColorFilter("ALL")}
+              <span className="mt-4 block text-[13px] text-muted">Colour</span>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="All colours"
                   aria-pressed={colorFilter === "ALL"}
-                  className="h-8 px-3.5 text-[11px]"
-                >
-                  All
-                </Pill>
-
+                  onClick={() => setColorFilter("ALL")}
+                  className={cn(
+                    "h-7 w-7 cursor-pointer rounded-full border bg-transparent transition-all duration-300 ease-soft",
+                    colorFilter === "ALL"
+                      ? "border-text ring-2 ring-text ring-offset-2 ring-offset-[var(--card)]"
+                      : "border-line",
+                  )}
+                />
                 {COLORS.map((color) => (
                   <button
                     key={color}
                     type="button"
                     aria-label={`Filter by ${color.toLowerCase()}`}
                     aria-pressed={colorFilter === color}
-                    className={cn(
-                      "flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-edge bg-card transition-colors duration-200 hover:border-ink",
-                      colorFilter === color && "border-brand",
-                    )}
                     onClick={() => setColorFilter(color)}
-                  >
-                    <span
-                      className="h-[16px] w-[16px] rounded-full border border-black/10"
-                      style={{ background: SWATCH_COLORS[color] }}
-                    />
-                  </button>
+                    className={cn(
+                      "h-7 w-7 cursor-pointer rounded-full border transition-all duration-300 ease-soft",
+                      colorFilter === color
+                        ? "border-text ring-2 ring-text ring-offset-2 ring-offset-[var(--card)]"
+                        : "border-line",
+                    )}
+                    style={{ background: SWATCH_COLORS[color] }}
+                  />
                 ))}
               </div>
             </div>
-          </div>
+          )}
         </div>
+      </div>
+
+      <div
+        className="mt-5 mb-8 flex flex-wrap items-center gap-2.5 animate-[riseIn_0.8s_ease-soft_both]"
+        style={{ animationDelay: "220ms" }}
+      >
+        {BRAND_FILTERS.map((filter) => (
+          <Pill
+            key={filter.value}
+            active={brandFilter === filter.value}
+            aria-pressed={brandFilter === filter.value}
+            onClick={() => setBrandFilter(filter.value)}
+          >
+            {filter.label}
+          </Pill>
+        ))}
       </div>
     </header>
   );

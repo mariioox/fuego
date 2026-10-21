@@ -9,18 +9,17 @@ interface ButtonProps
 }
 
 const base =
-  "inline-flex select-none cursor-pointer items-center justify-center gap-2.5 font-semibold tracking-[-0.01em] transition-[color,background-color,border-color,transform] duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:translate-y-px";
+  "inline-flex select-none cursor-pointer items-center justify-center gap-2 rounded-control font-medium tracking-[-0.01em] transition-[color,background-color,border-color,transform] duration-300 ease-soft disabled:cursor-not-allowed disabled:opacity-50 active:translate-y-px";
 
 const variants = {
-  solid: "bg-ink text-bg hover:text-brand",
-  outline:
-    "border border-edge bg-transparent text-ink hover:border-brand hover:text-brand",
+  solid: "bg-btn text-btn-ink",
+  outline: "border border-line bg-card text-ink",
 };
 
 const sizes = {
-  sm: "min-h-[38px] px-5 text-[12px]",
-  md: "min-h-[46px] px-6 text-[13px]",
-  lg: "min-h-[52px] px-8 text-[14px]",
+  sm: "min-h-[40px] px-5 text-[13px]",
+  md: "min-h-[46px] px-6 text-[14px]",
+  lg: "min-h-[52px] px-7 text-[15px]",
 };
 
 export function Button({

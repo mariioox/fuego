@@ -15,14 +15,17 @@ export default function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("flex flex-wrap items-end justify-between gap-6", className)}>
+    <div
+      className={cn(
+        "flex flex-wrap items-end justify-between gap-6",
+        className,
+      )}
+    >
       <div>
         {eyebrow && (
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-            {eyebrow}
-          </span>
+          <span className="text-[13px] font-medium text-muted">{eyebrow}</span>
         )}
-        <h2 className="mt-6 mb-4 text-[clamp(1.9rem,4vw,2.9rem)] font-bold leading-[1.05] tracking-[-0.035em]">
+        <h2 className="mt-3 font-display text-[clamp(32px,3.6vw,48px)] font-semibold leading-none tracking-[-0.035em] text-ink">
           {title}
         </h2>
       </div>

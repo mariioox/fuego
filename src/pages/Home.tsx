@@ -1,7 +1,9 @@
 // src/pages/Home.tsx
 import SEO from "../core/components/SEO";
 import Hero from "../features/home/components/Hero";
-import ShopIcons from "../features/home/components/ShopIcons";
+import TrustCards from "../features/home/components/TrustCards";
+import BrandRow from "../features/home/components/BrandRow";
+import NewIn from "../features/home/components/NewIn";
 import About from "../features/home/components/About";
 import Newsletter from "../features/home/components/Newsletter";
 
@@ -117,15 +119,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsData) }}
       />
       <Hero />
-      <div className="border-t border-edge">
-        <ShopIcons />
-      </div>
-      <div className="border-t border-edge">
-        <About />
-      </div>
-      <div className="border-t border-edge">
-        <Newsletter />
-      </div>
+      <TrustCards />
+      <BrandRow />
+      <NewIn />
+      <About />
+      <Newsletter />
     </>
   );
 }

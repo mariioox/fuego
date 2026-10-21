@@ -26,6 +26,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     status: "AVAILABLE",
   },
   {
+    // TODO: duplicate SKU, confirm correct price
     sku: "TB010073-009",
     name: "Timberland 6' Premium Waterproof Boot Black",
     brand: "TIMBERLAND",
@@ -34,6 +35,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     price: 60000,
   },
   {
+    // TODO: duplicate SKU, confirm correct price
     sku: "TB010061-713",
     name: "Timberland 6' Premium Waterproof Boot Wheat",
     brand: "TIMBERLAND",
@@ -106,6 +108,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     price: 70000,
   },
   /*{
+    // TODO: duplicate SKU, confirm correct price
     sku: "TB010073-009",
     name: "Timberland 6' Waterproof Boot Black",
     brand: "TIMBERLAND",
@@ -114,6 +117,7 @@ export const miscSneakers: Partial<Sneaker>[] = [
     price: 40000,
   },
   {
+    // TODO: duplicate SKU, confirm correct price
     sku: "TB010061-713",
     name: "Timberland 6' Waterproof Boot Wheat",
     brand: "TIMBERLAND",

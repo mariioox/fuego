@@ -2,18 +2,21 @@ import { useState, useMemo } from "react";
 import { cn } from "../../../core/utils/cn";
 import { useDebounce } from "../../../core/hooks/useDebounce";
 import Section from "../../../core/ui/Section";
+import { Button } from "../../../core/ui/Button";
 import { SNEAKER_REGISTRY } from "../data/sneakerRegistry";
 import ArchiveHeader from "./ArchiveHeader";
 import ArchiveGrid from "./ArchiveGrid";
 import type { Sneaker } from "../types/sneaker";
 
 const ITEMS_PER_PAGE = 20;
+const WHATSAPP_URL = "https://wa.me/message/MNPXIERXZVHPK1";
 
 export default function ArchiveContainer() {
   const [searchTerm, setSearchTerm] = useState("");
   const [brandFilter, setBrandFilter] = useState("ALL");
   const [colorFilter, setColorFilter] = useState("ALL");
-  const [sortOrder, setSortOrder] = useState("NEWEST");
+  const [stockOnly, setStockOnly] = useState(false);
+  const [sortOrder, setSortOrder] = useState("FEATURED");
   const [currentPage, setCurrentPage] = useState(1);
 
   const debouncedSearch = useDebounce(searchTerm, 300);
@@ -27,21 +30,24 @@ export default function ArchiveContainer() {
   const filteredAndSortedData = useMemo(() => {
     let result = [...SNEAKER_REGISTRY];
 
-    // Search Filter
+    // Search Filter — brand and model name
     if (debouncedSearch) {
       const lowSearch = debouncedSearch.toLowerCase();
       result = result.filter(
         (item) =>
           item.name.toLowerCase().includes(lowSearch) ||
-          item.sku.toLowerCase().includes(lowSearch),
+          item.brand.toLowerCase().includes(lowSearch),
       );
     }
 
-    // Brand / Availability Filter
-    if (brandFilter === "IN_HAND") {
-      result = result.filter((item) => item.availability === "IN_HAND");
-    } else if (brandFilter !== "ALL") {
+    // Brand Filter
+    if (brandFilter !== "ALL") {
       result = result.filter((item) => item.brand === brandFilter);
+    }
+
+    // Availability Filter
+    if (stockOnly) {
+      result = result.filter((item) => item.availability === "IN_HAND");
     }
 
     // Color Filter (Strict Type Safety)
@@ -55,9 +61,9 @@ export default function ArchiveContainer() {
     return result.sort((a, b) => {
       if (sortOrder === "PRICE_ASC") return a.price - b.price;
       if (sortOrder === "PRICE_DESC") return b.price - a.price;
-      return b.id - a.id;
+      return a.id - b.id;
     });
-  }, [debouncedSearch, brandFilter, colorFilter, sortOrder]);
+  }, [debouncedSearch, brandFilter, colorFilter, stockOnly, sortOrder]);
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredAndSortedData.length / ITEMS_PER_PAGE);
@@ -72,48 +78,63 @@ export default function ArchiveContainer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const clearFilters = () => {
+    setSearchTerm("");
+    setBrandFilter("ALL");
+    setColorFilter("ALL");
+    setStockOnly(false);
+    setSortOrder("FEATURED");
+    setCurrentPage(1);
+  };
+
   return (
-    <Section className="py-[clamp(3rem,6vw,5.5rem)]">
+    <Section className="pt-[clamp(40px,6vw,72px)]">
       <ArchiveHeader
         searchTerm={searchTerm}
         brandFilter={brandFilter}
         colorFilter={colorFilter}
+        stockOnly={stockOnly}
         setSearchTerm={(v) => handleFilterChange(setSearchTerm, v)}
         setBrandFilter={(v) => handleFilterChange(setBrandFilter, v)}
         setColorFilter={(v) => handleFilterChange(setColorFilter, v)}
+        setStockOnly={(v) => {
+          setStockOnly(v);
+          setCurrentPage(1);
+        }}
         setSortOrder={(v) => handleFilterChange(setSortOrder, v)}
         sortOrder={sortOrder}
+        count={filteredAndSortedData.length}
       />
-
-      {/* ... inside ArchiveContainer return ... */}
 
       {filteredAndSortedData.length > 0 ? (
         <>
           <ArchiveGrid data={visibleData} />
 
-          {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="my-20 flex items-center justify-center gap-8 border-t border-edge pt-12 max-sm:my-12 max-sm:gap-2 max-sm:pt-8">
+            <div className="mt-16 flex flex-wrap items-center justify-center gap-3 max-sm:mt-10 max-sm:gap-2">
               <button
                 disabled={currentPage === 1}
                 onClick={() => handlePageChange(currentPage - 1)}
-                className="cursor-pointer rounded-full border border-edge bg-transparent px-6 py-2 text-[12px] font-semibold text-ink transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 enabled:hover:border-ink enabled:hover:bg-ink enabled:hover:text-bg max-sm:px-4 max-sm:py-1.5 max-sm:text-[11px] max-sm:whitespace-nowrap"
+                className="h-11 cursor-pointer rounded-control border border-line bg-card px-5 text-[14px] font-medium text-ink transition-colors duration-300 ease-soft disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:border-text max-sm:px-3"
               >
                 Previous
               </button>
 
-              <div className="flex gap-4 max-sm:flex-nowrap max-sm:gap-1 max-sm:overflow-x-auto max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden">
+              <div className="flex items-center gap-1">
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i + 1}
                     onClick={() => handlePageChange(i + 1)}
                     className={cn(
-                      "cursor-pointer border-none bg-transparent p-2 text-[13px] font-semibold text-ink opacity-40 transition-opacity duration-200 max-sm:p-[0.35rem_0.45rem] max-sm:text-[11px]",
-                      currentPage === i + 1 &&
-                        "text-brand opacity-100 underline underline-offset-4",
+                      "h-11 w-11 cursor-pointer rounded-control border-none bg-transparent text-[14px] font-medium transition-colors duration-300 ease-soft max-sm:h-9 max-sm:w-9",
+                      currentPage === i + 1
+                        ? "bg-text text-bg"
+                        : "text-muted hover:text-ink",
                     )}
+                    aria-label={`Page ${i + 1}`}
+                    aria-current={currentPage === i + 1 ? "page" : undefined}
                   >
-                    {String(i + 1).padStart(2, "0")}
+                    {i + 1}
                   </button>
                 ))}
               </div>
@@ -121,7 +142,7 @@ export default function ArchiveContainer() {
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
-                className="cursor-pointer rounded-full border border-edge bg-transparent px-6 py-2 text-[12px] font-semibold text-ink transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 enabled:hover:border-ink enabled:hover:bg-ink enabled:hover:text-bg max-sm:px-4 max-sm:py-1.5 max-sm:text-[11px] max-sm:whitespace-nowrap"
+                className="h-11 cursor-pointer rounded-control border border-line bg-card px-5 text-[14px] font-medium text-ink transition-colors duration-300 ease-soft disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:border-text max-sm:px-3"
               >
                 Next
               </button>
@@ -129,25 +150,27 @@ export default function ArchiveContainer() {
           )}
         </>
       ) : (
-        <div className="mt-8 flex w-full items-center justify-center rounded-2xl border border-dashed border-edge px-8 py-32">
-          <div className="max-w-[420px] text-center">
-            <h3 className="mb-3 text-[1.6rem] font-bold leading-tight tracking-[-0.02em]">
-              Nothing matches that yet
-            </h3>
-            <p className="mb-8 text-[14px] leading-relaxed text-ink/55">
-              Try a different model, brand or colour — the archive is growing
-              every week.
+        <div className="flex w-full items-center justify-center rounded-surface bg-card px-6 py-[72px]">
+          <div className="max-w-[440px] text-center">
+            <h2 className="font-display text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-[-0.02em] text-ink">
+              No pairs match that yet
+            </h2>
+            <p className="mt-3 text-[15px] leading-[1.6] text-muted">
+              Tell us the shoe and your size, and we&apos;ll source it for you.
             </p>
-            <button
-              className="cursor-pointer rounded-full border-none bg-ink px-7 py-3 text-[13px] font-semibold text-bg transition-colors duration-200 hover:bg-brand hover:text-white"
-              onClick={() => {
-                setSearchTerm("");
-                setBrandFilter("ALL");
-                setColorFilter("ALL");
-              }}
-            >
-              Clear filters
-            </button>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="lg"
+              >
+                Ask on WhatsApp
+              </Button>
+              <Button variant="outline" size="lg" onClick={clearFilters}>
+                Clear filters
+              </Button>
+            </div>
           </div>
         </div>
       )}

@@ -22,9 +22,12 @@ describe("Newsletter", () => {
 
   it("renders the newsletter form", () => {
     render(<Newsletter />);
-    expect(screen.getByPlaceholderText("Email address")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /SUBSCRIBE/i })).toBeInTheDocument();
-    expect(screen.getByText(/Never miss a release/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("you@example.com")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /join the list/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Win a new pair of/i)).toBeInTheDocument();
+    expect(screen.getByLabelText("Email address")).toBeInTheDocument();
   });
 
   it("disables input and button while loading", async () => {
@@ -34,15 +37,15 @@ describe("Newsletter", () => {
     );
 
     render(<Newsletter />);
-    const input = screen.getByPlaceholderText("Email address");
-    const button = screen.getByRole("button", { name: /SUBSCRIBE/i });
+    const input = screen.getByPlaceholderText("you@example.com");
+    const button = screen.getByRole("button", { name: /join the list/i });
 
     await user.type(input, "test@example.com");
     await user.click(button);
 
     expect(input).toBeDisabled();
     expect(button).toBeDisabled();
-    expect(button).toHaveTextContent("Sending…");
+    expect(button).toHaveTextContent("Joining…");
   });
 
   it("shows success state after successful subscription", async () => {
@@ -50,16 +53,18 @@ describe("Newsletter", () => {
     mockSubscribe.mockResolvedValue({ success: true });
 
     render(<Newsletter />);
-    const input = screen.getByPlaceholderText("Email address");
-    const button = screen.getByRole("button", { name: /SUBSCRIBE/i });
+    const input = screen.getByPlaceholderText("you@example.com");
+    const button = screen.getByRole("button", { name: /join the list/i });
 
     await user.type(input, "test@example.com");
     await user.click(button);
 
-    expect(input).toHaveAttribute("placeholder", "You're subscribed");
+    expect(input).toHaveValue("");
     expect(input).toBeDisabled();
     expect(button).toBeDisabled();
-    expect(screen.getByText(/You're on the list/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/You're in\. Watch your inbox for the next drop\./i),
+    ).toBeInTheDocument();
   });
 
   it("shows error state after failed subscription", async () => {
@@ -67,13 +72,16 @@ describe("Newsletter", () => {
     mockSubscribe.mockResolvedValue({ success: false, error: "Failed" });
 
     render(<Newsletter />);
-    const input = screen.getByPlaceholderText("Email address");
-    const button = screen.getByRole("button", { name: /SUBSCRIBE/i });
+    const input = screen.getByPlaceholderText("you@example.com");
+    const button = screen.getByRole("button", { name: /join the list/i });
 
     await user.type(input, "test@example.com");
     await user.click(button);
 
-    expect(button).toHaveTextContent("Subscribe");
+    expect(button).toHaveTextContent("Join the list");
     expect(input).toBeEnabled();
+    expect(
+      screen.getByText(/Something went wrong\. Please try again\./i),
+    ).toBeInTheDocument();
   });
 });
