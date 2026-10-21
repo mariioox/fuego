@@ -8,7 +8,7 @@ import { miscSneakers } from "./sneakers/misc";
 import { pumaSneakers } from "./sneakers/puma";
 
 /* STEP 1: DYNAMIC ASSET IMPORT */
-const imageModules = import.meta.glob('./assets/*.webp', { 
+const imageModules = import.meta.glob('./assets-cutout/*.webp', { 
   eager: true, 
   import: 'default' 
 });

@@ -3,13 +3,13 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Section from "../../../core/ui/Section";
 import SectionHeader from "../../../core/ui/SectionHeader";
-import LV_TIMB_black from "../../archive/data/assets/Louis Vuitton Timberland 6 Ankle Boot Wheat Monogram - 1AD72X.webp";
-import Speedcat_BW from "../../archive/data/assets/Puma Speedcat OG Black White - 398846-01.webp";
-import Forest_green from "../../archive/data/assets/New Balance 9060 Team Forest Green - U9060VRA.webp";
-import Rammellzee from "../../archive/data/assets/Nike SB Dunk High Supreme Rammellzee - FD8779-100.webp";
-import Timberland_grey from "../../archive/data/assets/Timberland 6 Waterproof Boot Ice Studios - TB0A44VY-EJR.webp";
-import Speedcat_blue from "../../archive/data/assets/Puma Speedcat Archive Team Light Blue Club Navy - 398847-01.webp";
-import comme from "../../archive/data/assets/Adidas Samba x Comme des Garçons Play White_Pink - 01ASCGPWP.webp";
+import LV_TIMB_black from "../../archive/data/assets-cutout/Louis Vuitton Timberland 6 Ankle Boot Wheat Monogram - 1AD72X.webp";
+import Speedcat_BW from "../../archive/data/assets-cutout/Puma Speedcat OG Black White - 398846-01.webp";
+import Forest_green from "../../archive/data/assets-cutout/New Balance 9060 Team Forest Green - U9060VRA.webp";
+import Rammellzee from "../../archive/data/assets-cutout/Nike SB Dunk High Supreme Rammellzee - FD8779-100.webp";
+import Timberland_grey from "../../archive/data/assets-cutout/Timberland 6 Waterproof Boot Ice Studios - TB0A44VY-EJR.webp";
+import Speedcat_blue from "../../archive/data/assets-cutout/Puma Speedcat Archive Team Light Blue Club Navy - 398847-01.webp";
+import comme from "../../archive/data/assets-cutout/Adidas Samba x Comme des Garçons Play White_Pink - 01ASCGPWP.webp";
 
 const ICONS = [
   {
@@ -116,7 +116,7 @@ export default function ShopIcons() {
               <img
                 src={icon.img}
                 alt={icon.name}
-                className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                className="h-full w-full object-contain p-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
               />
             </div>
             <div className="mt-5 text-center">

@@ -4,10 +4,15 @@
   display: flex;
   flex-direction: column;
   min-width: 0; /* Prevent grid blowout / horizontal overflow */
-  background: var(--card);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
-  border: 1px solid var(--border);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   text-decoration: none;
   color: inherit;
@@ -22,28 +27,77 @@
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
 }
 
+[data-theme="dark"] .archive-card:hover {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
 /* Image Wrapper & Zoom */
 .card-img-wrapper {
   position: relative;
   width: auto;
   aspect-ratio: 1/1;
   overflow: hidden;
-  background: #ffffff; /* Light neutral for product shots */
   margin: 10px;
   border-radius: 12px;
-  border: 1px solid var(--border);
+  background: radial-gradient(
+    68% 52% at 50% 56%,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0) 72%
+  );
 }
 
 [data-theme="dark"] .card-img-wrapper {
-  background: #1a1a1a;
+  background: radial-gradient(
+    68% 52% at 50% 56%,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0) 72%
+  );
 }
 
 .card-img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: contain; /* Better for sneaker product shots */
   padding: 14px;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+/* Soft contact shadow so the cut-out shoe sits on the glass */
+.card-img-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 16%;
+  width: 52%;
+  height: 7%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
+}
+
+.archive-card:hover .card-img-wrapper::after {
+  transform: translateX(-50%) scale(1.12);
+  opacity: 0.75;
+}
+
+[data-theme="dark"] .card-img-wrapper::after {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
 }
 
 .card-img-wrapper::before {
@@ -81,68 +135,83 @@
 }
 
 /* Card Metadata Tags */
-.card-tag {
+.card-brand-tag {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background: var(--text);
-  color: var(--bg);
-  padding: 5px 10px;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
   font-family: "Geist Mono", monospace;
   font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
-  z-index: 5;
-  letter-spacing: 0.08em;
-  border-radius: 6px;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  pointer-events: none;
 }
-/* Overlay */
+
+.card-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Geist Mono", monospace;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  opacity: 0.45;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-stock.in-hand {
+  opacity: 1;
+  color: var(--orange);
+}
+
+/* Overlay: small chip instead of a heavy scrim */
 .card-overlay {
   position: absolute;
-  inset: 0;
-  display: flex;
+  left: 12px;
+  bottom: 12px;
+  z-index: 6;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   gap: 6px;
-  background: rgba(0, 0, 0, 0.3);
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(12, 12, 12, 0.55);
+  backdrop-filter: blur(6px);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateY(4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   color: white;
-  border: none;
   cursor: pointer;
   font: inherit;
 }
 
 .card-overlay:focus-visible {
   opacity: 1;
-  outline: 3px solid var(--orange);
-  outline-offset: -3px;
+  transform: translateY(0);
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
 }
 
 /* Trigger the overlay when the WHOLE card is hovered */
 .archive-card:hover .card-overlay {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Info Section */
 .card-info {
   padding: 0.9rem 1rem 1rem;
   border-top: 1px solid var(--border);
-}
-
-.card-brand {
-  font-family: "Geist Mono", monospace;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--orange);
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  display: block;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .card-name {
@@ -297,10 +366,6 @@
 
   .card-price {
     font-size: 0.75rem;
-  }
-
-  .card-brand {
-    font-size: 10px;
   }
 
   .card-info {

@@ -69,9 +69,10 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
 
   return (
     <>
-      <article className="archive-card" onClick={() => setShowModal(true)}>
+      <article className="archive-card glass-panel" onClick={() => setShowModal(true)}>
         <div className="card-img-wrapper">
-          {sneaker.status && <span className="card-tag">{sneaker.status}</span>}
+          <span className="card-brand-tag">{sneaker.brand}</span>
+
           <img
             src={sneaker.image}
             alt={sneaker.name}
@@ -106,7 +107,7 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
             <div className="mono text-[10px] tracking-widest font-black">
               VIEW_SPECIMEN
             </div>
-            <ArrowUpRight size={24} />
+            <ArrowUpRight size={16} />
           </button>
         </div>
 
@@ -151,7 +152,18 @@ function SneakerCard({ sneaker }: { sneaker: Sneaker }) {
         <div className="card-info mono">
           <h3 className="card-name">{sneaker.name}</h3>
           <div className="card-meta-row">
-            <span className="card-brand">{sneaker.brand}</span>
+            <span
+              className={`card-stock ${sneaker.availability === "IN_HAND" ? "in-hand" : ""}`}
+              title={
+                sneaker.availability === "IN_HAND"
+                  ? `In stock, EU ${sneaker.inHandSizes?.join("/") ?? ""}`
+                  : "Pre-order"
+              }
+            >
+              {sneaker.availability === "IN_HAND"
+                ? `IN STOCK · ${sneaker.inHandSizes?.join("/") ?? "—"}`
+                : "PRE-ORDER"}
+            </span>
             <div className="card-price">{sneaker.priceFormatted}</div>
           </div>
         </div>

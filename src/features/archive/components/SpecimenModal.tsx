@@ -96,7 +96,7 @@ export default function SpecimenModal({
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="relative flex items-center justify-center border-b border-edge bg-white p-[30px] lg:min-h-[500px] lg:border-b-0 lg:border-r lg:p-[60px]">
+          <div className="relative flex items-center justify-center border-b border-edge bg-card p-[30px] lg:min-h-[500px] lg:border-b-0 lg:border-r lg:p-[60px]">
             {!imgLoaded && (
               <div className="absolute inset-[30px] animate-shimmer rounded-[8%] bg-[linear-gradient(90deg,rgba(128,128,128,0.06)_25%,rgba(128,128,128,0.12)_50%,rgba(128,128,128,0.06)_75%)] bg-[length:200%_100%]" />
             )}
