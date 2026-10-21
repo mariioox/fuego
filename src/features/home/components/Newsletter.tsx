@@ -64,7 +64,7 @@ export default function Newsletter() {
               id="newsletter-email"
               type="email"
               placeholder="you@example.com"
-              className="h-[46px] w-full min-w-0 flex-1 rounded-control border border-white/12 bg-white/5 px-3.5 text-[14px] text-[#F4F4F2] outline-none transition-colors duration-300 ease-soft placeholder:text-white/40 focus-visible:border-white/30 focus-visible:outline-none sm:h-[52px] sm:px-4 sm:text-[15px]"
+              className="h-[46px] w-full rounded-control border border-white/18 bg-white/8 px-3.5 text-[14px] text-[#F4F4F2] outline-none transition-colors duration-300 ease-soft placeholder:text-white/50 focus-visible:border-white/40 focus-visible:outline-none sm:h-[52px] sm:px-4 sm:text-[15px] min-[500px]:flex-1 min-[500px]:w-auto"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "LOADING" || status === "SUCCESS"}
