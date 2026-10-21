@@ -39,9 +39,9 @@ export default function Footer() {
 
   return (
     <footer className="mt-[clamp(24px,4vw,40px)] border-t border-line">
-      <div className="mx-auto w-full max-w-310 px-[clamp(14px,3vw,28px)] py-3 max-sm:py-2">
+      <div className="mx-auto w-full max-w-[1240px] px-[clamp(14px,3vw,28px)] py-3 max-sm:py-2">
         <div className="flex flex-wrap items-start justify-between gap-3 max-sm:gap-2">
-          <div className="max-w-75">
+          <div className="max-w-[300px]">
             <p className="font-display text-[16px] font-semibold leading-[1.15] tracking-[-0.025em] text-ink max-sm:text-[14px]">
               Rare pairs, sourced right. Delivered across Nigeria.
             </p>
@@ -132,19 +132,19 @@ export default function Footer() {
 
         <div
           aria-hidden="true"
-          className="mt-[clamp(10px,2vw,18px)] flex items-baseline justify-center overflow-hidden text-ink"
+          className="mt-[clamp(8px,1.5vw,14px)] flex items-center justify-center overflow-hidden text-ink leading-none"
         >
-          <span className="font-display text-[clamp(38px,9vw,92px)] font-bold leading-[0.78] tracking-[-0.06em]">
+          <span className="font-display text-[clamp(42px,10vw,98px)] font-bold leading-[0.78] tracking-[-0.06em]">
             FUEG
           </span>
           <Flame
-            className="inline-block h-[0.78em] w-[0.78em] origin-bottom translate-y-[-0.02em] animate-[flameBreath_1.6s_ease-in-out_infinite_alternate]"
+            className="ml-[2px] inline-block h-[clamp(42px,10vw,98px)] w-[clamp(38px,9vw,88px)] origin-center -translate-y-[1px]"
             fill="var(--orange)"
             color="var(--orange)"
           />
         </div>
 
-        <div className="mt-[clamp(8px,1.5vw,12px)] flex flex-wrap items-center justify-center gap-3 border-t border-line pt-2 pb-1 text-[11px] text-muted">
+        <div className="mt-[clamp(6px,1vw,10px)] flex flex-wrap items-center justify-center gap-3 border-t border-line pt-2 pb-1 text-[11px] text-muted">
           <p>
             © {new Date().getFullYear()} Fuego. Every pair verified authentic.
           </p>
