@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { cn } from "../../../core/utils/cn";
 import { SWATCH_COLORS } from "../data/swatchColors";
 import Pill from "../../../core/ui/Pill";
+import { BRANDS } from "../../../core/constants";
 
 interface Props {
   searchTerm: string;
@@ -30,19 +31,6 @@ const COLORS = [
   "PINK",
   "ORANGE",
   "MULTI",
-];
-
-const BRAND_FILTERS = [
-  { value: "ALL", label: "All" },
-  { value: "NIKE", label: "Nike" },
-  { value: "JORDAN", label: "Jordan" },
-  { value: "ADIDAS", label: "adidas" },
-  { value: "NEW BALANCE", label: "New Balance" },
-  { value: "PUMA", label: "Puma" },
-  { value: "TIMBERLAND", label: "Timberland" },
-  { value: "ASICS", label: "ASICS" },
-  { value: "CONVERSE", label: "Converse" },
-  { value: "VANS", label: "Vans" },
 ];
 
 export default function ArchiveHeader({
@@ -216,7 +204,7 @@ export default function ArchiveHeader({
         className="mt-4 mb-6 flex flex-wrap items-center gap-2 animate-[riseIn_0.8s_ease-soft_both] sm:mt-5 sm:mb-8 sm:gap-2.5"
         style={{ animationDelay: "220ms" }}
       >
-        {BRAND_FILTERS.map((filter) => (
+        {BRANDS.map((filter) => (
           <Pill
             key={filter.value}
             active={brandFilter === filter.value}

@@ -1,15 +1,5 @@
 import { revealStyle, useReveal } from "../../../core/hooks/useReveal";
-
-const BRANDS = [
-  "Nike",
-  "Jordan",
-  "adidas",
-  "New Balance",
-  "Puma",
-  "Timberland",
-  "ASICS",
-  "Converse",
-];
+import { BRAND_LIST } from "../../../core/constants";
 
 export default function BrandRow() {
   const [ref, shown] = useReveal<HTMLDivElement>();
@@ -24,7 +14,7 @@ export default function BrandRow() {
         style={revealStyle(shown)}
         className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 sm:gap-x-10 sm:gap-y-3"
       >
-        {BRANDS.map((brand) => (
+        {BRAND_LIST.map((brand) => (
           <span
             key={brand}
             className="font-display text-[clamp(16px,2.6vw,24px)] font-medium text-muted"

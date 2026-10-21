@@ -79,7 +79,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="text-[11px] text-muted">Connect</p>
+              <p className="text-[11px] ml-15 text-muted">Connect</p>
               <div className="mt-2 flex items-center gap-1.5">
                 <a
                   href={WHATSAPP_URL}

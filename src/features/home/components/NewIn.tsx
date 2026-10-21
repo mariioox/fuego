@@ -5,18 +5,7 @@ import Section from "../../../core/ui/Section";
 import Pill from "../../../core/ui/Pill";
 import { SNEAKER_REGISTRY } from "../../archive/data/sneakerRegistry";
 import SneakerCard from "../../archive/components/SneakerCard";
-
-const BRAND_FILTERS = [
-  { value: "ALL", label: "All" },
-  { value: "NIKE", label: "Nike" },
-  { value: "JORDAN", label: "Jordan" },
-  { value: "ADIDAS", label: "adidas" },
-  { value: "NEW BALANCE", label: "New Balance" },
-  { value: "PUMA", label: "Puma" },
-  { value: "TIMBERLAND", label: "Timberland" },
-  { value: "ASICS", label: "ASICS" },
-  { value: "VANS", label: "Vans" },
-];
+import { BRANDS } from "../../../core/constants";
 
 export default function NewIn() {
   const [brand, setBrand] = useState("ALL");
@@ -47,7 +36,7 @@ export default function NewIn() {
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-2.5">
-        {BRAND_FILTERS.map((filter) => (
+        {BRANDS.map((filter) => (
           <Pill
             key={filter.value}
             active={brand === filter.value}
