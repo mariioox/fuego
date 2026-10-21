@@ -2,7 +2,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "../../../core/utils/cn";
 import { SWATCH_COLORS } from "../data/swatchColors";
-import FilterPills from "./FilterPills";
+import Pill from "../../../core/ui/Pill";
 
 interface Props {
   searchTerm: string;
@@ -48,21 +48,21 @@ export default function ArchiveHeader({
     <header className="mb-12 mt-0 flex flex-col gap-6 border-b border-edge pb-8 lg:mb-16">
       <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <span className="mono text-xs font-bold tracking-widest text-brand">
-            COLLECTION_INDEX // 2026
+          <span className="text-[11px] font-semibold tracking-[0.18em] text-brand uppercase">
+            The collection
           </span>
-          <h1 className="mt-8 text-[clamp(3rem,5vw,4rem)] font-[950] italic uppercase leading-[0.85] tracking-[-0.05em]">
-            FULL ARCHIVE.
+          <h1 className="mt-6 text-[clamp(2.6rem,5vw,3.6rem)] font-bold leading-[0.95] tracking-[-0.035em]">
+            The full archive
           </h1>
         </div>
 
-        <div className="sticky top-[70px] z-40 flex w-full flex-col items-end gap-4 border-b border-edge bg-bg/90 py-3 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:static lg:max-w-[680px] lg:border-0 lg:bg-transparent lg:py-0 lg:shadow-none lg:backdrop-blur-none">
-          <div className="relative flex h-10 w-full items-center border border-edge bg-card transition-colors duration-500 focus-within:border-brand">
-            <Search size={14} className="absolute left-3.5 opacity-30" />
+        <div className="flex w-full flex-col items-end gap-4 lg:max-w-[680px]">
+          <div className="relative flex h-11 w-full items-center rounded-full border border-edge bg-card transition-colors duration-200 focus-within:border-brand">
+            <Search size={15} className="absolute left-4 opacity-30" />
             <input
               type="text"
-              placeholder="SEARCH_BY_MODEL..."
-              className="mono w-full bg-transparent pl-11 pr-3.5 text-[11px] uppercase outline-none max-md:text-xs"
+              placeholder="Search by model or SKU"
+              className="w-full bg-transparent pl-11 pr-10 text-[13px] outline-none placeholder:text-ink/40"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               aria-label="Search by model name or SKU"
@@ -70,7 +70,7 @@ export default function ArchiveHeader({
             {searchTerm && (
               <button
                 type="button"
-                className="absolute right-1.5 flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent text-ink opacity-50 transition-opacity hover:opacity-100"
+                className="absolute right-3 flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent text-ink opacity-50 transition-opacity hover:opacity-100"
                 onClick={() => setSearchTerm("")}
                 aria-label="Clear search"
               >
@@ -81,12 +81,12 @@ export default function ArchiveHeader({
 
           <button
             type="button"
-            className="hidden h-[38px] w-full cursor-pointer items-center justify-center gap-2 border border-edge bg-card text-[11px] font-black text-ink max-md:flex"
+            className="hidden h-[42px] w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-edge bg-card text-[12px] font-semibold text-ink max-md:flex"
             onClick={() => setFiltersOpen((open) => !open)}
             aria-expanded={filtersOpen}
             aria-controls="archive-filter-row"
           >
-            FILTERS
+            Filters
             <ChevronDown
               size={14}
               className={cn(
@@ -99,78 +99,71 @@ export default function ArchiveHeader({
           <div
             id="archive-filter-row"
             className={cn(
-              "flex flex-wrap items-end gap-x-2.5 gap-y-4 max-md:items-stretch max-md:gap-2",
+              "flex flex-wrap items-center gap-2.5",
               !filtersOpen && "max-md:hidden",
             )}
           >
             <select
-              className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
+              className="h-10 cursor-pointer rounded-full border border-edge bg-card px-4 text-[12px] font-medium text-ink outline-none transition-colors duration-200 hover:border-brand"
               value={brandFilter}
               onChange={(e) => setBrandFilter(e.target.value)}
               aria-label="Filter by brand"
             >
-              <option value="ALL">BRAND: ALL</option>
-              <option value="IN_HAND">IN HAND READY</option>
-              <option value="NIKE">NIKE</option>
-              <option value="JORDAN">JORDAN</option>
-              <option value="ADIDAS">ADIDAS</option>
-              <option value="ASICS">ASICS</option>
-              <option value="PUMA">PUMA</option>
-              <option value="VANS">VANS</option>
-              <option value="CONVERSE">CONVERSE</option>
-              <option value="NEW BALANCE">NEW BALANCE</option>
-              <option value="TIMBERLAND">TIMBERLAND</option>
+              <option value="ALL">All brands</option>
+              <option value="IN_HAND">In stock now</option>
+              <option value="NIKE">Nike</option>
+              <option value="JORDAN">Jordan</option>
+              <option value="ADIDAS">Adidas</option>
+              <option value="ASICS">Asics</option>
+              <option value="PUMA">Puma</option>
+              <option value="VANS">Vans</option>
+              <option value="CONVERSE">Converse</option>
+              <option value="NEW BALANCE">New Balance</option>
+              <option value="TIMBERLAND">Timberland</option>
             </select>
 
             <select
-              className="mono h-[30px] cursor-pointer border border-edge bg-card px-2.5 text-[10px] font-semibold uppercase outline-none transition-colors duration-500 hover:border-brand max-md:h-10 max-md:flex-[1_1_45%] max-md:text-[11px]"
+              className="h-10 cursor-pointer rounded-full border border-edge bg-card px-4 text-[12px] font-medium text-ink outline-none transition-colors duration-200 hover:border-brand"
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
               aria-label="Sort sneakers"
             >
-              <option value="NEWEST">SORT: NEWEST</option>
-              <option value="PRICE_ASC">SORT: PRICE(LOW TO HIGH)</option>
-              <option value="PRICE_DESC">SORT: PRICE(HIGH TO LOW)</option>
+              <option value="NEWEST">Newest first</option>
+              <option value="PRICE_ASC">Price: low to high</option>
+              <option value="PRICE_DESC">Price: high to low</option>
             </select>
 
             <div className="flex w-full flex-col items-start">
-              <span className="mono mb-[5px] text-[10px] font-bold uppercase opacity-40">
-                SPEC_COLOR_INDEX
+              <span className="mb-2 text-[10px] font-semibold tracking-[0.14em] text-ink/40 uppercase">
+                Colour
               </span>
 
-              <div className="flex flex-wrap items-center gap-1">
-                <button
-                  type="button"
-                  className={cn(
-                    "mono flex h-[30px] cursor-pointer items-center justify-center border border-edge bg-card px-2.5 text-[9px] font-black text-ink transition-colors duration-300 hover:border-ink max-md:h-9",
-                    colorFilter === "ALL" && "border-brand",
-                  )}
+              <div className="flex flex-wrap items-center gap-1.5">
+                <Pill
+                  active={colorFilter === "ALL"}
                   onClick={() => setColorFilter("ALL")}
                   aria-pressed={colorFilter === "ALL"}
-                  aria-label="Show all colors"
+                  className="h-8 px-3.5 text-[11px]"
                 >
-                  ALL
-                </button>
+                  All
+                </Pill>
 
                 {COLORS.map((color) => (
                   <button
                     key={color}
                     type="button"
-                    aria-label={`Filter by ${color}`}
+                    aria-label={`Filter by ${color.toLowerCase()}`}
                     aria-pressed={colorFilter === color}
                     className={cn(
-                      "relative flex h-[30px] w-[30px] cursor-pointer items-center justify-center border border-edge bg-card transition-colors duration-300 hover:border-ink max-md:h-9 max-md:w-9",
+                      "flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-edge bg-card transition-colors duration-200 hover:border-ink",
                       colorFilter === color && "border-brand",
                     )}
                     onClick={() => setColorFilter(color)}
                   >
-                    <div
-                      className="h-[15px] w-[15px] border border-black/5 max-md:h-[18px] max-md:w-[18px]"
+                    <span
+                      className="h-[16px] w-[16px] rounded-full border border-black/10"
                       style={{ background: SWATCH_COLORS[color] }}
                     />
-                    {colorFilter === color && (
-                      <div className="absolute -right-1 -top-1 h-1.5 w-1.5 bg-brand" />
-                    )}
                   </button>
                 ))}
               </div>
@@ -178,8 +171,6 @@ export default function ArchiveHeader({
           </div>
         </div>
       </div>
-
-      <FilterPills brandFilter={brandFilter} setBrandFilter={setBrandFilter} />
     </header>
   );
 }

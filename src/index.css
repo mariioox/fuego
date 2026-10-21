@@ -54,6 +54,7 @@
   --color-edge: var(--border);
   --color-glass: var(--glass-bg);
   --color-glass-edge: var(--glass-edge);
+  --shadow-glass: var(--glass-shadow);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
@@ -172,39 +173,6 @@ body::before {
   .mono {
     font-family: "Geist Mono", monospace;
     letter-spacing: 0.06em;
-  }
-
-  /* --- GLASS SURFACE --- */
-  .glass-panel {
-    background-color: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-edge);
-    box-shadow: var(--glass-shadow);
-  }
-
-  /* Floating nav shell: the pill is inset 16px from the viewport while the
-     page container is capped at 1440px, so its padding has to compensate to
-     keep the logo aligned with the page content on every breakpoint. */
-  .nav-shell {
-    padding-inline: max(4px, calc(var(--gutter) - 17px));
-  }
-
-  @media (min-width: 1441px) and (max-width: 1503px) {
-    .nav-shell {
-      padding-inline: calc((100% + 32px - 1440px) / 2 + var(--gutter) - 17px);
-    }
-  }
-
-  @media (min-width: 1504px) {
-    .nav-shell {
-      padding-inline: calc(var(--gutter) + 15px);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .nav-shell {
-      padding-inline: var(--gutter);
-    }
   }
 
   /* Screen Flicker Animation */
