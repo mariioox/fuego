@@ -8,7 +8,13 @@ const X_URL = "https://x.com/fuego_heatng";
 
 function TikTokIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
     </svg>
   );
@@ -16,7 +22,13 @@ function TikTokIcon() {
 
 function XIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
@@ -27,9 +39,9 @@ export default function Footer() {
 
   return (
     <footer className="mt-[clamp(24px,4vw,40px)] border-t border-line">
-      <div className="mx-auto w-full max-w-[1240px] px-[clamp(14px,3vw,28px)] py-3 max-sm:py-2">
+      <div className="mx-auto w-full max-w-310 px-[clamp(14px,3vw,28px)] py-3 max-sm:py-2">
         <div className="flex flex-wrap items-start justify-between gap-3 max-sm:gap-2">
-          <div className="max-w-[300px]">
+          <div className="max-w-75">
             <p className="font-display text-[16px] font-semibold leading-[1.15] tracking-[-0.025em] text-ink max-sm:text-[14px]">
               Rare pairs, sourced right. Delivered across Nigeria.
             </p>
@@ -120,20 +132,22 @@ export default function Footer() {
 
         <div
           aria-hidden="true"
-          className="mt-[clamp(14px,3vw,24px)] flex items-baseline justify-center gap-0.5 overflow-hidden text-ink"
+          className="mt-[clamp(10px,2vw,18px)] flex items-baseline justify-center overflow-hidden text-ink"
         >
-          <span className="font-display text-[clamp(34px,8vw,84px)] font-bold leading-[0.78] tracking-[-0.06em]">
+          <span className="font-display text-[clamp(38px,9vw,92px)] font-bold leading-[0.78] tracking-[-0.06em]">
             FUEG
           </span>
           <Flame
-            className="inline-block h-[0.72em] w-[0.72em] origin-bottom translate-y-[-0.01em] animate-[flameBreath_1.6s_ease-in-out_infinite_alternate]"
+            className="inline-block h-[0.78em] w-[0.78em] origin-bottom translate-y-[-0.02em] animate-[flameBreath_1.6s_ease-in-out_infinite_alternate]"
             fill="var(--orange)"
             color="var(--orange)"
           />
         </div>
 
-        <div className="mt-[clamp(10px,2vw,16px)] flex flex-wrap items-center justify-center gap-3 border-t border-line pt-3 pb-2 text-[11px] text-muted">
-          <p>© {new Date().getFullYear()} Fuego. Every pair verified authentic.</p>
+        <div className="mt-[clamp(8px,1.5vw,12px)] flex flex-wrap items-center justify-center gap-3 border-t border-line pt-2 pb-1 text-[11px] text-muted">
+          <p>
+            © {new Date().getFullYear()} Fuego. Every pair verified authentic.
+          </p>
         </div>
       </div>
     </footer>
